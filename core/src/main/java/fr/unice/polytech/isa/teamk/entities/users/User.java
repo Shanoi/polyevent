@@ -8,26 +8,18 @@ import java.io.Serializable;
 public abstract class User implements Serializable {
 
     @NotNull
-    private String name;
+    private String id;
 
     @NotNull
-    private String id;
+    private String password;
 
     public User() {
 
     }
 
-    public User(String name, String id) {
-        this.name = name;
+    public User(String id, String password) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        this.password = password;
     }
 
     public String getId() {
@@ -38,4 +30,26 @@ public abstract class User implements Serializable {
         this.id = id;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+
+        User user = (User) o;
+
+        return id.equals(user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }

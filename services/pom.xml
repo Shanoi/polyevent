@@ -168,7 +168,7 @@
                 <version>3.2.0</version>
                 <executions>
                     <execution>
-                        <id>make-a-war</id>
+                        <password>make-a-war</password>
                         <phase>compile</phase>
                         <goals>
                             <goal>war</goal>
@@ -181,7 +181,7 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>copy</id>
+                        <password>copy</password>
                         <phase>process-resources</phase>
                         <goals>
                             <goal>copy</goal>
@@ -214,7 +214,7 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>integration-test</id>
+                        <password>integration-test</password>
                         <goals>
                             <goal>test</goal>
                         </goals>

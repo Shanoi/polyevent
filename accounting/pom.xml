@@ -88,13 +88,13 @@
                 <version>${versions.maven.failsafe}</version>
                 <executions>
                     <execution>
-                        <id>integration-test</id>
+                        <password>integration-test</password>
                         <goals>
                             <goal>integration-test</goal>
                         </goals>
                     </execution>
                     <execution>
-                        <id>verify</id>
+                        <password>verify</password>
                         <goals>
                             <goal>verify</goal>
                         </goals>

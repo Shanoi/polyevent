@@ -6,15 +6,13 @@ import fr.unice.polytech.isa.teamk.entities.users.Organizer;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Startup
 @Singleton
 public class DatabaseSingletonBean {
 
-    private List<Organizer> organizerList;
+    private Set<Organizer> organizerList;
 
     private List<Event> waitingList;
 
@@ -26,14 +24,14 @@ public class DatabaseSingletonBean {
 
     @PostConstruct
     void init() {
-        this.organizerList = new ArrayList<>();
+        this.organizerList = new HashSet<>();
         this.waitingList = new ArrayList<>();
         currentID = 1;
     }
 
-    public Optional<Organizer> findOrganizerByID(String ID) {
+    public Optional<Organizer> findOrganizerByID(String id) {
         for (Organizer organizer : organizerList) {
-            if (organizer.getId().equals(ID)) {
+            if (organizer.getId().equals(id)) {
                 return Optional.of(organizer);
             }
         }
@@ -41,8 +39,8 @@ public class DatabaseSingletonBean {
         return Optional.empty();
     }
 
-    public void createNewOrganizer(Organizer organizer) {
-        this.organizerList.add(organizer);
+    public boolean createNewOrganizer(Organizer organizer) {
+        return organizerList.add(organizer);
     }
 
     public void addToWaitingList(Event event) {

@@ -20,24 +20,17 @@ public class OrganizerRegistryBean implements OrganizerRegister, OrganizerFinder
     }
 
     @Override
-    public Optional<Organizer> searchOrganisateurByID(String idOrganizer) {
-        return databaseSingletonBean.findOrganizerByID(idOrganizer);
-    }
-
-    @Override
-    public Optional<Organizer> searchOrganisateurByName(String name) {
-        return Optional.empty();
-    }
-
-    @Override
-    public boolean registerOrganizer(String name, String id) throws AlreadyExistingOrganizer {
-        if(searchOrganisateurByID(id).isPresent()){
+    public boolean registerOrganizer(String id, String password) throws AlreadyExistingOrganizer {
+        if(databaseSingletonBean.createNewOrganizer(new Organizer(id, password))) {
             throw new AlreadyExistingOrganizer(id);
         }
 
-        databaseSingletonBean.createNewOrganizer(new Organizer(name, id));
-
         return true;
+    }
+
+    @Override
+    public Optional<Organizer> searchOrganizerByID(String id) {
+        return databaseSingletonBean.findOrganizerByID(id);
     }
 
 }

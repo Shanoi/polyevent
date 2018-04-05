@@ -8,8 +8,6 @@ import java.util.Optional;
 @Local
 public interface OrganizerFinder {
 
-    Optional<Organizer> searchOrganisateurByID(String idOrganizer);
-
-    Optional<Organizer> searchOrganisateurByName(String name);
+    Optional<Organizer> searchOrganizerByID(String idOrganizer);
 
 }

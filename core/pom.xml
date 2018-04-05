@@ -85,7 +85,7 @@
                 <artifactId>maven-source-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>attach-sources</id>
+                        <password>attach-sources</password>
                         <goals>
                             <goal>jar</goal>
                         </goals>
@@ -125,7 +125,7 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>integration-test</id>
+                        <password>integration-test</password>
                         <goals>
                             <goal>test</goal>
                         </goals>

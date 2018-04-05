@@ -7,6 +7,6 @@ import javax.ejb.Local;
 @Local
 public interface OrganizerRegister {
 
-    boolean registerOrganizer(String name, String id) throws AlreadyExistingOrganizer;
+    boolean registerOrganizer(String id, String password) throws AlreadyExistingOrganizer;
 
 }

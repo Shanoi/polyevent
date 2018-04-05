@@ -40,12 +40,12 @@ public class OrganizerRegistrationIntegrationTest extends AbstractOrganizerTest 
 
     @Ignore
     public void integrationForOrganizerRegistering() throws Exception {
-        registry.registerOrganizer(organizer.getName(), organizer.getId());
-        Optional<Organizer> customer = finder.searchOrganisateurByID(organizer.getName());
+        registry.registerOrganizer(organizer.getId(), organizer.getPassword());
+        Optional<Organizer> customer = finder.searchOrganisateurByID(organizer.getId());
         assertTrue(customer.isPresent());
         Organizer retrieved = customer.get();
-        assertEquals(organizer.getName(), retrieved.getName());
         assertEquals(organizer.getId(), retrieved.getId());
+        assertEquals(organizer.getPassword(), retrieved.getPassword());
     }
 
 }
