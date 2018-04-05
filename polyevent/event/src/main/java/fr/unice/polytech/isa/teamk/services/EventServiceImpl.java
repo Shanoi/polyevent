@@ -27,18 +27,13 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void submitNewEvent(String name, String idOrganizer, short startDay, short startMonth, short startYear, short endDay, short endMonth, short endYear)
-        throws UnknownOrganizerException {
-        Optional<Organizer> organizer = organizerFinder.searchOrganisateurByID(idOrganizer);
+    public void submitNewEvent(Event event) throws UnknownOrganizerException {
+        Optional<Organizer> organizer = organizerFinder.searchOrganizerByID(event.getOrganizer().getId());
 
         if(organizer.isPresent()){
-            eventTracker.forwardNewEvent(
-                    new Event(name,
-                            new GregorianCalendar(startYear, startMonth-1, startDay, 0, 0, 0),
-                            new GregorianCalendar(endYear, endMonth-1, endDay, 0, 0, 0),
-                            organizer.get()));
+            eventTracker.forwardNewEvent(event);
         } else {
-            throw new UnknownOrganizerException(idOrganizer);
+            throw new UnknownOrganizerException(event.getOrganizer().getId());
         }
     }
 

@@ -5,6 +5,8 @@ import fr.unice.polytech.isa.teamk.entities.users.Organizer;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 @Embeddable
@@ -14,13 +16,10 @@ public class Event implements Serializable {
     private String name;
 
     @NotNull
-    private GregorianCalendar startingDate;
+    private Date startingDate;
 
     @NotNull
-    private GregorianCalendar endingDate;
-
-    @NotNull
-    private String id;
+    private Date endingDate;
 
     @NotNull
     private Organizer organizer;
@@ -29,11 +28,15 @@ public class Event implements Serializable {
 
     }
 
-    public Event(String name, GregorianCalendar gregorianCalendar, GregorianCalendar calendar, Organizer id) {
+    public Event(String name, Date startingDate, Date endingDate, Organizer organizer) {
         this.name = name;
-        this.startingDate = gregorianCalendar;
-        this.endingDate = calendar;
-        this.organizer = id;
+        this.startingDate = startingDate;
+        this.endingDate = endingDate;
+        this.organizer = organizer;
+    }
+
+    public int integrationGetter() {
+        return 1;
     }
 
     public String getName() {
@@ -44,32 +47,20 @@ public class Event implements Serializable {
         this.name = name;
     }
 
-    public GregorianCalendar getStartingDate() {
+    public Date getStartingDate() {
         return startingDate;
     }
 
-    public void setStartingDate(GregorianCalendar startingDate) {
+    public void setStartingDate(Date startingDate) {
         this.startingDate = startingDate;
     }
 
-    public GregorianCalendar getEndingDate() {
+    public Date getEndingDate() {
         return endingDate;
     }
 
-    public int integrationGetter() {
-        return 1;
-    }
-
-    public void setEndingDate(GregorianCalendar endingDate) {
+    public void setEndingDate(Date endingDate) {
         this.endingDate = endingDate;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public Organizer getOrganizer() {

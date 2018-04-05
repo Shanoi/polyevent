@@ -8,21 +8,21 @@ import java.util.List;
 
 public class RegisterOrganizer extends Command<PEPublicAPI> {
 
-    private String name;
     private String id;
+    private String password;
 
     @Override
     public String identifier() { return "register"; }
 
     @Override
     public void load(List<String> args) {
-        name= args.get(0);
-        id = args.get(1);
+        id = args.get(0);
+        password = args.get(1);
     }
 
     @Override
     public void execute() throws Exception {
-        shell.system.organizerService.registerOrganizer(name,id);
+        shell.system.organizerService.registerOrganizer(id, password);
     }
 
     @Override

@@ -17,7 +17,7 @@ public interface OrganizerService {
                      @WebParam(name = "price") int price);
 
     @WebMethod
-    void registerOrganizer(@WebParam(name = "organizer_name") String name,
-                           @WebParam(name = "organizer_id") String id) throws AlreadyExistingOrganizer;
+    void registerOrganizer(@WebParam(name = "organizer_id") String id,
+                           @WebParam(name = "organizer_password") String password) throws AlreadyExistingOrganizer;
 
 }
