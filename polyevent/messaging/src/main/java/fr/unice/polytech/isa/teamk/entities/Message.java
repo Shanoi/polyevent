@@ -6,13 +6,13 @@ public class Message {
 
     private User destination;
     private User sender;
-    private Event event;
+    private String idEvent;
     private String description;
 
-    public Message(User destination, User sender, Event event, String description) {
+    public Message(User destination, User sender, String event, String description) {
         this.destination = destination;
         this.sender = sender;
-        this.event = event;
+        this.idEvent = event;
         this.description = description;
     }
 
@@ -24,8 +24,8 @@ public class Message {
         return sender;
     }
 
-    public Event getEvent() {
-        return event;
+    public String getEvent() {
+        return idEvent;
     }
 
     public String getDescription() {
@@ -40,8 +40,8 @@ public class Message {
         this.sender = sender;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setEvent(String event) {
+        this.idEvent = event;
     }
 
     public void setDescription(String description) {
