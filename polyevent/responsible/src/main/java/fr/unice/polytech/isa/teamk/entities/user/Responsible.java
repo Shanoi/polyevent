@@ -1,4 +1,4 @@
-package fr.unice.polytech.isa.teamk.entites.user;
+package fr.unice.polytech.isa.teamk.entities.user;
 
 import fr.unice.polytech.isa.teamk.entities.users.User;
 
