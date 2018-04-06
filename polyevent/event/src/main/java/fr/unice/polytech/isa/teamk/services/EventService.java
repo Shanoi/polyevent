@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public interface EventService {
 
     @WebMethod
-    void submitNewEvent(@WebParam(name = "event") Event event) throws UnknownOrganizerException;
+    void submitNewEvent(@WebParam(name = "event") Event event) /*throws UnknownOrganizerException*/;
 
     /*void submitNewEvent(@WebParam(name = "event_name") String name,
                         @WebParam(name = "id_organizer") String id,

@@ -1,22 +1,19 @@
 package fr.unice.polytech.isa.teamk.services;
 
-import fr.unice.polytech.isa.teamk.EventModifier;
 import fr.unice.polytech.isa.teamk.OrganizerFinder;
+import fr.unice.polytech.isa.teamk.components.EventModifierBean;
 import fr.unice.polytech.isa.teamk.entities.Event;
-import fr.unice.polytech.isa.teamk.entities.users.Organizer;
-import fr.unice.polytech.isa.teamk.exceptions.UnknownOrganizerException;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
-import java.util.Optional;
 
 @Stateless(name = "EventWS")
 @WebService(targetNamespace = "http://www.polytech.unice.fr/si/4a/isa/event")
 public class EventServiceImpl implements EventService {
 
     @EJB
-    private EventModifier eventTracker;
+    private EventModifierBean eventModifier;
 
     @EJB
     private OrganizerFinder organizerFinder;
@@ -26,14 +23,17 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void submitNewEvent(Event event) throws UnknownOrganizerException {
-        Optional<Organizer> organizer = organizerFinder.searchOrganizerByID(event.getOrganizer().getId());
+    public void submitNewEvent(Event event) /*throws UnknownOrganizerException */{
+        /*Optional<Organizer> organizer = organizerFinder.searchOrganizerByID(event.getOrganizer().getId()); On connait déjà l'organisateur
 
         if(organizer.isPresent()){
-            eventTracker.forwardNewEvent(event);
+            eventModifier.forwardNewEvent(event);
         } else {
             throw new UnknownOrganizerException(event.getOrganizer().getId());
-        }
+        }*/
+        eventModifier.forwardNewEvent(event);
+
+
     }
 
 }

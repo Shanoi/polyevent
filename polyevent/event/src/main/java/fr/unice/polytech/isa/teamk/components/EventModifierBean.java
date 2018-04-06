@@ -20,6 +20,7 @@ public class EventModifierBean implements EventModifier {
     @Override
     public void forwardNewEvent(Event event) {
         this.databaseSingletonBean.addToWaitingList(event);
+        //Envoyer message ?
     }
 
     @Override

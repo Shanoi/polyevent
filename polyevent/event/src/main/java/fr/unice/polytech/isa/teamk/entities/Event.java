@@ -6,6 +6,7 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 
 @Embeddable
 public class Event implements Serializable {
@@ -24,15 +25,21 @@ public class Event implements Serializable {
     @NotNull
     private Organizer organizer;
 
+    @NotNull
+    private int nbAttendee;
+
+    //private HashMap<TypeSalle, nb>
+
     public Event() {
 
     }
 
-    public Event(String name, Date startingDate, Date endingDate, Organizer organizer) {
+    public Event(String name, Date startingDate, Date endingDate, Organizer organizer, int nbAttendee) {
         this.name = name;
         this.startingDate = startingDate;
         this.endingDate = endingDate;
         this.organizer = organizer;
+        this.nbAttendee = nbAttendee;
     }
 
     public int integrationGetter() {
