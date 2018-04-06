@@ -13,7 +13,6 @@ public class Event implements Serializable {
     @NotNull
     private String name;
 
-    @NotNull
     private String id;
 
     @NotNull
