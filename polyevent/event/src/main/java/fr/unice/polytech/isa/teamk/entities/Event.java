@@ -1,12 +1,11 @@
 package fr.unice.polytech.isa.teamk.entities;
 
-import fr.unice.polytech.isa.teamk.entities.users.Organizer;
+import fr.unice.polytech.isa.teamk.entities.user.Organizer;
 
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
 
 @Embeddable
 public class Event implements Serializable {

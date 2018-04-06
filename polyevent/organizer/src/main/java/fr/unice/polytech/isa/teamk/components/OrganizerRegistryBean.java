@@ -2,7 +2,7 @@ package fr.unice.polytech.isa.teamk.components;
 
 import fr.unice.polytech.isa.teamk.OrganizerFinder;
 import fr.unice.polytech.isa.teamk.OrganizerRegister;
-import fr.unice.polytech.isa.teamk.entities.users.Organizer;
+import fr.unice.polytech.isa.teamk.entities.user.Organizer;
 import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingOrganizer;
 
 import javax.ejb.EJB;

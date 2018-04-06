@@ -1,7 +1,7 @@
 package fr.unice.polytech.isa.teamk.components;
 
 import fr.unice.polytech.isa.teamk.entities.Event;
-import fr.unice.polytech.isa.teamk.entities.users.Organizer;
+import fr.unice.polytech.isa.teamk.entities.user.Organizer;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;

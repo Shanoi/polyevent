@@ -3,7 +3,7 @@ package fr.unice.polytech.isa.teamk.components.integration;
 import arquillian.AbstractAccountingTest;
 import fr.unice.polytech.isa.teamk.Payment;
 import fr.unice.polytech.isa.teamk.entities.Event;
-import fr.unice.polytech.isa.teamk.entities.users.Organizer;
+import fr.unice.polytech.isa.teamk.entities.user.Organizer;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Before;
 import org.junit.Test;
