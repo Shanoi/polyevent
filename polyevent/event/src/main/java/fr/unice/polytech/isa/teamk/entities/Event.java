@@ -5,15 +5,16 @@ import fr.unice.polytech.isa.teamk.entities.users.Organizer;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 @Embeddable
 public class Event implements Serializable {
 
     @NotNull
     private String name;
+
+    @NotNull
+    private String id;
 
     @NotNull
     private Date startingDate;
@@ -45,6 +46,14 @@ public class Event implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getID() {
+        return id;
+    }
+
+    public void setID(String id) {
+        this.id = id;
     }
 
     public Date getStartingDate() {

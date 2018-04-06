@@ -1,6 +1,6 @@
 package fr.unice.polytech.isa.teamk.components;
 
-import fr.unice.polytech.isa.teamk.EventTracker;
+import fr.unice.polytech.isa.teamk.EventModifier;
 import fr.unice.polytech.isa.teamk.entities.Event;
 import fr.unice.polytech.isa.teamk.entities.Provider;
 
@@ -8,12 +8,12 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 @Stateless
-public class EventTrackerBean implements EventTracker {
+public class EventModifierBean implements EventModifier {
 
     @EJB
     private DatabaseSingletonBean databaseSingletonBean;
 
-    public EventTrackerBean() {
+    public EventModifierBean() {
 
     }
 

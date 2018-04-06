@@ -1,6 +1,6 @@
 package fr.unice.polytech.isa.teamk.services;
 
-import fr.unice.polytech.isa.teamk.EventTracker;
+import fr.unice.polytech.isa.teamk.EventModifier;
 import fr.unice.polytech.isa.teamk.OrganizerFinder;
 import fr.unice.polytech.isa.teamk.entities.Event;
 import fr.unice.polytech.isa.teamk.entities.users.Organizer;
@@ -9,7 +9,6 @@ import fr.unice.polytech.isa.teamk.exceptions.UnknownOrganizerException;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
-import java.util.GregorianCalendar;
 import java.util.Optional;
 
 @Stateless(name = "EventWS")
@@ -17,7 +16,7 @@ import java.util.Optional;
 public class EventServiceImpl implements EventService {
 
     @EJB
-    private EventTracker eventTracker;
+    private EventModifier eventTracker;
 
     @EJB
     private OrganizerFinder organizerFinder;

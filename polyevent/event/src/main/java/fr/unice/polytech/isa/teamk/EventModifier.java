@@ -3,7 +3,7 @@ package fr.unice.polytech.isa.teamk;
 import fr.unice.polytech.isa.teamk.entities.Event;
 import fr.unice.polytech.isa.teamk.entities.Provider;
 
-public interface EventTracker {
+public interface EventModifier {
 
     void forwardNewEvent(Event event);
 

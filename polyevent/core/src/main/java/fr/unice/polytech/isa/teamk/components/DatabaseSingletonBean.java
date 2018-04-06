@@ -45,7 +45,7 @@ public class DatabaseSingletonBean {
 
     public void addToWaitingList(Event event) {
         this.waitingList.add(event);
-        event.setId(String.valueOf(this.currentID++));
+        event.setID(String.valueOf(this.currentID++));
     }
 
     public void validateEvent(Event event) {
@@ -59,7 +59,7 @@ public class DatabaseSingletonBean {
     public Optional<Event> findEventByID(String idEvent) {
         for (Event event:
                 this.waitingList) {
-            if(event.getId().equals(idEvent)){
+            if(event.getID().equals(idEvent)){
                 return Optional.of(event);
             }
         }
