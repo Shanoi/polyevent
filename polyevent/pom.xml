@@ -15,6 +15,7 @@
         <module>services</module>
         <module>responsible</module>
         <module>core</module>
+        <module>rooms</module>
     </modules>
 
     <properties>
