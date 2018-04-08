@@ -2,7 +2,7 @@ package arquillian;
 
 import fr.unice.polytech.isa.teamk.OrganizerFinder;
 import fr.unice.polytech.isa.teamk.OrganizerRegister;
-import fr.unice.polytech.isa.teamk.components.DatabaseSingletonBean;
+import fr.unice.polytech.isa.teamk.components.DatabaseSingletonOrganizer;
 import fr.unice.polytech.isa.teamk.components.OrganizerRegistryBean;
 import fr.unice.polytech.isa.teamk.entities.user.Organizer;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -15,7 +15,7 @@ import javax.ejb.EJB;
 public abstract class AbstractOrganizerTest {
 
     @EJB
-    private DatabaseSingletonBean memory;
+    private DatabaseSingletonOrganizer memory;
 
     @Deployment
     public static WebArchive createDeployment() {
@@ -29,7 +29,7 @@ public abstract class AbstractOrganizerTest {
                 .addPackage(OrganizerFinder.class.getPackage())
                 // Components implementations
                 .addPackage(OrganizerRegistryBean.class.getPackage())
-                .addPackage(DatabaseSingletonBean.class.getPackage());
+                .addPackage(DatabaseSingletonOrganizer.class.getPackage());
     }
 
 }
