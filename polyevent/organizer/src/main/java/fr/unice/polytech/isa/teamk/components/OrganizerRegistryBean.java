@@ -13,7 +13,7 @@ import java.util.Optional;
 public class OrganizerRegistryBean implements OrganizerRegister, OrganizerFinder {
 
     @EJB
-    private DatabaseSingletonBean databaseSingletonBean;
+    private DatabaseSingletonOrganizer databaseSingletonBean;
 
     public OrganizerRegistryBean(){
 

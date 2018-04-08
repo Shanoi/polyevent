@@ -12,8 +12,6 @@ import java.util.*;
 @Singleton
 public class DatabaseSingletonBean {
 
-    private Set<Organizer> organizerList;
-
     private List<Event> waitingList;
 
     private int currentID;
@@ -24,23 +22,9 @@ public class DatabaseSingletonBean {
 
     @PostConstruct
     void init() {
-        this.organizerList = new HashSet<>();
+
         this.waitingList = new ArrayList<>();
         currentID = 1;
-    }
-
-    public Optional<Organizer> findOrganizerByID(String id) {
-        for (Organizer organizer : organizerList) {
-            if (organizer.getId().equals(id)) {
-                return Optional.of(organizer);
-            }
-        }
-
-        return Optional.empty();
-    }
-
-    public boolean createNewOrganizer(Organizer organizer) {
-        return organizerList.add(organizer);
     }
 
     public void addToWaitingList(Event event) {
@@ -57,9 +41,9 @@ public class DatabaseSingletonBean {
     }
 
     public Optional<Event> findEventByID(String idEvent) {
-        for (Event event:
+        for (Event event :
                 this.waitingList) {
-            if(event.getID().equals(idEvent)){
+            if (event.getID().equals(idEvent)) {
                 return Optional.of(event);
             }
         }
