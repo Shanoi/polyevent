@@ -1,7 +1,6 @@
 package fr.unice.polytech.isa.teamk.services;
 
 import fr.unice.polytech.isa.teamk.OrganizerRegister;
-import fr.unice.polytech.isa.teamk.Payment;
 import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingOrganizer;
 
 import javax.ejb.EJB;
@@ -12,8 +11,8 @@ import javax.jws.WebService;
 @WebService(targetNamespace = "http://www.polytech.unice.fr/si/4a/isa/organizer")
 public class OrganizerServiceImpl implements OrganizerService {
 
-    @EJB
-    private Payment payment;
+   /* @EJB
+    private Payment payment;*/
 
     @EJB
     private OrganizerRegister organizerRegister;

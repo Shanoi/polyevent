@@ -1,6 +1,6 @@
 package fr.unice.polytech.isa.teamk.entities;
 
-import fr.unice.polytech.isa.teamk.entities.users.User;
+import fr.unice.polytech.isa.teamk.entities.user.User;
 
 public class Message {
 

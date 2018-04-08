@@ -1,4 +1,4 @@
-package fr.unice.polytech.isa.teamk.entities.users;
+package fr.unice.polytech.isa.teamk.entities.user;
 
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;

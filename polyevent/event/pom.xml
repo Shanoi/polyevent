@@ -6,7 +6,7 @@
     <groupId>fr.unice.polytech.isa.teamk</groupId>
     <modelVersion>4.0.0</modelVersion>
     <version>1.0-SNAPSHOT</version>
-    <artifactId>services</artifactId>
+    <artifactId>event</artifactId>
     <packaging>war</packaging>
 
     <properties>
@@ -134,11 +134,7 @@
             <artifactId>responsible</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>fr.unice.polytech.isa.teamk</groupId>
-            <artifactId>core</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+
 
     </dependencies>
 
@@ -157,43 +153,7 @@
                     <target>${versions.java}</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.0</version>
-                <executions>
-                    <execution>
-                        <password>make-a-war</password>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>war</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <password>copy</password>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.apache.openejb</groupId>
-                                    <artifactId>openejb-javaagent</artifactId>
-                                    <version>4.7.4</version>
-                                    <outputDirectory>${dir.agent}</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+
 
             <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>

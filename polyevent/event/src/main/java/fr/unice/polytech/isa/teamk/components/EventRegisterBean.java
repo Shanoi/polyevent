@@ -18,7 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Stateless
-public class EventRegisterBean implements EventRegister, EventModifier {
+public class EventRegisterBean implements EventRegister {
 
     private static final Logger log = Logger.getLogger(Logger.class.getName());
 
@@ -51,46 +51,6 @@ public class EventRegisterBean implements EventRegister, EventModifier {
         //TODO PUT THE J2E SIDE CODE HERE
 
         return status;
-    }
-
-    @Override
-    public boolean modifyNbAttendee(int idEvent, int nbAttendee) {
-        return false;
-    }
-
-    @Override
-    public boolean modifyStartDate(int idEvent, Date dateStart) {
-        return false;
-    }
-
-    @Override
-    public boolean modifyEndDate(int idEvent, Date dateEnd) {
-        return false;
-    }
-
-    @Override
-    public boolean modifyNeedMaterial(int idEvent, String typeMaterial, int materialQuantity) {
-        return false;
-    }
-
-    @Override
-    public boolean modifyNeedMaterial(String typeRoom, String typeMaterial, int materialQuantity) {
-        return false;
-    }
-
-    @Override
-    public boolean addService(int idEvent, String providerType) {
-        return false;
-    }
-
-    @Override
-    public boolean delNeedMaterial(int idEvent, String materialType) {
-        return false;
-    }
-
-    @Override
-    public boolean delService(int idEvent, String providerType) {
-        return false;
     }
 
     @PostConstruct

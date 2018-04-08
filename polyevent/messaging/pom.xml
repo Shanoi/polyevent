@@ -6,7 +6,7 @@
     <groupId>fr.unice.polytech.isa.teamk</groupId>
     <modelVersion>4.0.0</modelVersion>
     <version>1.0-SNAPSHOT</version>
-    <artifactId>core</artifactId>
+    <artifactId>messaging</artifactId>
     <packaging>jar</packaging>
 
     <properties>
@@ -81,18 +81,7 @@
         <sourceDirectory>src/main/java</sourceDirectory>
         <testSourceDirectory>src/test</testSourceDirectory>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <password>attach-sources</password>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+
             <!-- deploy test jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -113,36 +102,7 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${versions.maven.surefire}</version>
-                <configuration>
-                    <reuseForks>false</reuseForks>
-                    <excludes>
-                        <exclude>**/*IntegrationTest.java</exclude>
-                    </excludes>
-                    <trimStackTrace>false</trimStackTrace>
-                </configuration>
-                <executions>
-                    <execution>
-                        <password>integration-test</password>
-                        <goals>
-                            <goal>test</goal>
-                        </goals>
-                        <phase>integration-test</phase>
-                        <configuration>
-                            <excludes>
-                                <exclude>**/*Test.java</exclude>
-                            </excludes>
-                            <includes>
-                                <include>**/*IntegrationTest.java</include>
-                            </includes>
-                            <trimStackTrace>false</trimStackTrace>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+
         </plugins>
     </build>
 </project>
