@@ -9,13 +9,11 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-
 @Startup
 @Singleton
 public class DatabaseSingletonOrganizer {
 
     private Set<Organizer> organizerList;
-
 
     public DatabaseSingletonOrganizer() {
 
@@ -40,6 +38,5 @@ public class DatabaseSingletonOrganizer {
     public boolean createNewOrganizer(Organizer organizer) {
         return organizerList.add(organizer);
     }
-
 
 }

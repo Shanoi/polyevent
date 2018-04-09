@@ -1,6 +1,5 @@
 package fr.unice.polytech.isa.teamk.components;
 
-import fr.unice.polytech.isa.teamk.EventModifier;
 import fr.unice.polytech.isa.teamk.EventRegister;
 import fr.unice.polytech.isa.teamk.entities.Event;
 import fr.unice.polytech.isa.teamk.exceptions.ExternalPartnerException;
@@ -12,7 +11,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import java.io.IOException;
-import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;

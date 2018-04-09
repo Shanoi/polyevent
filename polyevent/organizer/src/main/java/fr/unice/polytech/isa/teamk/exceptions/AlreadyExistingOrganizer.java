@@ -1,6 +1,5 @@
 package fr.unice.polytech.isa.teamk.exceptions;
 
-
 import javax.xml.ws.WebFault;
 import java.io.Serializable;
 
@@ -24,4 +23,5 @@ public class AlreadyExistingOrganizer extends Exception implements Serializable 
     public void setName(String name) {
         this.name = name;
     }
+
 }

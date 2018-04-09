@@ -9,4 +9,6 @@ public class Provider {
     private String type;
     private float price;
 
+    public Provider() {}
+
 }

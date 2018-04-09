@@ -15,13 +15,13 @@ public class OrganizerRegistryBean implements OrganizerRegister, OrganizerFinder
     @EJB
     private DatabaseSingletonOrganizer databaseSingletonBean;
 
-    public OrganizerRegistryBean(){
+    public OrganizerRegistryBean() {
 
     }
 
     @Override
     public boolean registerOrganizer(String id, String password) throws AlreadyExistingOrganizer {
-        if(databaseSingletonBean.createNewOrganizer(new Organizer(id, password))) {
+        if (databaseSingletonBean.createNewOrganizer(new Organizer(id, password))) {
             throw new AlreadyExistingOrganizer(id);
         }
 
