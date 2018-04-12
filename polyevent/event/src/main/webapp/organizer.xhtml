@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+<head>
+    <title>PolyEvent</title>
+</head>
+<body>
+<h1>PolyEvent web interface</h1>
+
+<h:messages id="form-error" style="color: red"/>
+
+<h2>Connect</h2>
+<f:view>
+    <h:form id="select-form">
+        <h:panelGrid columns="2">
+            <h:outputText value='Name:'/>
+            <h:inputText value='#{organizerBean.id}' required="true"/>
+            <h:inputText value="#{organizerBean.password}" required="true"/>
+            <h:commandButton action="#{organizerBean.connect}" value="Connect"/>
+        </h:panelGrid>
+    </h:form>
+</f:view>
+
+<h2>Create an account</h2>
+<f:view>
+    <h:form id="register-form">
+        <h:panelGrid columns="2">
+            <h:outputText value='Customer id'/>
+            <h:inputText value='#{organizerBean.id}' required="true" />
+            <h:outputText value='Password'/>
+            <h:inputText value='#{organizerBean.password}' required="true"/>
+            <h:commandButton action="#{organizerBean.register}" value="Register"/>
+        </h:panelGrid>
+    </h:form>
+</f:view>
+</body>
+</html>
