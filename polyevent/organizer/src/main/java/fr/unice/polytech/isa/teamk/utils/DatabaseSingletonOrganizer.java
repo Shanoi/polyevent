@@ -43,8 +43,8 @@ public class DatabaseSingletonOrganizer implements OrganizerFinder, OrganizerReg
         return organizerList.add(organizer);
     }
 
-    public boolean loginOrganizer(Organizer organizer) {
-        return loggedInOrganizerList.add(organizer);
+    public boolean loginOrganizer(String id, String password) {
+        return loggedInOrganizerList.add(new Organizer(id, password));
     }
 
     @Override
