@@ -224,7 +224,7 @@
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <classifier>classes</classifier>
+                        <classifier>classes</classifier>
                 </configuration>
                 <executions>
                     <execution>
