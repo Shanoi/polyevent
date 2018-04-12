@@ -6,6 +6,7 @@ import fr.unice.polytech.isa.teamk.exceptions.ExternalPartnerException;
 import fr.unice.polytech.isa.teamk.exceptions.RegisterEventException;
 import fr.unice.polytech.isa.teamk.exceptions.UncheckedException;
 import fr.unice.polytech.isa.teamk.external.CalendarService;
+import fr.unice.polytech.isa.teamk.utils.DatabaseSingletonEvent;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -23,7 +24,7 @@ public class EventRegisterBean implements EventRegister {
     private CalendarService calendarService;
 
     @EJB
-    private DatabaseSingletonBean databaseSingletonBean;
+    private DatabaseSingletonEvent databaseSingletonEvent;
 
     public EventRegisterBean() {
 
@@ -44,7 +45,7 @@ public class EventRegisterBean implements EventRegister {
         }
 
 
-        databaseSingletonBean.validateEvent(event);
+        databaseSingletonEvent.validateEvent(event);
 
         //TODO PUT THE J2E SIDE CODE HERE
 

@@ -2,6 +2,8 @@ package fr.unice.polytech.isa.teamk.services;
 
 import fr.unice.polytech.isa.teamk.OrganizerRegister;
 import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingOrganizer;
+import fr.unice.polytech.isa.teamk.exceptions.AlreadyLoggedInOrganizer;
+import fr.unice.polytech.isa.teamk.exceptions.UnknownOrganizerException;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -29,6 +31,11 @@ public class OrganizerServiceImpl implements OrganizerService {
     @Override
     public void registerOrganizer(String id, String password) throws AlreadyExistingOrganizer {
         organizerRegister.registerOrganizer(id, password);
+    }
+
+    @Override
+    public void loginOrganizer(String id, String password) throws UnknownOrganizerException, AlreadyLoggedInOrganizer {
+        organizerRegister.loginOrganizer(id, password);
     }
 
 }

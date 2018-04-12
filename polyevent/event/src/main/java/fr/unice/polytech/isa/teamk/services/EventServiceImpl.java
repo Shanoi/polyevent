@@ -23,17 +23,8 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void submitNewEvent(Event event) /*throws UnknownOrganizerException */{
-        /*Optional<Organizer> organizer = organizerFinder.searchOrganizerByID(event.getOrganizer().getId()); On connait déjà l'organisateur
-
-        if(organizer.isPresent()){
-            eventModifier.forwardNewEvent(event);
-        } else {
-            throw new UnknownOrganizerException(event.getOrganizer().getId());
-        }*/
+    public void submitNewEvent(Event event) {
         eventModifier.forwardNewEvent(event);
-
-
     }
 
 }

@@ -1,61 +1,84 @@
-<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/event" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="EventServiceImplService" targetNamespace="http://www.polytech.unice.fr/si/4a/isa/event">
-  <wsdl:types>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/event" elementFormDefault="unqualified" targetNamespace="http://www.polytech.unice.fr/si/4a/isa/event" version="1.0">
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/event"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  name="EventServiceImplService" targetNamespace="http://www.polytech.unice.fr/si/4a/isa/event">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/event"
+                   elementFormDefault="unqualified" targetNamespace="http://www.polytech.unice.fr/si/4a/isa/event"
+                   version="1.0">
 
-  <xs:element name="submitNewEvent" type="tns:submitNewEvent"/>
+            <xs:element name="submitNewEvent" type="tns:submitNewEvent"/>
 
-  <xs:element name="submitNewEventResponse" type="tns:submitNewEventResponse"/>
+            <xs:element name="submitNewEventResponse" type="tns:submitNewEventResponse"/>
 
-  <xs:complexType name="submitNewEvent">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="event_name" type="xs:string"/>
-      <xs:element minOccurs="0" name="id_organizer" type="xs:string"/>
-      <xs:element name="start_day" type="xs:short"/>
-      <xs:element name="start_month" type="xs:short"/>
-      <xs:element name="start_year" type="xs:short"/>
-      <xs:element name="end_day" type="xs:short"/>
-      <xs:element name="end_month" type="xs:short"/>
-      <xs:element name="end_year" type="xs:short"/>
-    </xs:sequence>
-  </xs:complexType>
+            <xs:complexType name="submitNewEvent">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="event" type="tns:event"/>
+                </xs:sequence>
+            </xs:complexType>
 
-  <xs:complexType name="submitNewEventResponse">
-    <xs:sequence/>
-  </xs:complexType>
+            <xs:complexType name="event">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="endingDate" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="ID" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="organizer" type="tns:organizer"/>
+                    <xs:element minOccurs="0" name="startingDate" type="xs:dateTime"/>
+                </xs:sequence>
+            </xs:complexType>
 
-</xs:schema>
-  </wsdl:types>
-  <wsdl:message name="submitNewEventResponse">
-    <wsdl:part element="tns:submitNewEventResponse" name="parameters">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="submitNewEvent">
-    <wsdl:part element="tns:submitNewEvent" name="parameters">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:portType name="EventService">
-    <wsdl:operation name="submitNewEvent">
-      <wsdl:input message="tns:submitNewEvent" name="submitNewEvent">
-    </wsdl:input>
-      <wsdl:output message="tns:submitNewEventResponse" name="submitNewEventResponse">
-    </wsdl:output>
-    </wsdl:operation>
-  </wsdl:portType>
-  <wsdl:binding name="EventServiceImplServiceSoapBinding" type="tns:EventService">
-    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="submitNewEvent">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="submitNewEvent">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="submitNewEventResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:service name="EventServiceImplService">
-    <wsdl:port binding="tns:EventServiceImplServiceSoapBinding" name="EventServiceImplPort">
-      <soap:address location="http://localhost:8080/event/webservices/EventWS"/>
-    </wsdl:port>
-  </wsdl:service>
+            <xs:complexType name="organizer">
+                <xs:complexContent>
+                    <xs:extension base="tns:user">
+                        <xs:sequence/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+
+            <xs:complexType abstract="true" name="user">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" type="xs:string"/>
+                    <xs:element minOccurs="0" name="password" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="submitNewEventResponse">
+                <xs:sequence/>
+            </xs:complexType>
+
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="submitNewEventResponse">
+        <wsdl:part element="tns:submitNewEventResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="submitNewEvent">
+        <wsdl:part element="tns:submitNewEvent" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="EventService">
+        <wsdl:operation name="submitNewEvent">
+            <wsdl:input message="tns:submitNewEvent" name="submitNewEvent">
+            </wsdl:input>
+            <wsdl:output message="tns:submitNewEventResponse" name="submitNewEventResponse">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="EventServiceImplServiceSoapBinding" type="tns:EventService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="submitNewEvent">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="submitNewEvent">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="submitNewEventResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="EventServiceImplService">
+        <wsdl:port binding="tns:EventServiceImplServiceSoapBinding" name="EventServiceImplPort">
+            <soap:address location="http://localhost:8080/event/webservices/EventWS"/>
+        </wsdl:port>
+    </wsdl:service>
 </wsdl:definitions>

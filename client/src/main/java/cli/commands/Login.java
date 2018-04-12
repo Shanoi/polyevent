@@ -5,15 +5,13 @@ import cli.framework.Command;
 
 import java.util.List;
 
-public class RegisterOrganizer extends Command<PEPublicAPI> {
+public class Login extends Command<PEPublicAPI> {
 
     private String id;
     private String password;
 
     @Override
-    public String identifier() {
-        return "register";
-    }
+    public String identifier() { return "login"; }
 
     @Override
     public void load(List<String> args) {

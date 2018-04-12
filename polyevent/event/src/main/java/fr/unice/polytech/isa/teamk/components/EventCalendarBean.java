@@ -3,6 +3,7 @@ package fr.unice.polytech.isa.teamk.components;
 import fr.unice.polytech.isa.teamk.EventFinder;
 import fr.unice.polytech.isa.teamk.ResponsibleFinder;
 import fr.unice.polytech.isa.teamk.entities.Event;
+import fr.unice.polytech.isa.teamk.utils.DatabaseSingletonEvent;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -16,7 +17,7 @@ public class EventCalendarBean implements EventFinder {
     private ResponsibleFinder responsibleFinder;
 
     @EJB
-    private DatabaseSingletonBean databaseSingletonBean;
+    private DatabaseSingletonEvent databaseSingletonEvent;
 
     public EventCalendarBean() {
 
@@ -24,12 +25,12 @@ public class EventCalendarBean implements EventFinder {
 
     @Override
     public Optional<Event> searchEvenement(String idEvent) {
-        return databaseSingletonBean.findEventByID(idEvent);
+        return databaseSingletonEvent.findEventByID(idEvent);
     }
 
     @Override
     public List<Event> getAllWaitingEvents() {
-        return databaseSingletonBean.getWaitingList();
+        return databaseSingletonEvent.getWaitingList();
     }
 
 }

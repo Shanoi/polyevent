@@ -3,6 +3,7 @@ package fr.unice.polytech.isa.teamk.components;
 import fr.unice.polytech.isa.teamk.EventModifier;
 import fr.unice.polytech.isa.teamk.entities.Event;
 import fr.unice.polytech.isa.teamk.entities.Provider;
+import fr.unice.polytech.isa.teamk.utils.DatabaseSingletonEvent;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -11,7 +12,7 @@ import javax.ejb.Stateless;
 public class EventModifierBean implements EventModifier {
 
     @EJB
-    private DatabaseSingletonBean databaseSingletonBean;
+    private DatabaseSingletonEvent databaseSingletonEvent;
 
     public EventModifierBean() {
 
@@ -19,7 +20,7 @@ public class EventModifierBean implements EventModifier {
 
     @Override
     public void forwardNewEvent(Event event) {
-        this.databaseSingletonBean.addToWaitingList(event);
+        this.databaseSingletonEvent.addToWaitingList(event);
         //Envoyer message ?
     }
 

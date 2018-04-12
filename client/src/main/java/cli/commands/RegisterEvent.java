@@ -3,6 +3,7 @@ package cli.commands;
 import api.PEPublicAPI;
 import cli.framework.Command;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +31,6 @@ public class RegisterEvent extends Command<PEPublicAPI> {
         eventName = args.get(argIndex++);
         id = args.get(argIndex++);
 
-
         startHour = Short.valueOf(args.get(argIndex++));
         startDay = Short.valueOf(args.get(argIndex++));
         startMonth = Short.valueOf(args.get(argIndex++));
@@ -40,11 +40,13 @@ public class RegisterEvent extends Command<PEPublicAPI> {
         endDay = Short.valueOf(args.get(argIndex++));
         endMonth = Short.valueOf(args.get(argIndex++));
         endYear = Short.valueOf(args.get(argIndex));
+
+
     }
 
     @Override
     public void execute() throws Exception {
-        shell.system.eventService.submitNewEvent(eventName, id, startDay, startMonth, startYear, endDay, endMonth, endYear);
+        shell.system.eventService.submitNewEvent(eventName, id, );
     }
 
     @Override

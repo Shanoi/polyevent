@@ -1,4 +1,4 @@
-package fr.unice.polytech.isa.teamk.components;
+package fr.unice.polytech.isa.teamk.utils;
 
 import fr.unice.polytech.isa.teamk.entities.Event;
 import fr.unice.polytech.isa.teamk.entities.user.Organizer;
@@ -10,13 +10,13 @@ import java.util.*;
 
 @Startup
 @Singleton
-public class DatabaseSingletonBean {
+public class DatabaseSingletonEvent {
 
     private List<Event> waitingList;
 
     private int currentID;
 
-    public DatabaseSingletonBean() {
+    public DatabaseSingletonEvent() {
 
     }
 

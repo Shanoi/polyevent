@@ -1,93 +1,106 @@
-<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/organizer" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="OrganizerServiceImplService" targetNamespace="http://www.polytech.unice.fr/si/4a/isa/organizer">
-  <wsdl:types>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/organizer" elementFormDefault="unqualified" targetNamespace="http://www.polytech.unice.fr/si/4a/isa/organizer" version="1.0">
-
-  <xs:element name="registerOrganizer" type="tns:registerOrganizer"/>
-
-  <xs:element name="registerOrganizerResponse" type="tns:registerOrganizerResponse"/>
-
-  <xs:element name="sendPayment" type="tns:sendPayment"/>
-
-  <xs:element name="sendPaymentResponse" type="tns:sendPaymentResponse"/>
-
-  <xs:complexType name="sendPayment">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="organizer_id" type="xs:string"/>
-      <xs:element name="price" type="xs:int"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="sendPaymentResponse">
-    <xs:sequence/>
-  </xs:complexType>
-
-  <xs:complexType name="registerOrganizer">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="organizer_name" type="xs:string"/>
-      <xs:element minOccurs="0" name="organizer_id" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="registerOrganizerResponse">
-    <xs:sequence/>
-  </xs:complexType>
-
-</xs:schema>
-  </wsdl:types>
-  <wsdl:message name="sendPaymentResponse">
-    <wsdl:part element="tns:sendPaymentResponse" name="parameters">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="registerOrganizerResponse">
-    <wsdl:part element="tns:registerOrganizerResponse" name="parameters">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="sendPayment">
-    <wsdl:part element="tns:sendPayment" name="parameters">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="registerOrganizer">
-    <wsdl:part element="tns:registerOrganizer" name="parameters">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:portType name="OrganizerService">
-    <wsdl:operation name="sendPayment">
-      <wsdl:input message="tns:sendPayment" name="sendPayment">
-    </wsdl:input>
-      <wsdl:output message="tns:sendPaymentResponse" name="sendPaymentResponse">
-    </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="registerOrganizer">
-      <wsdl:input message="tns:registerOrganizer" name="registerOrganizer">
-    </wsdl:input>
-      <wsdl:output message="tns:registerOrganizerResponse" name="registerOrganizerResponse">
-    </wsdl:output>
-    </wsdl:operation>
-  </wsdl:portType>
-  <wsdl:binding name="OrganizerServiceImplServiceSoapBinding" type="tns:OrganizerService">
-    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="sendPayment">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="sendPayment">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="sendPaymentResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="registerOrganizer">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="registerOrganizer">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="registerOrganizerResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:service name="OrganizerServiceImplService">
-    <wsdl:port binding="tns:OrganizerServiceImplServiceSoapBinding" name="OrganizerServiceImplPort">
-      <soap:address location="http://localhost:8080/event/webservices/OrganizerWS"/>
-    </wsdl:port>
-  </wsdl:service>
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/organizer"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  name="OrganizerServiceImplService" targetNamespace="http://www.polytech.unice.fr/si/4a/isa/organizer">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/organizer" attributeFormDefault="unqualified"
+                   elementFormDefault="unqualified" targetNamespace="http://www.polytech.unice.fr/si/4a/isa/organizer">
+            <xs:element name="registerOrganizer" type="tns:registerOrganizer"/>
+            <xs:element name="registerOrganizerResponse" type="tns:registerOrganizerResponse"/>
+            <xs:element name="sendPayment" type="tns:sendPayment"/>
+            <xs:element name="sendPaymentResponse" type="tns:sendPaymentResponse"/>
+            <xs:complexType name="sendPayment">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="organizer_id" type="xs:string"/>
+                    <xs:element name="price" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="sendPaymentResponse">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="registerOrganizer">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="organizer_id" type="xs:string"/>
+                    <xs:element minOccurs="0" name="organizer_password" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="registerOrganizerResponse">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:element name="AlreadyExistingOrganizer" type="tns:AlreadyExistingOrganizer"/>
+            <xs:complexType name="AlreadyExistingOrganizer">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="sendPaymentResponse">
+        <wsdl:part element="tns:sendPaymentResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="AlreadyExistingOrganizer">
+        <wsdl:part element="tns:AlreadyExistingOrganizer" name="AlreadyExistingOrganizer">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="registerOrganizerResponse">
+        <wsdl:part element="tns:registerOrganizerResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="sendPayment">
+        <wsdl:part element="tns:sendPayment" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="registerOrganizer">
+        <wsdl:part element="tns:registerOrganizer" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="OrganizerService">
+        <wsdl:operation name="sendPayment">
+            <wsdl:input message="tns:sendPayment" name="sendPayment">
+            </wsdl:input>
+            <wsdl:output message="tns:sendPaymentResponse" name="sendPaymentResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="registerOrganizer">
+            <wsdl:input message="tns:registerOrganizer" name="registerOrganizer">
+            </wsdl:input>
+            <wsdl:output message="tns:registerOrganizerResponse" name="registerOrganizerResponse">
+            </wsdl:output>
+            <wsdl:fault message="tns:AlreadyExistingOrganizer" name="AlreadyExistingOrganizer">
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="OrganizerServiceImplServiceSoapBinding" type="tns:OrganizerService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="sendPayment">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="sendPayment">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="sendPaymentResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="registerOrganizer">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="registerOrganizer">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="registerOrganizerResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="AlreadyExistingOrganizer">
+                <soap:fault name="AlreadyExistingOrganizer" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="OrganizerServiceImplService">
+        <wsdl:port binding="tns:OrganizerServiceImplServiceSoapBinding" name="OrganizerServiceImplPort">
+            <soap:address location="http://localhost:8080/event/webservices/OrganizerWS"/>
+        </wsdl:port>
+    </wsdl:service>
 </wsdl:definitions>

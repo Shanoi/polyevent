@@ -1,4 +1,4 @@
-package fr.unice.polytech.isa.teamk.components;
+package fr.unice.polytech.isa.teamk.utils;
 
 import fr.unice.polytech.isa.teamk.entities.user.Organizer;
 
@@ -14,6 +14,7 @@ import java.util.Set;
 public class DatabaseSingletonOrganizer {
 
     private Set<Organizer> organizerList;
+    private Set<Organizer> loggedInOrganizerList;
 
     public DatabaseSingletonOrganizer() {
 
@@ -22,7 +23,7 @@ public class DatabaseSingletonOrganizer {
     @PostConstruct
     void init() {
         this.organizerList = new HashSet<>();
-
+        this.loggedInOrganizerList = new HashSet<>();
     }
 
     public Optional<Organizer> findOrganizerByID(String id) {
@@ -37,6 +38,10 @@ public class DatabaseSingletonOrganizer {
 
     public boolean createNewOrganizer(Organizer organizer) {
         return organizerList.add(organizer);
+    }
+
+    public boolean loginOrganizer(Organizer organizer) {
+        return loggedInOrganizerList.add(organizer);
     }
 
 }
