@@ -1,13 +1,14 @@
 package fr.unice.polytech.isa.teamk.entities.user;
 
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@Embeddable
+@Entity
 public abstract class User implements Serializable {
 
-    @NotNull
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
     @NotNull

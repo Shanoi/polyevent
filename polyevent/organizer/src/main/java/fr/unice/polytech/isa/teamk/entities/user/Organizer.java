@@ -1,10 +1,11 @@
 package fr.unice.polytech.isa.teamk.entities.user;
 
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 import java.io.Serializable;
 
-@Embeddable
+@Entity
 public class Organizer extends User implements Serializable {
+
 
     public Organizer() {
 

@@ -16,6 +16,7 @@
         <module>organizer</module>
         <module>responsible</module>
         <module>rooms</module>
+        <module>database</module>
     </modules>
 
     <properties>

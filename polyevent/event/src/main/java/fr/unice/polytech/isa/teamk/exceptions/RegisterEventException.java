@@ -18,7 +18,7 @@ public class RegisterEventException extends Exception implements Serializable {
         this.roomID = roomID;
     }
 
-    public RegisterEventException() {
+    public RegisterEventException(String name) {
     }
 
     public String getName() {

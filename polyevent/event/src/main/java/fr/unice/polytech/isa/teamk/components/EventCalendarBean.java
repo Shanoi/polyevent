@@ -30,7 +30,7 @@ public class EventCalendarBean implements EventFinder {
 
     @Override
     public List<Event> getAllWaitingEvents() {
-        return databaseSingletonEvent.getWaitingList();
+        return databaseSingletonEvent.getEvents();
     }
 
 }

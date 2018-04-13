@@ -2,32 +2,36 @@ package fr.unice.polytech.isa.teamk.entities;
 
 import fr.unice.polytech.isa.teamk.entities.user.Organizer;
 
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 
-@Embeddable
+@Entity
 public class Event implements Serializable {
+
+    @Id
+    @GeneratedValue
+    private String id;
 
     @NotNull
     private String name;
 
-    private String id;
-
-    @NotNull
+    @Temporal(TemporalType.DATE)
     private Date startingDate;
 
-    @NotNull
+    @Temporal(TemporalType.DATE)
     private Date endingDate;
 
-    @NotNull
+    @ManyToOne
     private Organizer organizer;
 
     @NotNull
     private int nbAttendee;
 
-    //private HashMap<TypeSalle, nb>
+    //private List<Room> rooms;
 
     public Event() {
 

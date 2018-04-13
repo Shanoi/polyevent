@@ -13,7 +13,7 @@ import java.util.Optional;
 @Singleton
 public class DatabaseSingletonEvent {
 
-    private List<Event> waitingList;
+    private List<Event> events;
 
     private int currentID;
 
@@ -24,32 +24,39 @@ public class DatabaseSingletonEvent {
     @PostConstruct
     void init() {
 
-        this.waitingList = new ArrayList<>();
+        this.events = new ArrayList<>();
         currentID = 1;
     }
 
     public void addToWaitingList(Event event) {
-        this.waitingList.add(event);
+        this.events.add(event);
         event.setID(String.valueOf(this.currentID++));
     }
 
     public void validateEvent(Event event) {
-        this.waitingList.remove(event);
+        this.events.remove(event);
     }
 
-    public List<Event> getWaitingList() {
-        return waitingList;
+    public List<Event> getEvents() {
+        return events;
     }
 
     public Optional<Event> findEventByID(String idEvent) {
         for (Event event :
-                this.waitingList) {
+                this.events) {
             if (event.getID().equals(idEvent)) {
                 return Optional.of(event);
             }
         }
 
         return Optional.empty();
+    }
+
+    public void registerEvent(Event event) {
+
+        this.events.add(event);
+        event.setID(String.valueOf(this.currentID++));
+
     }
 
 }

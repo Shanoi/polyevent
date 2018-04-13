@@ -17,6 +17,7 @@
         <h:panelGrid columns="2">
             <h:outputText value='Name:'/>
             <h:inputText value='#{organizerBean.id}' required="true"/>
+            <h:outputText value='Password:'/>
             <h:inputText value="#{organizerBean.password}" required="true"/>
             <h:commandButton action="#{organizerBean.connect}" value="Connect"/>
         </h:panelGrid>
