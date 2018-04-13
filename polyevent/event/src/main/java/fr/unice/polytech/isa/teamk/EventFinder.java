@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public interface EventFinder {
 
-    Optional<Event> searchEvenement(String idEvent);
+    Optional<Event> searchEventByID(String id);
 
-    List<Event> getAllWaitingEvents();
+    List<Event> getSubmittedEvents();
 
 }

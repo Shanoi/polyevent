@@ -1,26 +1,19 @@
 package fr.unice.polytech.isa.teamk.managed;
 
 import fr.unice.polytech.isa.teamk.entities.Event;
-import fr.unice.polytech.isa.teamk.entities.user.Organizer;
-import fr.unice.polytech.isa.teamk.exceptions.ExternalPartnerException;
 import fr.unice.polytech.isa.teamk.exceptions.RegisterEventException;
-import fr.unice.polytech.isa.teamk.exceptions.UncheckedException;
 import fr.unice.polytech.isa.teamk.external.CalendarService;
 import fr.unice.polytech.isa.teamk.utils.DatabaseSingletonEvent;
-import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Properties;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @ManagedBean
@@ -100,7 +93,7 @@ public class EventBean implements Serializable {
     public String registerEvent() throws RegisterEventException {
 
         Event event = new Event(name,startDate,endDate,
-                new Organizer(customerId, customerPassword), nbAttendee);
+                nbAttendee);
 
         databaseSingletonBean.registerEvent(event);
 

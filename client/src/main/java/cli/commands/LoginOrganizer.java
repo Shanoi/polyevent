@@ -2,6 +2,7 @@ package cli.commands;
 
 import api.PEPublicAPI;
 import cli.framework.Command;
+import stubs.eventstubs.Organizer;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ public class LoginOrganizer extends Command<PEPublicAPI> {
 
     private String id;
     private String password;
+    private String loggedInOrganizerId;
 
     @Override
     public String identifier() {
@@ -22,8 +24,13 @@ public class LoginOrganizer extends Command<PEPublicAPI> {
     }
 
     @Override
-    public void execute() throws Exception {
-        shell.system.organizerService.loginOrganizer(id, password);
+    public void execute() {
+        try {
+            shell.system.organizerService.loginOrganizer(id, password);
+            loggedInOrganizerId = id;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

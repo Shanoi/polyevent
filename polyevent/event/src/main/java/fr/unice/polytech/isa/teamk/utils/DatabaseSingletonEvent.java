@@ -23,7 +23,6 @@ public class DatabaseSingletonEvent {
 
     @PostConstruct
     void init() {
-
         this.events = new ArrayList<>();
         currentID = 1;
     }
@@ -53,10 +52,8 @@ public class DatabaseSingletonEvent {
     }
 
     public void registerEvent(Event event) {
-
         this.events.add(event);
         event.setID(String.valueOf(this.currentID++));
-
     }
 
 }

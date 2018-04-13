@@ -40,9 +40,41 @@ namespace Partner.Data
         [DataMember]
         public string RoomID { get; set; }
 
+        [DataMember]
+        public EventStatus Status { get; set; }
+
         override public string ToString()
         {
             return "Event[Identifier:" + Identifier + ", RegisterDate:" + RegisterDate + ", StartDate:" + StartDate + ", EndDate:" + EndDate + ", ID:" + RoomID + "]";
         }
+    }
+
+    public enum EventStatus { Ok, Ko }
+
+    public class Day
+    {
+        public String Day { get; set; }
+
+        private Dictionary<string, List<string>> planning = new Dictionary<string, List<string>>
+        {
+            { "8:00", new List<string>() },
+            { "9:00", new List<string>() },
+            { "10:00", new List<string>() },
+            { "11:00", new List<string>() },
+            { "12:00", new List<string>() },
+            { "13:00", new List<string>() },
+            { "14:00", new List<string>() },
+            { "15:00", new List<string>() },
+            { "16:00", new List<string>() },
+            { "17:00", new List<string>() },
+            { "18:00", new List<string>() }
+        };
+
+        public Day(string day)
+        {
+            Day = day;
+        }
+
+        public Dictionary<string, List<string>> Planning { get; set; }
     }
 }

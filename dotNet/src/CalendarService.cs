@@ -42,6 +42,7 @@ namespace Partner.Service
             e.StartDate = request.StartDate;
             e.EndDate = request.EndDate;
             e.RoomID = request.RoomID;
+            e.Status = EventStatus.Ok;
             return e;
         }
     }

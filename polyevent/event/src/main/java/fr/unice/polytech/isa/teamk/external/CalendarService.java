@@ -6,7 +6,6 @@ import org.apache.cxf.jaxrs.client.WebClient;
 import org.json.JSONObject;
 
 import javax.ws.rs.core.MediaType;
-import java.util.GregorianCalendar;
 
 public class CalendarService {
 
@@ -20,10 +19,9 @@ public class CalendarService {
         this("localhost", "9090");
     }
 
-    public boolean submitEvent(Event event, String roomID) throws ExternalPartnerException {
+    public boolean submitEvent(Event event) throws ExternalPartnerException {
         JSONObject request = new JSONObject().put("StartDate", event.getStartingDate().getTime())
-                .put("EndDate", event.getEndingDate().getTime())
-                .put("RoomID", roomID);
+                .put("EndDate", event.getEndingDate().getTime());
 
         Integer id;
         try {

@@ -10,11 +10,6 @@ import javax.jws.WebService;
 public interface EventService {
 
     @WebMethod
-    void submitNewEvent(@WebParam(name = "event") Event event) /*throws UnknownOrganizerException*/;
-
-    /*void submitNewEvent(@WebParam(name = "event_name") String name,
-                        @WebParam(name = "id_organizer") String id,
-                        @WebParam(name = "start_date") LocalDateTime startDate,
-                        @WebParam(name = "end_date") LocalDateTime endDate) throws UnknownOrganizerException;*/
+    void submitNewEvent(@WebParam(name = "event") Event event, String organizerID);
 
 }

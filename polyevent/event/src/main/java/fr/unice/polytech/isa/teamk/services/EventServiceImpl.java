@@ -2,6 +2,7 @@ package fr.unice.polytech.isa.teamk.services;
 
 import fr.unice.polytech.isa.teamk.OrganizerFinder;
 import fr.unice.polytech.isa.teamk.components.EventModifierBean;
+import fr.unice.polytech.isa.teamk.components.EventRegistryBean;
 import fr.unice.polytech.isa.teamk.entities.Event;
 
 import javax.ejb.EJB;
@@ -13,7 +14,7 @@ import javax.jws.WebService;
 public class EventServiceImpl implements EventService {
 
     @EJB
-    private EventModifierBean eventModifier;
+    private EventRegistryBean eventRegistryBean;
 
     @EJB
     private OrganizerFinder organizerFinder;
@@ -23,8 +24,8 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void submitNewEvent(Event event) {
-        eventModifier.forwardNewEvent(event);
+    public void submitNewEvent(Event event, String organizerID) {
+        eventRegistryBean.submitNewEvent(event);
     }
 
 }

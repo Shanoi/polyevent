@@ -5,17 +5,14 @@ import java.io.Serializable;
 public class RegisterEventException extends Exception implements Serializable {
 
     private String eventName;
-    private String roomID;
 
     public RegisterEventException(String eventName, String roomID) {
         this.eventName = eventName;
-        this.roomID = roomID;
     }
 
-    public RegisterEventException(String eventName, String roomID, Exception source) {
+    public RegisterEventException(String eventName, Exception source) {
         super(source);
         this.eventName = eventName;
-        this.roomID = roomID;
     }
 
     public RegisterEventException(String name) {
@@ -27,14 +24,6 @@ public class RegisterEventException extends Exception implements Serializable {
 
     public void setName(String eventName) {
         this.eventName = eventName;
-    }
-
-    public String getRoomID() {
-        return roomID;
-    }
-
-    public void setRoomID(String roomID) {
-        this.roomID = roomID;
     }
 
 }

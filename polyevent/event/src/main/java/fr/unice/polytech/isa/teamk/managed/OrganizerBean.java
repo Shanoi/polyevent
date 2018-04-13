@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 @SessionScoped
 public class OrganizerBean implements Serializable {
 
-
     @EJB
     private transient OrganizerFinder finder;
     @EJB

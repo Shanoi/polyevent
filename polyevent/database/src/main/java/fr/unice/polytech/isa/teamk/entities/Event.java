@@ -42,11 +42,10 @@ public class Event implements Serializable {
 
     }
 
-    public Event(String name, Date startingDate, Date endingDate, Organizer organizer, int nbAttendee) {
+    public Event(String name, Date startingDate, Date endingDate, int nbAttendee) {
         this.name = name;
         this.startingDate = startingDate;
         this.endingDate = endingDate;
-        this.organizer = organizer;
         this.nbAttendee = nbAttendee;
     }
 
@@ -89,4 +88,5 @@ public class Event implements Serializable {
     public void setNbAttendee(int nbAttendee) {
         this.nbAttendee = nbAttendee;
     }
+
 }

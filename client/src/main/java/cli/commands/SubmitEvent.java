@@ -3,7 +3,9 @@ package cli.commands;
 import api.PEPublicAPI;
 import cli.framework.Command;
 import stubs.eventstubs.Event;
+import stubs.eventstubs.Organizer;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -33,12 +35,15 @@ public class SubmitEvent extends Command<PEPublicAPI> {
         short endMonth = Short.valueOf(args.get(argIndex++));
         short endYear = Short.valueOf(args.get(argIndex));
 
-        //event = new Event(eventName, id, )
+        Date startDate = new Date(startYear, startMonth, startDay, startHour, 0, 0);
+        Date endDate = new Date(endYear, endMonth, endDay, endHour, 0, 0);
+
+        event = new Event(eventName, id, startDate, endDate);
     }
 
     @Override
     public void execute() throws Exception {
-       // shell.system.eventService.submitNewEvent(eventName, id, );
+       shell.system.eventService.submitNewEvent(event);
     }
 
     @Override
