@@ -5,13 +5,15 @@ import cli.framework.Command;
 
 import java.util.List;
 
-public class Login extends Command<PEPublicAPI> {
+public class LoginOrganizer extends Command<PEPublicAPI> {
 
     private String id;
     private String password;
 
     @Override
-    public String identifier() { return "login"; }
+    public String identifier() {
+        return "login_organizer";
+    }
 
     @Override
     public void load(List<String> args) {
@@ -21,13 +23,13 @@ public class Login extends Command<PEPublicAPI> {
 
     @Override
     public void execute() throws Exception {
-        shell.system.organizerService.registerOrganizer(id, password);
+        shell.system.organizerService.loginOrganizer(id, password);
     }
 
     @Override
     public String describe() {
-        return "Register a new Organizer in the PolyEvent system\n" +
-                "	--> register <Organizer ID> <Organizer Password>";
+        return "LoginOrganizer an existing Organizer in the PolyEvent system\n" +
+                "	--> login_organizer <Organizer ID> <Organizer Password>";
     }
 
 }

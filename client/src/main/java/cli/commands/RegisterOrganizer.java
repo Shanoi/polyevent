@@ -12,7 +12,7 @@ public class RegisterOrganizer extends Command<PEPublicAPI> {
 
     @Override
     public String identifier() {
-        return "register";
+        return "register_organizer";
     }
 
     @Override
@@ -29,7 +29,7 @@ public class RegisterOrganizer extends Command<PEPublicAPI> {
     @Override
     public String describe() {
         return "Register a new Organizer in the PolyEvent system\n" +
-                "	--> register <Organizer ID> <Organizer Password>";
+                "	--> register_organizer <Organizer ID> <Organizer Password>";
     }
 
 }

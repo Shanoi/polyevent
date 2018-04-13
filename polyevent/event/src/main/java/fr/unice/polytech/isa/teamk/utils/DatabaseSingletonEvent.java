@@ -1,12 +1,13 @@
 package fr.unice.polytech.isa.teamk.utils;
 
 import fr.unice.polytech.isa.teamk.entities.Event;
-import fr.unice.polytech.isa.teamk.entities.user.Organizer;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Startup
 @Singleton

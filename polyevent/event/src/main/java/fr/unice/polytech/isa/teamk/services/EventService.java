@@ -1,12 +1,10 @@
 package fr.unice.polytech.isa.teamk.services;
 
 import fr.unice.polytech.isa.teamk.entities.Event;
-import fr.unice.polytech.isa.teamk.exceptions.UnknownOrganizerException;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
-import java.time.LocalDateTime;
 
 @WebService(targetNamespace = "http://www.polytech.unice.fr/si/4a/isa/event")
 public interface EventService {

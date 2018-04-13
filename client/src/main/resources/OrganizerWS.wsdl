@@ -1,16 +1,28 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
                   xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/organizer"
                   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-                  name="OrganizerServiceImplService" targetNamespace="http://www.polytech.unice.fr/si/4a/isa/organizer">
+                  xmlns:ns1="http://www.polytech.unice.fr/si/4a/isa/event" name="OrganizerServiceImplService"
+                  targetNamespace="http://www.polytech.unice.fr/si/4a/isa/organizer">
     <wsdl:types>
         <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
                    xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/organizer" attributeFormDefault="unqualified"
                    elementFormDefault="unqualified" targetNamespace="http://www.polytech.unice.fr/si/4a/isa/organizer">
+            <xs:element name="loginOrganizer" type="tns:loginOrganizer"/>
+            <xs:element name="loginOrganizerResponse" type="tns:loginOrganizerResponse"/>
             <xs:element name="registerOrganizer" type="tns:registerOrganizer"/>
             <xs:element name="registerOrganizerResponse" type="tns:registerOrganizerResponse"/>
             <xs:element name="sendPayment" type="tns:sendPayment"/>
             <xs:element name="sendPaymentResponse" type="tns:sendPaymentResponse"/>
+            <xs:complexType name="loginOrganizer">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="organizer_id" type="xs:string"/>
+                    <xs:element minOccurs="0" name="organizer_password" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="loginOrganizerResponse">
+                <xs:sequence/>
+            </xs:complexType>
             <xs:complexType name="sendPayment">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="organizer_id" type="xs:string"/>
@@ -29,21 +41,55 @@
             <xs:complexType name="registerOrganizerResponse">
                 <xs:sequence/>
             </xs:complexType>
+            <xs:element name="AlreadyLoggedInOrganizer" type="tns:AlreadyLoggedInOrganizer"/>
+            <xs:complexType name="AlreadyLoggedInOrganizer">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" type="xs:string"/>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
             <xs:element name="AlreadyExistingOrganizer" type="tns:AlreadyExistingOrganizer"/>
             <xs:complexType name="AlreadyExistingOrganizer">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="id" type="xs:string"/>
                     <xs:element minOccurs="0" name="message" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
         </xs:schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                    xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/event" attributeFormDefault="unqualified"
+                    elementFormDefault="unqualified" targetNamespace="http://www.polytech.unice.fr/si/4a/isa/event">
+            <xsd:element name="UnknownOrganizerException" type="tns:UnknownOrganizerException"/>
+            <xsd:complexType name="UnknownOrganizerException">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="iD" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="message" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
     </wsdl:types>
+    <wsdl:message name="loginOrganizer">
+        <wsdl:part element="tns:loginOrganizer" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="AlreadyLoggedInOrganizer">
+        <wsdl:part element="tns:AlreadyLoggedInOrganizer" name="AlreadyLoggedInOrganizer">
+        </wsdl:part>
+    </wsdl:message>
     <wsdl:message name="sendPaymentResponse">
         <wsdl:part element="tns:sendPaymentResponse" name="parameters">
         </wsdl:part>
     </wsdl:message>
+    <wsdl:message name="UnknownOrganizerException">
+        <wsdl:part element="ns1:UnknownOrganizerException" name="UnknownOrganizerException">
+        </wsdl:part>
+    </wsdl:message>
     <wsdl:message name="AlreadyExistingOrganizer">
         <wsdl:part element="tns:AlreadyExistingOrganizer" name="AlreadyExistingOrganizer">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="loginOrganizerResponse">
+        <wsdl:part element="tns:loginOrganizerResponse" name="parameters">
         </wsdl:part>
     </wsdl:message>
     <wsdl:message name="registerOrganizerResponse">
@@ -59,6 +105,16 @@
         </wsdl:part>
     </wsdl:message>
     <wsdl:portType name="OrganizerService">
+        <wsdl:operation name="loginOrganizer">
+            <wsdl:input message="tns:loginOrganizer" name="loginOrganizer">
+            </wsdl:input>
+            <wsdl:output message="tns:loginOrganizerResponse" name="loginOrganizerResponse">
+            </wsdl:output>
+            <wsdl:fault message="tns:UnknownOrganizerException" name="UnknownOrganizerException">
+            </wsdl:fault>
+            <wsdl:fault message="tns:AlreadyLoggedInOrganizer" name="AlreadyLoggedInOrganizer">
+            </wsdl:fault>
+        </wsdl:operation>
         <wsdl:operation name="sendPayment">
             <wsdl:input message="tns:sendPayment" name="sendPayment">
             </wsdl:input>
@@ -76,6 +132,21 @@
     </wsdl:portType>
     <wsdl:binding name="OrganizerServiceImplServiceSoapBinding" type="tns:OrganizerService">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="loginOrganizer">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="loginOrganizer">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="loginOrganizerResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="UnknownOrganizerException">
+                <soap:fault name="UnknownOrganizerException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="AlreadyLoggedInOrganizer">
+                <soap:fault name="AlreadyLoggedInOrganizer" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
         <wsdl:operation name="sendPayment">
             <soap:operation soapAction="" style="document"/>
             <wsdl:input name="sendPayment">

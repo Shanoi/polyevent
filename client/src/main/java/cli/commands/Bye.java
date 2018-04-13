@@ -5,18 +5,23 @@ import cli.framework.Command;
 
 public class Bye extends Command<PEPublicAPI> {
 
-	@Override
-	public String identifier() { return "bye"; }
+    @Override
+    public String identifier() {
+        return "bye";
+    }
 
-	@Override
-	public void execute() { }
+    @Override
+    public void execute() {
+    }
 
-	@Override
-	public String describe() {
-		return "Exit PolyEvent";
-	}
+    @Override
+    public String describe() {
+        return "Exit PolyEvent";
+    }
 
-	@Override
-	public boolean shouldContinue() { return false; }
+    @Override
+    public boolean shouldContinue() {
+        return false;
+    }
 
 }

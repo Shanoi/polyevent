@@ -24,11 +24,6 @@ public class OrganizerServiceImpl implements OrganizerService {
     }
 
     @Override
-    public void sendPayment(String id, int price) {
-
-    }
-
-    @Override
     public void registerOrganizer(String id, String password) throws AlreadyExistingOrganizer {
         organizerRegister.registerOrganizer(id, password);
     }
@@ -36,6 +31,11 @@ public class OrganizerServiceImpl implements OrganizerService {
     @Override
     public void loginOrganizer(String id, String password) throws UnknownOrganizerException, AlreadyLoggedInOrganizer {
         organizerRegister.loginOrganizer(id, password);
+    }
+
+    @Override
+    public void sendPayment(String id, int price) {
+
     }
 
 }
