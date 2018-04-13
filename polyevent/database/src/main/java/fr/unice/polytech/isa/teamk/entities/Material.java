@@ -3,6 +3,7 @@ package fr.unice.polytech.isa.teamk.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 public class Material implements Serializable {
@@ -13,10 +14,10 @@ public class Material implements Serializable {
     @NotNull
     private String type;
 
+    @Id
     @GeneratedValue
     private String id;
 
-    @Id
     public String getId() {
         return id;
     }
@@ -59,5 +60,22 @@ public class Material implements Serializable {
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Material material = (Material) o;
+        return getQuantity() == material.getQuantity() &&
+                Objects.equals(getType(), material.getType()) &&
+                Objects.equals(getId(), material.getId()) &&
+                Objects.equals(getRoom(), material.getRoom());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getQuantity(), getType(), getId(), getRoom());
     }
 }

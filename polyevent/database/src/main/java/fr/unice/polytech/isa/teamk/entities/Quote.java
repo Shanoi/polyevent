@@ -16,13 +16,13 @@ public class Quote implements Serializable {
     @NotNull
     private String description;
 
+    @Id
     @GeneratedValue
     private String id;
 
     @OneToOne
     private Event event;
 
-    @Id
     public String getId() {
         return id;
     }
