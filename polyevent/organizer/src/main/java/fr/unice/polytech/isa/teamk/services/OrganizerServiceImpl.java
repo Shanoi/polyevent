@@ -13,7 +13,7 @@ import javax.jws.WebService;
 @WebService(targetNamespace = "http://www.polytech.unice.fr/si/4a/isa/organizer")
 public class OrganizerServiceImpl implements OrganizerService {
 
-   /* @EJB
+    /*@EJB
     private Payment payment;*/
 
     @EJB

@@ -13,13 +13,13 @@ import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 @ManagedBean
 @SessionScoped
 public class OrganizerBean implements Serializable {
 
     @EJB
     private transient OrganizerFinder finder;
+
     @EJB
     private transient OrganizerRegister registry;
 
@@ -69,4 +69,3 @@ public class OrganizerBean implements Serializable {
     }
 
 }
-

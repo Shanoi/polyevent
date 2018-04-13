@@ -3,13 +3,13 @@ package fr.unice.polytech.isa.teamk.managed;
 import fr.unice.polytech.isa.teamk.entities.Event;
 import fr.unice.polytech.isa.teamk.exceptions.RegisterEventException;
 import fr.unice.polytech.isa.teamk.external.CalendarService;
-import fr.unice.polytech.isa.teamk.utils.DatabaseSingletonEvent;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -86,16 +86,16 @@ public class EventBean implements Serializable {
         this.partners = partners;
     }
 
-    @EJB
-    private DatabaseSingletonEvent databaseSingletonBean;
+    @PersistenceContext
+    private EntityManager manager;
 
 
     public String registerEvent() throws RegisterEventException {
 
-        Event event = new Event(name,startDate,endDate,
+        Event event = new Event(name, startDate, endDate,
                 nbAttendee);
 
-        databaseSingletonBean.registerEvent(event);
+        manager.persist(event);
 
         return Signal.ADDED;
     }

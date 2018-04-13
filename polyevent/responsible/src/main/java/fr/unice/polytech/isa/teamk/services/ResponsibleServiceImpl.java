@@ -26,7 +26,7 @@ public class ResponsibleServiceImpl implements ResponsibleService {
     @EJB
     private EventRegister register;
 
-    public ResponsibleServiceImpl(){
+    public ResponsibleServiceImpl() {
 
     }
 
@@ -45,7 +45,7 @@ public class ResponsibleServiceImpl implements ResponsibleService {
             throws RegisterEventException, UnknownEventException {
         Optional<Event> event = finder.searchEventByID(eventID);
 
-        if(event.isPresent()){
+        if (event.isPresent()) {
             register.registerEvent(event.get());
         } else {
             throw new UnknownEventException(eventID);

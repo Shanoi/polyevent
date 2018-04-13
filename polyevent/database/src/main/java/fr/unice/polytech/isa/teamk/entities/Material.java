@@ -1,6 +1,9 @@
 package fr.unice.polytech.isa.teamk.entities;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
@@ -36,7 +39,6 @@ public class Material implements Serializable {
 
     public Material() {
     }
-
 
     public int getQuantity() {
         return quantity;
@@ -75,7 +77,7 @@ public class Material implements Serializable {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(getQuantity(), getType(), getId(), getRoom());
     }
+
 }

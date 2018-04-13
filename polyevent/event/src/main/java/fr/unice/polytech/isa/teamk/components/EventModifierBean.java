@@ -4,12 +4,10 @@ import fr.unice.polytech.isa.teamk.EventModifier;
 import fr.unice.polytech.isa.teamk.entities.Event;
 import fr.unice.polytech.isa.teamk.entities.Provider;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 @Stateless
 public class EventModifierBean implements EventModifier {
-
 
     public EventModifierBean() {
 
@@ -17,7 +15,6 @@ public class EventModifierBean implements EventModifier {
 
     @Override
     public void forwardNewEvent(Event event) {
-
         //Envoyer message ?
     }
 

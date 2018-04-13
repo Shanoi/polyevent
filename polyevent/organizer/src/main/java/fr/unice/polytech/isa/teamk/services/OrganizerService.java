@@ -19,7 +19,7 @@ public interface OrganizerService {
 
     @WebMethod
     void loginOrganizer(@WebParam(name = "organizer_id") String id,
-                       @WebParam(name = "organizer_password") String password) throws UnknownOrganizerException, AlreadyLoggedInOrganizer;
+                        @WebParam(name = "organizer_password") String password) throws UnknownOrganizerException, AlreadyLoggedInOrganizer;
 
     @WebMethod
     @Interceptors({PriceVerifier.class})

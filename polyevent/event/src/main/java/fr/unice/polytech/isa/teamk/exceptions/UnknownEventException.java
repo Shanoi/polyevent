@@ -24,4 +24,5 @@ public class UnknownEventException extends Exception implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
 }

@@ -42,6 +42,7 @@ public class EventRegistryBean implements EventRegister, EventFinder {
     @Override
     public boolean registerEvent(Event event) throws RegisterEventException {
         boolean status;
+
         try {
             status = calendarService.submitEvent(event);
         } catch (ExternalPartnerException e) {
@@ -67,6 +68,7 @@ public class EventRegistryBean implements EventRegister, EventFinder {
         Root<Event> root = criteria.from(Event.class);
         criteria.select(root).where(builder.equal(root.get("id"), id));
         TypedQuery<Event> query = manager.createQuery(criteria);
+
         try {
             return Optional.of(query.getSingleResult());
         } catch (NoResultException nre) {
