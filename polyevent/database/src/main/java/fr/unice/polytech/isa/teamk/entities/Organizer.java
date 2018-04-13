@@ -25,16 +25,21 @@ public class Organizer implements Serializable {
     @NotNull
     private String email;
 
+    @NotNull
+    private String phone;
+
     @OneToMany(mappedBy = "organizer")
     private Set<Event> events = new HashSet<>();
 
     public Organizer() {
     }
 
-    public Organizer(String name, String password, String email) {
+    public Organizer(String name, String password, String email, String phone, Set<Event> events) {
         this.name = name;
         this.password = password;
         this.email = email;
+        this.phone = phone;
+        this.events = events;
     }
 
     public String getName() {

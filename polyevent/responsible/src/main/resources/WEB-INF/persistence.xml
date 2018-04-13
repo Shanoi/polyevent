@@ -7,8 +7,7 @@
 
         <jta-data-source>TCFDataSource</jta-data-source>
 
-        <class>fr.unice.polytech.isa.teamk.entities.Event</class>
-        <class>fr.unice.polytech.isa.teamk.entities.user.Organizer</class>
+        <class>fr.unice.polytech.isa.teamk.entities.user.Responsible</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
