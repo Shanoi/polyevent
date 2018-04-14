@@ -29,7 +29,7 @@
     <h:form id="register-form">
         <h:panelGrid columns="2">
             <h:outputText value='Customer id'/>
-            <h:inputText value='#{organizerBean.id}' required="true" />
+            <h:inputText value='#{organizerBean.id}' required="true"/>
             <h:outputText value='Password'/>
             <h:inputText value='#{organizerBean.password}' required="true"/>
             <h:commandButton action="#{organizerBean.register}" value="Register"/>

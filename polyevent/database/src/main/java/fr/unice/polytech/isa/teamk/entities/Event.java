@@ -1,6 +1,5 @@
 package fr.unice.polytech.isa.teamk.entities;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;

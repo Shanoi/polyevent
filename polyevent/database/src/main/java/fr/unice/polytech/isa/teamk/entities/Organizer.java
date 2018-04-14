@@ -70,4 +70,5 @@ public class Organizer implements Serializable {
     public void setEvents(Set<Event> events) {
         this.events = events;
     }
+
 }

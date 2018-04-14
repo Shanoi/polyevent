@@ -1,7 +1,6 @@
 package fr.unice.polytech.isa.teamk.services;
 
 import fr.unice.polytech.isa.teamk.OrganizerFinder;
-import fr.unice.polytech.isa.teamk.components.EventModifierBean;
 import fr.unice.polytech.isa.teamk.components.EventRegistryBean;
 import fr.unice.polytech.isa.teamk.entities.Event;
 

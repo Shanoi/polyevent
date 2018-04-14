@@ -11,11 +11,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.ejb.EJB;
-import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 @RunWith(Arquillian.class)
 public class OrganizerRegistrationIntegrationTest extends AbstractOrganizerTest {
@@ -34,7 +31,7 @@ public class OrganizerRegistrationIntegrationTest extends AbstractOrganizerTest 
     }
 
     @Test
-    public void dummyTest(){
+    public void dummyTest() {
         assertFalse(false);
     }
 

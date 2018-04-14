@@ -25,4 +25,5 @@ public class Material {
     public void setType(String type) {
         this.type = type;
     }
+
 }

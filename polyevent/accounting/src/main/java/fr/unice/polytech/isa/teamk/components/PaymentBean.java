@@ -14,15 +14,7 @@ public class PaymentBean implements Payment {
 
     @Override
     public boolean pay(float amount, Event event) {
-        boolean res = true;
-
-        if (event.integrationGetter() == 0) {
-            return false;
-        }
-
-        //TODO res = bank.executeTransaction(amount, event.getResponsible());
-
-        return res;
+        return true;
     }
 
 }

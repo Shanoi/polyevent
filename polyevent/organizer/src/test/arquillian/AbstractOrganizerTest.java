@@ -2,9 +2,9 @@ package arquillian;
 
 import fr.unice.polytech.isa.teamk.OrganizerFinder;
 import fr.unice.polytech.isa.teamk.OrganizerRegister;
-import fr.unice.polytech.isa.teamk.utils.DatabaseSingletonOrganizer;
 import fr.unice.polytech.isa.teamk.components.OrganizerRegistryBean;
 import fr.unice.polytech.isa.teamk.entities.user.Organizer;
+import fr.unice.polytech.isa.teamk.utils.DatabaseSingletonOrganizer;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
