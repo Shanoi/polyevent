@@ -1,9 +1,6 @@
 package fr.unice.polytech.isa.teamk.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
@@ -17,7 +14,7 @@ public class Quote implements Serializable {
     private String description;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
     @OneToOne

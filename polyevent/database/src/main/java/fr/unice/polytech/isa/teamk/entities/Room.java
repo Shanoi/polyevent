@@ -12,6 +12,7 @@ public class Room implements Serializable {
     @OneToMany
     private Set<Material> materials = new HashSet<>();
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
     public String getId() {

@@ -15,7 +15,7 @@ public class Material implements Serializable {
     private String type;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
     public String getId() {

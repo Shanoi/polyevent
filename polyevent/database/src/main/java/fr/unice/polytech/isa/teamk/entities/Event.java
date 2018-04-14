@@ -12,7 +12,7 @@ import java.util.Set;
 public class Event implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
     @NotNull
