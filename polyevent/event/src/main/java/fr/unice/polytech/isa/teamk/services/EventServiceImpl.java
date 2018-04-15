@@ -7,6 +7,7 @@ import fr.unice.polytech.isa.teamk.entities.Event;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -29,7 +30,8 @@ public class EventServiceImpl implements EventService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
         LocalDateTime startDateTime = LocalDateTime.parse(startDate, formatter);
         LocalDateTime endDateTime = LocalDateTime.parse(endDate, formatter);
-        eventRegistryBean.submitNewEvent(new Event(eventName, startDateTime, endDateTime, nbAttendee), organizerEmail);
+        eventRegistryBean.submitNewEvent(new Event(eventName, Timestamp.valueOf(startDateTime),
+                Timestamp.valueOf(endDateTime), nbAttendee), organizerEmail);
     }
 
 }

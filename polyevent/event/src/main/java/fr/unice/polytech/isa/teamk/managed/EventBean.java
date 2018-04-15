@@ -11,6 +11,7 @@ import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +91,7 @@ public class EventBean implements Serializable {
     private EntityManager manager;
 
     public String registerEvent() throws RegisterEventException {
-        Event event = new Event(name, startDate, endDate, nbAttendee);
+        Event event = new Event(name, Timestamp.valueOf(startDate), Timestamp.valueOf(endDate), nbAttendee);
         manager.persist(event);
 
         return Signal.ADDED;

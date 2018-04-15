@@ -49,10 +49,6 @@ public class Organizer implements Serializable {
         this.id = id;
     }
 
-    public boolean isLoggedIn() {
-        return loggedIn;
-    }
-
     public String getName() {
         return name;
     }
@@ -81,16 +77,16 @@ public class Organizer implements Serializable {
         return phone;
     }
 
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public boolean getLoggedIn() {
         return loggedIn;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
     }
 
     public Set<Event> getEvents() {
@@ -107,14 +103,14 @@ public class Organizer implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Organizer organizer = (Organizer) o;
         return Objects.equals(getName(), organizer.getName()) &&
-                Objects.equals(getPassword(), organizer.getPassword()) &&
                 Objects.equals(getEmail(), organizer.getEmail()) &&
+                Objects.equals(getPassword(), organizer.getPassword()) &&
                 Objects.equals(getPhone(), organizer.getPhone());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getPassword(), getEmail(), getPhone());
+        return Objects.hash(getName(), getEmail(), getPassword(), getPhone());
     }
 
 }

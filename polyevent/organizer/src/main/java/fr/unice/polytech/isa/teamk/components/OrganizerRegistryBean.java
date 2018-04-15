@@ -37,7 +37,7 @@ public class OrganizerRegistryBean implements OrganizerRegister, OrganizerFinder
     @Override
     public void registerOrganizer(String name, String email, String password, String phone) throws AlreadyExistingOrganizer {
         if (searchOrganizerByEmail(email).isPresent()) {
-            throw new AlreadyExistingOrganizer(name);
+            throw new AlreadyExistingOrganizer(email);
         }
 
         Organizer organizer = new Organizer(name, email, password, phone);
@@ -52,6 +52,7 @@ public class OrganizerRegistryBean implements OrganizerRegister, OrganizerFinder
         if (organizer.isPresent() && organizer.get().getPassword().equals(password)) {
             if (!organizer.get().getLoggedIn()) {
                 organizer.get().setLoggedIn(true);
+                return;
             } else {
                 throw new AlreadyLoggedInOrganizer(email);
             }

@@ -3,9 +3,7 @@ package fr.unice.polytech.isa.teamk.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -38,7 +36,7 @@ public class Event implements Serializable {
     @OneToOne
     private Quote quote;
 
-    //private List<Room> rooms;
+    // private List<Room> rooms;
 
     public Event() {
 

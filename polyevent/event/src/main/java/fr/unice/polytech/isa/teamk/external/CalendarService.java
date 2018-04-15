@@ -23,8 +23,8 @@ public class CalendarService {
 
     public boolean submitEvent(Event event) throws ExternalPartnerException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
-        String startDate = event.getStartingDate().format(formatter);
-        String endDate = event.getEndingDate().format(formatter);
+        String startDate = event.getStartingDate().toLocalDateTime().format(formatter);
+        String endDate = event.getEndingDate().toLocalDateTime().format(formatter);
 
         JSONObject request = new JSONObject().put("StartDate", startDate).put("EndDate", endDate);
 

@@ -3,8 +3,7 @@ package fr.unice.polytech.isa.teamk.exceptions;
 import javax.xml.ws.WebFault;
 import java.io.Serializable;
 
-
-@WebFault(targetNamespace = "http://www.polytech.unice.fr/si/4a/isa/responsible")
+@WebFault(targetNamespace = "http://www.polytech.unice.fr/si/4a/isa/event")
 public class UnknownEventException extends Exception implements Serializable {
 
     private String name;
@@ -12,7 +11,6 @@ public class UnknownEventException extends Exception implements Serializable {
     public UnknownEventException(String name) {
         this.name = name;
     }
-
 
     public UnknownEventException() {
     }

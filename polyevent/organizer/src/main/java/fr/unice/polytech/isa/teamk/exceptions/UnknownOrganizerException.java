@@ -3,7 +3,7 @@ package fr.unice.polytech.isa.teamk.exceptions;
 import javax.xml.ws.WebFault;
 import java.io.Serializable;
 
-@WebFault(targetNamespace = "http://www.polytech.unice.fr/si/4a/isa/event")
+@WebFault(targetNamespace = "http://www.polytech.unice.fr/si/4a/isa/organizer")
 public class UnknownOrganizerException extends Exception implements Serializable {
 
     private String email;
@@ -15,11 +15,11 @@ public class UnknownOrganizerException extends Exception implements Serializable
     public UnknownOrganizerException() {
     }
 
-    public String getID() {
+    public String getEmail() {
         return email;
     }
 
-    public void setID(String name) {
+    public void setEmail(String name) {
         this.email = name;
     }
 

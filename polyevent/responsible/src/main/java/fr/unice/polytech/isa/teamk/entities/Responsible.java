@@ -82,15 +82,15 @@ public class Responsible implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Responsible that = (Responsible) o;
-        return Objects.equals(getName(), that.getName()) &&
-                Objects.equals(getEmail(), that.getEmail()) &&
-                Objects.equals(phone, that.phone);
+        Responsible responsible = (Responsible) o;
+        return Objects.equals(getName(), responsible.getName()) &&
+                Objects.equals(getEmail(), responsible.getEmail()) &&
+                Objects.equals(getPhone(), responsible.getPhone());
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(getName(), getEmail(), phone);
+        return Objects.hash(getName(), getEmail(), getPhone());
     }
+
 }
