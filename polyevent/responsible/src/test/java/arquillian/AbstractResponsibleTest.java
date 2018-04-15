@@ -2,7 +2,7 @@ package arquillian;
 
 import fr.unice.polytech.isa.teamk.ResponsibleFinder;
 import fr.unice.polytech.isa.teamk.ResponsibleRegister;
-import fr.unice.polytech.isa.teamk.entities.user.Responsible;
+import fr.unice.polytech.isa.teamk.entities.Responsible;
 import fr.unice.polytech.isa.teamk.exceptions.RegisterEventException;
 import fr.unice.polytech.isa.teamk.exceptions.UncheckedException;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -11,9 +11,7 @@ import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 
-import javax.ejb.EJB;
-
-public abstract class AbstractPolyeventTest {
+public abstract class AbstractResponsibleTest {
 
     @Deployment
     public static WebArchive createDeployment() {

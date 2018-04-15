@@ -1,7 +1,7 @@
 package fr.unice.polytech.isa.teamk.persistence;
 
-import arquillian.AbstractPolyeventTest;
-import fr.unice.polytech.isa.teamk.entities.user.Responsible;
+import arquillian.AbstractResponsibleTest;
+import fr.unice.polytech.isa.teamk.entities.Responsible;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
 import org.jboss.arquillian.transaction.api.annotation.Transactional;
@@ -16,7 +16,7 @@ import static org.junit.Assert.assertNotEquals;
 
 @RunWith(Arquillian.class)
 @Transactional(TransactionMode.COMMIT)
-public class StorageTest extends AbstractPolyeventTest {
+public class StorageTest extends AbstractResponsibleTest {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -24,11 +24,11 @@ public class StorageTest extends AbstractPolyeventTest {
     @Test
     public void storingResponsible() throws Exception {
         Responsible c = new Responsible("John Doe", "1234567890", "lolilol@gmail.com", "0474015640");
-        assertEquals("0",c.getId());
+        assertEquals(0, c.getId());
 
         entityManager.persist(c);
-        String id = c.getId();
-        assertNotEquals("0",id);
+        int id = c.getId();
+        assertNotEquals(0, id);
 
         Responsible stored = (Responsible) entityManager.find(Responsible.class, id);
         assertEquals(c, stored);

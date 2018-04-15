@@ -1,6 +1,6 @@
 package fr.unice.polytech.isa.teamk;
 
-import fr.unice.polytech.isa.teamk.entities.user.Responsible;
+import fr.unice.polytech.isa.teamk.entities.Responsible;
 
 import java.util.Optional;
 

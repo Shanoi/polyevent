@@ -1,7 +1,8 @@
-package fr.unice.polytech.isa.teamk.entities.user;
+package fr.unice.polytech.isa.teamk.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -11,8 +12,8 @@ import java.util.Objects;
 public class Responsible implements Serializable {
 
     @Id
-    @GeneratedValue
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     @NotNull
     private String name;
@@ -37,11 +38,11 @@ public class Responsible implements Serializable {
         this.phone = phone;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
