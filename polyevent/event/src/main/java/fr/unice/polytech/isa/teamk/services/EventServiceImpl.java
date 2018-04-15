@@ -23,8 +23,8 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void submitNewEvent(Event event, String organizerID) {
-        eventRegistryBean.submitNewEvent(event);
+    public void submitNewEvent(Event event, String organizerEmail) {
+        eventRegistryBean.submitNewEvent(event, organizerEmail);
     }
 
 }

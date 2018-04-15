@@ -3,7 +3,7 @@ package fr.unice.polytech.isa.teamk.components.integration;
 import arquillian.AbstractOrganizerTest;
 import fr.unice.polytech.isa.teamk.OrganizerFinder;
 import fr.unice.polytech.isa.teamk.OrganizerRegister;
-import fr.unice.polytech.isa.teamk.entities.user.Organizer;
+import fr.unice.polytech.isa.teamk.entities.Organizer;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -27,7 +27,7 @@ public class OrganizerRegistrationIntegrationTest extends AbstractOrganizerTest 
 
     @Before
     public void setUpContext() {
-        organizer = new Organizer("Poggers", "pitmfc");
+        organizer = new Organizer("John Doe", "jdoe@gmail.com", "jdoepe", "0699887766");
     }
 
     @Test

@@ -35,7 +35,7 @@ public class EventRegistryBean implements EventRegister, EventFinder {
     private CalendarService calendarService;
 
     @Override
-    public boolean submitNewEvent(Event event) {
+    public boolean submitNewEvent(Event event, String organizerEmail) {
         return false;
     }
 

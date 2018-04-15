@@ -25,10 +25,10 @@ public class EventBean implements Serializable {
     private CalendarService calendarService;
 
     @ManagedProperty("#{organizerBean.email}")
-    private String customerId;
+    private String email;
 
     @ManagedProperty("#{organizerBean.password}")
-    private String customerPassword;
+    private String password;
 
     private String name;
     private Date startDate;
@@ -89,12 +89,8 @@ public class EventBean implements Serializable {
     @PersistenceContext
     private EntityManager manager;
 
-
     public String registerEvent() throws RegisterEventException {
-
-        Event event = new Event(name, startDate, endDate,
-                nbAttendee);
-
+        Event event = new Event(name, startDate, endDate, nbAttendee);
         manager.persist(event);
 
         return Signal.ADDED;

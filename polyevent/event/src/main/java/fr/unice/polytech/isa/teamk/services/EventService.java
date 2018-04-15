@@ -10,6 +10,6 @@ import javax.jws.WebService;
 public interface EventService {
 
     @WebMethod
-    void submitNewEvent(@WebParam(name = "event") Event event, String organizerID);
+    void submitNewEvent(@WebParam(name = "event") Event event, String organizerEmail);
 
 }

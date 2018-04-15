@@ -29,8 +29,8 @@ public class OrganizerServiceImpl implements OrganizerService {
     }
 
     @Override
-    public void loginOrganizer(String id, String password) throws UnknownOrganizerException, AlreadyLoggedInOrganizer {
-        organizerRegister.loginOrganizer(id, password);
+    public void loginOrganizer(String email, String password) throws UnknownOrganizerException, AlreadyLoggedInOrganizer {
+        organizerRegister.loginOrganizer(email, password);
     }
 
     @Override
