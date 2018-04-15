@@ -10,7 +10,7 @@ public class Provider implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private String id;
+    private int id;
 
     @NotNull
     private String name;
@@ -36,11 +36,11 @@ public class Provider implements Serializable {
     public Provider() {
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

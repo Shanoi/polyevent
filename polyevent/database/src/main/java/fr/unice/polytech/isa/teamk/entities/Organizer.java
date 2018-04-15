@@ -12,7 +12,7 @@ public class Organizer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private int id;
 
     @NotNull
     private String name;
@@ -39,6 +39,18 @@ public class Organizer implements Serializable {
         this.email = email;
         this.password = password;
         this.phone = phone;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
     }
 
     public String getName() {

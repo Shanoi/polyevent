@@ -16,16 +16,16 @@ public class Material implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private int id;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
     @ManyToOne
     private Room room;
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

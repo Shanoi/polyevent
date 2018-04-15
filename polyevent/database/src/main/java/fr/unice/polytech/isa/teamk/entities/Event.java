@@ -13,7 +13,7 @@ public class Event implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private int id;
 
     @NotNull
     private String name;
@@ -47,6 +47,14 @@ public class Event implements Serializable {
         this.startingDate = startingDate;
         this.endingDate = endingDate;
         this.nbAttendee = nbAttendee;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -87,6 +95,22 @@ public class Event implements Serializable {
 
     public void setNbAttendee(int nbAttendee) {
         this.nbAttendee = nbAttendee;
+    }
+
+    public Set<Provider> getProviders() {
+        return providers;
+    }
+
+    public void setProviders(Set<Provider> providers) {
+        this.providers = providers;
+    }
+
+    public Quote getQuote() {
+        return quote;
+    }
+
+    public void setQuote(Quote quote) {
+        this.quote = quote;
     }
 
     @Override
