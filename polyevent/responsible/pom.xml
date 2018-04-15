@@ -89,6 +89,7 @@
             <groupId>fr.unice.polytech.isa.teamk</groupId>
             <artifactId>event</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <classifier>classes</classifier>
         </dependency>
 
     </dependencies>
