@@ -25,15 +25,25 @@ public class OrganizerBean implements Serializable {
 
     private static final Logger log = Logger.getLogger(OrganizerBean.class.getName());
 
-    private String id;
+    private String name;
+    private String email;
     private String password;
+    private String phone;
 
-    public String getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -44,13 +54,21 @@ public class OrganizerBean implements Serializable {
         this.password = password;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     // Invoked when the "Select" button is pushed
     public String connect() {
-        if (finder.searchOrganizerByID(getId()).isPresent()) {
+        if (finder.searchOrganizerByEmail(getEmail()).isPresent()) {
             return Signal.CONNECTED;
         } else {
             FacesContext.getCurrentInstance()
-                    .addMessage("form-error", new FacesMessage("Unknown organizer: " + getId()));
+                    .addMessage("form-error", new FacesMessage("Unknown organizer: " + getEmail()));
             return Signal.UNKOWN;
         }
     }
@@ -58,12 +76,12 @@ public class OrganizerBean implements Serializable {
     // Invoked when the "Register" button is pushed
     public String register() {
         try {
-            registry.registerOrganizer(getId(), getPassword());
+            registry.registerOrganizer(getName(), getEmail(), getPassword(), getPhone());
             return Signal.ADDED;
         } catch (AlreadyExistingOrganizer e) {
             log.log(Level.WARNING, "Unknown customer", e);
             FacesContext.getCurrentInstance()
-                    .addMessage("form-error", new FacesMessage("Organizer " + getId() + " already exists!"));
+                    .addMessage("form-error", new FacesMessage("Organizer " + getEmail() + " already exists!"));
             return Signal.EXISTING;
         }
     }

@@ -24,8 +24,8 @@ public class OrganizerServiceImpl implements OrganizerService {
     }
 
     @Override
-    public void registerOrganizer(String id, String password) throws AlreadyExistingOrganizer {
-        organizerRegister.registerOrganizer(id, password);
+    public void registerOrganizer(String name, String email, String password, String phone) throws AlreadyExistingOrganizer {
+        organizerRegister.registerOrganizer(name, email, password, phone);
     }
 
     @Override

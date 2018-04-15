@@ -2,21 +2,30 @@ package fr.unice.polytech.isa.teamk.components;
 
 import fr.unice.polytech.isa.teamk.OrganizerFinder;
 import fr.unice.polytech.isa.teamk.OrganizerRegister;
-import fr.unice.polytech.isa.teamk.entities.user.Organizer;
+import fr.unice.polytech.isa.teamk.entities.Organizer;
 import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingOrganizer;
 import fr.unice.polytech.isa.teamk.exceptions.AlreadyLoggedInOrganizer;
 import fr.unice.polytech.isa.teamk.exceptions.UnknownOrganizerException;
-import fr.unice.polytech.isa.teamk.utils.DatabaseSingletonOrganizer;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Stateless
 public class OrganizerRegistryBean implements OrganizerRegister, OrganizerFinder {
 
-    @EJB
-    private DatabaseSingletonOrganizer databaseSingleton;
+    private static final Logger log = Logger.getLogger(Logger.class.getName());
+
+    @PersistenceContext
+    private EntityManager manager;
 
     /**
      * Public constructor for ejb purpose.
@@ -26,31 +35,45 @@ public class OrganizerRegistryBean implements OrganizerRegister, OrganizerFinder
     }
 
     @Override
-    public boolean registerOrganizer(String id, String password) throws AlreadyExistingOrganizer {
-        if (!databaseSingleton.createNewOrganizer(new Organizer(id, password))) {
-            throw new AlreadyExistingOrganizer(id);
+    public void registerOrganizer(String name, String email, String password, String phone) throws AlreadyExistingOrganizer {
+        if (searchOrganizerByEmail(email).isPresent()) {
+            throw new AlreadyExistingOrganizer(name);
         }
 
-        return true;
+        Organizer organizer = new Organizer(name, email, password, phone);
+
+        manager.persist(organizer);
     }
 
     @Override
-    public boolean loginOrganizer(String id, String password) throws UnknownOrganizerException, AlreadyLoggedInOrganizer {
-        Optional<Organizer> organizer = searchOrganizerByID(id);
+    public void loginOrganizer(String email, String password) throws UnknownOrganizerException, AlreadyLoggedInOrganizer {
+        Optional<Organizer> organizer = searchOrganizerByEmail(email);
+
         if (organizer.isPresent() && organizer.get().getPassword().equals(password)) {
-            if (databaseSingleton.loginOrganizer(organizer.get())) {
-                return true;
+            if (!organizer.get().getLoggedIn()) {
+                organizer.get().setLoggedIn(true);
             } else {
-                throw new AlreadyLoggedInOrganizer(id);
+                throw new AlreadyLoggedInOrganizer(email);
             }
         }
 
-        throw new UnknownOrganizerException(id);
+        throw new UnknownOrganizerException(email);
     }
 
     @Override
-    public Optional<Organizer> searchOrganizerByID(String id) {
-        return databaseSingleton.findOrganizerByID(id);
+    public Optional<Organizer> searchOrganizerByEmail(String email) {
+        CriteriaBuilder builder = manager.getCriteriaBuilder();
+        CriteriaQuery<Organizer> criteria = builder.createQuery(Organizer.class);
+        Root<Organizer> root = criteria.from(Organizer.class);
+        criteria.select(root).where(builder.equal(root.get("email"), email));
+        TypedQuery<Organizer> query = manager.createQuery(criteria);
+
+        try {
+            return Optional.of(query.getSingleResult());
+        } catch (NoResultException nre) {
+            log.log(Level.FINEST, "No result for [" + email + "]", nre);
+            return Optional.empty();
+        }
     }
 
 }

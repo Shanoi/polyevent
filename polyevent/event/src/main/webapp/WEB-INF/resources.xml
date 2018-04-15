@@ -1,5 +1,5 @@
 <resources>
-    <Resource id="production" type="DataSource">
+    <Resource email="production" type="DataSource">
         JdbcDriver org.hsqldb.jdbcDriver
         JdbcUrl jdbc:hsqldb:file:proddb
         UserName sa

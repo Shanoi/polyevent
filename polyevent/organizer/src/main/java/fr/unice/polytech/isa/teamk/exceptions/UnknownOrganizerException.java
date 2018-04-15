@@ -6,21 +6,21 @@ import java.io.Serializable;
 @WebFault(targetNamespace = "http://www.polytech.unice.fr/si/4a/isa/event")
 public class UnknownOrganizerException extends Exception implements Serializable {
 
-    private String id;
+    private String email;
 
-    public UnknownOrganizerException(String id) {
-        this.id = id;
+    public UnknownOrganizerException(String email) {
+        this.email = email;
     }
 
     public UnknownOrganizerException() {
     }
 
     public String getID() {
-        return id;
+        return email;
     }
 
     public void setID(String name) {
-        this.id = name;
+        this.email = name;
     }
 
 }

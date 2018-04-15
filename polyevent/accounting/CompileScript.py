@@ -28,4 +28,4 @@ def changeDirectory(path):
 ###------------------------------------------------------------------------------
 
 changeDirectory('..')
-executeCommand('mvn install -pl accounting -am')
+executeCommand('mvn clean install -pl accounting -am')

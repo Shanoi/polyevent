@@ -18,13 +18,15 @@ public class Organizer implements Serializable {
     private String name;
 
     @NotNull
-    private String password;
-
-    @NotNull
     private String email;
 
     @NotNull
+    private String password;
+
+    @NotNull
     private String phone;
+
+    private boolean loggedIn;
 
     @OneToMany(mappedBy = "organizer")
     private Set<Event> events = new HashSet<>();
@@ -32,12 +34,11 @@ public class Organizer implements Serializable {
     public Organizer() {
     }
 
-    public Organizer(String name, String password, String email, String phone, Set<Event> events) {
+    public Organizer(String name, String email, String password, String phone) {
         this.name = name;
-        this.password = password;
         this.email = email;
+        this.password = password;
         this.phone = phone;
-        this.events = events;
     }
 
     public String getName() {
@@ -48,14 +49,6 @@ public class Organizer implements Serializable {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -64,20 +57,36 @@ public class Organizer implements Serializable {
         this.email = email;
     }
 
-    public Set<Event> getEvents() {
-        return events;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEvents(Set<Event> events) {
-        this.events = events;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPhone() {
         return phone;
     }
 
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
+
+    public boolean getLoggedIn() {
+        return loggedIn;
+    }
+
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
     }
 
     @Override
@@ -93,7 +102,7 @@ public class Organizer implements Serializable {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(getName(), getPassword(), getEmail(), getPhone());
     }
+
 }

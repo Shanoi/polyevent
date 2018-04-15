@@ -9,8 +9,8 @@ import javax.ejb.Local;
 @Local
 public interface OrganizerRegister {
 
-    boolean registerOrganizer(String id, String password) throws AlreadyExistingOrganizer;
+    void registerOrganizer(String name, String email, String password, String phone) throws AlreadyExistingOrganizer;
 
-    boolean loginOrganizer(String id, String password) throws UnknownOrganizerException, AlreadyLoggedInOrganizer;
+    void loginOrganizer(String email, String password) throws UnknownOrganizerException, AlreadyLoggedInOrganizer;
 
 }

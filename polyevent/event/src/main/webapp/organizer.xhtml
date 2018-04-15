@@ -9,14 +9,14 @@
 <body>
 <h1>PolyEvent web interface</h1>
 
-<h:messages id="form-error" style="color: red"/>
+<h:messages email="form-error" style="color: red"/>
 
 <h2>Connect</h2>
 <f:view>
-    <h:form id="select-form">
+    <h:form email="select-form">
         <h:panelGrid columns="2">
-            <h:outputText value='Name:'/>
-            <h:inputText value='#{organizerBean.id}' required="true"/>
+            <h:outputText value='Email:'/>
+            <h:inputText value='#{organizerBean.email}' required="true"/>
             <h:outputText value='Password:'/>
             <h:inputText value="#{organizerBean.password}" required="true"/>
             <h:commandButton action="#{organizerBean.connect}" value="Connect"/>
@@ -26,12 +26,16 @@
 
 <h2>Create an account</h2>
 <f:view>
-    <h:form id="register-form">
+    <h:form email="register-form">
         <h:panelGrid columns="2">
-            <h:outputText value='Customer id'/>
-            <h:inputText value='#{organizerBean.id}' required="true"/>
-            <h:outputText value='Password'/>
+            <h:outputText value='Organizer name'/>
+            <h:inputText value='#{organizerBean.name}' required="true"/>
+            <h:outputText value='Organizer email'/>
+            <h:inputText value='#{organizerBean.email}' required="true"/>
+            <h:outputText value='Organizer password'/>
             <h:inputText value='#{organizerBean.password}' required="true"/>
+            <h:outputText value='Organizer phone'/>
+            <h:inputText value='#{organizerBean.phone}' required="true"/>
             <h:commandButton action="#{organizerBean.register}" value="Register"/>
         </h:panelGrid>
     </h:form>

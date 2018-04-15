@@ -14,11 +14,13 @@ import javax.jws.WebService;
 public interface OrganizerService {
 
     @WebMethod
-    void registerOrganizer(@WebParam(name = "organizer_id") String id,
-                           @WebParam(name = "organizer_password") String password) throws AlreadyExistingOrganizer;
+    void registerOrganizer(@WebParam(name = "organizer_name") String name,
+                           @WebParam(name = "organizer_email") String email,
+                           @WebParam(name = "organizer_password") String password,
+                           @WebParam(name = "organizer_phone") String phone) throws AlreadyExistingOrganizer;
 
     @WebMethod
-    void loginOrganizer(@WebParam(name = "organizer_id") String id,
+    void loginOrganizer(@WebParam(name = "organizer_email") String email,
                         @WebParam(name = "organizer_password") String password) throws UnknownOrganizerException, AlreadyLoggedInOrganizer;
 
     @WebMethod

@@ -24,7 +24,7 @@ public class EventBean implements Serializable {
 
     private CalendarService calendarService;
 
-    @ManagedProperty("#{organizerBean.id}")
+    @ManagedProperty("#{organizerBean.email}")
     private String customerId;
 
     @ManagedProperty("#{organizerBean.password}")

@@ -6,21 +6,21 @@ import java.io.Serializable;
 @WebFault(targetNamespace = "http://www.polytech.unice.fr/si/4a/isa/organizer")
 public class AlreadyExistingOrganizer extends Exception implements Serializable {
 
-    private String id;
+    private String email;
 
-    public AlreadyExistingOrganizer(String id) {
-        this.id = id;
+    public AlreadyExistingOrganizer(String email) {
+        this.email = email;
     }
 
     public AlreadyExistingOrganizer() {
     }
 
-    public String getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }
