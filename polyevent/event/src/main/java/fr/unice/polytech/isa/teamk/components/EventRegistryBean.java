@@ -3,6 +3,7 @@ package fr.unice.polytech.isa.teamk.components;
 import fr.unice.polytech.isa.teamk.EventFinder;
 import fr.unice.polytech.isa.teamk.EventRegister;
 import fr.unice.polytech.isa.teamk.entities.Event;
+import fr.unice.polytech.isa.teamk.entities.EventStatus;
 import fr.unice.polytech.isa.teamk.exceptions.ExternalPartnerException;
 import fr.unice.polytech.isa.teamk.exceptions.RegisterEventException;
 import fr.unice.polytech.isa.teamk.external.CalendarService;
@@ -18,6 +19,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
@@ -35,12 +37,12 @@ public class EventRegistryBean implements EventRegister, EventFinder {
     private CalendarService calendarService;
 
     @Override
-    public boolean submitNewEvent(Event event, String organizerEmail) {
-        return false;
+    public void submitNewEvent(Event event, String organizerEmail) {
+
     }
 
     @Override
-    public boolean registerEvent(Event event) throws RegisterEventException {
+    public boolean confirmEvent(Event event) throws RegisterEventException {
         boolean status;
 
         try {
@@ -78,8 +80,19 @@ public class EventRegistryBean implements EventRegister, EventFinder {
     }
 
     @Override
-    public List<Event> getSubmittedEvents() {
-        return null;
+    public List<Event> searchEventByStatus(EventStatus status) {
+        CriteriaBuilder builder = manager.getCriteriaBuilder();
+        CriteriaQuery<Event> criteria = builder.createQuery(Event.class);
+        Root<Event> root = criteria.from(Event.class);
+        criteria.select(root).where(builder.equal(root.get("status"), status));
+        TypedQuery<Event> query = manager.createQuery(criteria);
+
+        try {
+            return query.getResultList();
+        } catch (NoResultException nre) {
+            log.log(Level.FINEST, "No result for [" + status + "]", nre);
+            return new ArrayList<>();
+        }
     }
 
     @PostConstruct

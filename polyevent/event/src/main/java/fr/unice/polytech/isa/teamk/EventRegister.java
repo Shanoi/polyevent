@@ -8,8 +8,8 @@ import javax.ejb.Local;
 @Local
 public interface EventRegister {
 
-    boolean submitNewEvent(Event event, String organizerEmail);
+    void submitNewEvent(Event event, String organizerEmail);
 
-    boolean registerEvent(Event event) throws RegisterEventException;
+    boolean confirmEvent(Event event) throws RegisterEventException;
 
 }

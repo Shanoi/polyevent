@@ -11,13 +11,7 @@ import org.junit.runner.RunWith;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNotEquals;

@@ -69,7 +69,7 @@ public class OrganizerBean implements Serializable {
         } else {
             FacesContext.getCurrentInstance()
                     .addMessage("form-error", new FacesMessage("Unknown organizer: " + getEmail()));
-            return Signal.UNKOWN;
+            return Signal.UNKNOWN;
         }
     }
 

@@ -24,11 +24,14 @@ public class Event implements Serializable {
     @Temporal(TemporalType.DATE)
     private Timestamp endingDate;
 
+    @NotNull
+    private int nbAttendee;
+
     @ManyToOne
     private Organizer organizer;
 
-    @NotNull
-    private int nbAttendee;
+    @Enumerated(value = EnumType.STRING)
+    private EventStatus status;
 
     @OneToMany(cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY, mappedBy = "event")
     private Set<Provider> providers = new HashSet<>();
@@ -47,6 +50,7 @@ public class Event implements Serializable {
         this.startingDate = startingDate;
         this.endingDate = endingDate;
         this.nbAttendee = nbAttendee;
+        this.status = EventStatus.SUBMITTED;
     }
 
     public int getId() {

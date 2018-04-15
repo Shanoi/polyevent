@@ -4,6 +4,7 @@ import fr.unice.polytech.isa.teamk.EventFinder;
 import fr.unice.polytech.isa.teamk.EventRegister;
 import fr.unice.polytech.isa.teamk.ResponsibleRegister;
 import fr.unice.polytech.isa.teamk.entities.Event;
+import fr.unice.polytech.isa.teamk.entities.EventStatus;
 import fr.unice.polytech.isa.teamk.exceptions.RegisterEventException;
 import fr.unice.polytech.isa.teamk.exceptions.UnknownEventException;
 
@@ -37,7 +38,7 @@ public class ResponsibleServiceImpl implements ResponsibleService {
 
     @Override
     public List<Event> getEventList() {
-        return finder.getSubmittedEvents();
+        return finder.searchEventByStatus(EventStatus.SUBMITTED);
     }
 
     @Override
@@ -46,7 +47,7 @@ public class ResponsibleServiceImpl implements ResponsibleService {
         Optional<Event> event = finder.searchEventByID(eventID);
 
         if (event.isPresent()) {
-            register.registerEvent(event.get());
+            register.confirmEvent(event.get());
         } else {
             throw new UnknownEventException(eventID);
         }
