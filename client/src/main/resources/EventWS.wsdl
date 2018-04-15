@@ -13,56 +13,11 @@
 
             <xs:complexType name="submitNewEvent">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="event" type="tns:event"/>
-                    <xs:element minOccurs="0" name="arg1" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-
-            <xs:complexType name="event">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="endingDate" type="xs:dateTime"/>
-                    <xs:element name="id" type="xs:int"/>
-                    <xs:element minOccurs="0" name="name" type="xs:string"/>
-                    <xs:element name="nbAttendee" type="xs:int"/>
-                    <xs:element minOccurs="0" name="organizer" type="tns:organizer"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="providers" nillable="true"
-                                type="tns:provider"/>
-                    <xs:element minOccurs="0" name="quote" type="tns:quote"/>
-                    <xs:element minOccurs="0" name="startingDate" type="xs:dateTime"/>
-                </xs:sequence>
-            </xs:complexType>
-
-            <xs:complexType name="organizer">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="email" type="xs:string"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="events" nillable="true" type="tns:event"/>
-                    <xs:element name="id" type="xs:int"/>
-                    <xs:element name="loggedIn" type="xs:boolean"/>
-                    <xs:element minOccurs="0" name="name" type="xs:string"/>
-                    <xs:element minOccurs="0" name="password" type="xs:string"/>
-                    <xs:element minOccurs="0" name="phone" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-
-            <xs:complexType name="provider">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="adress" type="xs:string"/>
-                    <xs:element minOccurs="0" name="event" type="tns:event"/>
-                    <xs:element name="id" type="xs:int"/>
-                    <xs:element minOccurs="0" name="mail" type="xs:string"/>
-                    <xs:element minOccurs="0" name="name" type="xs:string"/>
-                    <xs:element minOccurs="0" name="phone" type="xs:string"/>
-                    <xs:element name="price" type="xs:float"/>
-                    <xs:element minOccurs="0" name="type" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-
-            <xs:complexType name="quote">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="description" type="xs:string"/>
-                    <xs:element minOccurs="0" name="event" type="tns:event"/>
-                    <xs:element name="id" type="xs:int"/>
-                    <xs:element name="price" type="xs:float"/>
+                    <xs:element minOccurs="0" name="event_name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="start_date" type="xs:string"/>
+                    <xs:element minOccurs="0" name="end_date" type="xs:string"/>
+                    <xs:element name="nb_attendee" type="xs:int"/>
+                    <xs:element minOccurs="0" name="organizer_email" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
 

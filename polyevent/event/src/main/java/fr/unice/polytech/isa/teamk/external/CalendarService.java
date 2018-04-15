@@ -6,6 +6,8 @@ import org.apache.cxf.jaxrs.client.WebClient;
 import org.json.JSONObject;
 
 import javax.ws.rs.core.MediaType;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class CalendarService {
 
@@ -20,10 +22,14 @@ public class CalendarService {
     }
 
     public boolean submitEvent(Event event) throws ExternalPartnerException {
-        JSONObject request = new JSONObject().put("StartDate", event.getStartingDate().getTime())
-                .put("EndDate", event.getEndingDate().getTime());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
+        String startDate = event.getStartingDate().format(formatter);
+        String endDate = event.getEndingDate().format(formatter);
+
+        JSONObject request = new JSONObject().put("StartDate", startDate).put("EndDate", endDate);
 
         Integer id;
+
         try {
             String str = WebClient.create(url).path("/eventbox")
                     .accept(MediaType.APPLICATION_JSON_TYPE)
@@ -35,6 +41,7 @@ public class CalendarService {
         }
 
         JSONObject status;
+
         try {
             String response = WebClient.create(url).path("/events/" + id).get(String.class);
             status = new JSONObject(response);

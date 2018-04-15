@@ -26,7 +26,7 @@ public class Organizer implements Serializable {
     @NotNull
     private String phone;
 
-    private boolean loggedIn;
+    private boolean loggedIn = false;
 
     @OneToMany(mappedBy = "organizer")
     private Set<Event> events = new HashSet<>();

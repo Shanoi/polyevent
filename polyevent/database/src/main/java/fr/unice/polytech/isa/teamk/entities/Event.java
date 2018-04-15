@@ -3,7 +3,7 @@ package fr.unice.polytech.isa.teamk.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -19,10 +19,10 @@ public class Event implements Serializable {
     private String name;
 
     @Temporal(TemporalType.DATE)
-    private Date startingDate;
+    private LocalDateTime startingDate;
 
     @Temporal(TemporalType.DATE)
-    private Date endingDate;
+    private LocalDateTime endingDate;
 
     @ManyToOne
     private Organizer organizer;
@@ -42,7 +42,7 @@ public class Event implements Serializable {
 
     }
 
-    public Event(String name, Date startingDate, Date endingDate, int nbAttendee) {
+    public Event(String name, LocalDateTime startingDate, LocalDateTime endingDate, int nbAttendee) {
         this.name = name;
         this.startingDate = startingDate;
         this.endingDate = endingDate;
@@ -65,19 +65,19 @@ public class Event implements Serializable {
         this.name = name;
     }
 
-    public Date getStartingDate() {
+    public LocalDateTime getStartingDate() {
         return startingDate;
     }
 
-    public void setStartingDate(Date startingDate) {
+    public void setStartingDate(LocalDateTime startingDate) {
         this.startingDate = startingDate;
     }
 
-    public Date getEndingDate() {
+    public LocalDateTime getEndingDate() {
         return endingDate;
     }
 
-    public void setEndingDate(Date endingDate) {
+    public void setEndingDate(LocalDateTime endingDate) {
         this.endingDate = endingDate;
     }
 
@@ -130,4 +130,5 @@ public class Event implements Serializable {
 
         return Objects.hash(getName(), getStartingDate(), getEndingDate(), getOrganizer(), getNbAttendee());
     }
+
 }
