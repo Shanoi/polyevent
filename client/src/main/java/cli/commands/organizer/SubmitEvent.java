@@ -1,4 +1,4 @@
-package cli.commands;
+package cli.commands.organizer;
 
 import api.PEPublicAPI;
 import cli.framework.Command;
@@ -20,6 +20,7 @@ public class SubmitEvent extends Command<PEPublicAPI> {
     @Override
     public void load(List<String> args) {
         short argIndex = 0;
+
         eventName = args.get(argIndex++);
 
         short startHour = Short.parseShort(args.get(argIndex++));

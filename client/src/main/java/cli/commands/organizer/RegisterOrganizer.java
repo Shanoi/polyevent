@@ -1,7 +1,9 @@
-package cli.commands;
+package cli.commands.organizer;
 
 import api.PEPublicAPI;
 import cli.framework.Command;
+import stubs.organizerstubs.AlreadyExistingOrganizer;
+import stubs.organizerstubs.AlreadyExistingOrganizer_Exception;
 
 import java.util.List;
 
@@ -19,15 +21,21 @@ public class RegisterOrganizer extends Command<PEPublicAPI> {
 
     @Override
     public void load(List<String> args) {
-        name = args.get(0);
-        email = args.get(1);
-        password = args.get(2);
-        phone = args.get(3);
+        short argIndex = 0;
+
+        name = args.get(argIndex++);
+        email = args.get(argIndex++);
+        password = args.get(argIndex++);
+        phone = args.get(argIndex);
     }
 
     @Override
-    public void execute() throws Exception {
-        shell.system.organizerService.registerOrganizer(name, email, password, phone);
+    public void execute() {
+        try {
+            shell.system.organizerService.registerOrganizer(name, email, password, phone);
+        } catch (AlreadyExistingOrganizer_Exception e) {
+            System.err.println("The organizer with email '" + e.getFaultInfo().getEmail() + "' already exists.");
+        }
     }
 
     @Override

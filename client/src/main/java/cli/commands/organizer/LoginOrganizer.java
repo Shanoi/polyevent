@@ -1,7 +1,9 @@
-package cli.commands;
+package cli.commands.organizer;
 
 import api.PEPublicAPI;
 import cli.framework.Command;
+import stubs.organizerstubs.AlreadyLoggedInOrganizer_Exception;
+import stubs.organizerstubs.UnknownOrganizerException_Exception;
 
 import java.util.List;
 
@@ -18,8 +20,10 @@ public class LoginOrganizer extends Command<PEPublicAPI> {
 
     @Override
     public void load(List<String> args) {
-        email = args.get(0);
-        password = args.get(1);
+        short argIndex = 0;
+
+        email = args.get(argIndex++);
+        password = args.get(argIndex);
     }
 
     @Override
@@ -27,14 +31,16 @@ public class LoginOrganizer extends Command<PEPublicAPI> {
         try {
             shell.system.organizerService.loginOrganizer(email, password);
             loggedInOrganizerId = email;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (AlreadyLoggedInOrganizer_Exception e) {
+            System.err.println("The organizer with email '" + e.getFaultInfo().getEmail() + "' is already logged in.");
+        } catch (UnknownOrganizerException_Exception e) {
+            System.err.println("The organizer with email '" + e.getFaultInfo().getEmail() + "' is unknown.");
         }
     }
 
     @Override
     public String describe() {
-        return "LoginOrganizer an existing Organizer in the PolyEvent system\n" +
+        return "Login an existing Organizer in the PolyEvent system\n" +
                 "	--> login_organizer <Organizer Email> <Organizer Password>";
     }
 

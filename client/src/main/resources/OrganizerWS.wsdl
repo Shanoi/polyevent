@@ -1,9 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
                   xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/organizer"
                   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-                  xmlns:ns1="http://www.polytech.unice.fr/si/4a/isa/event" name="OrganizerServiceImplService"
-                  targetNamespace="http://www.polytech.unice.fr/si/4a/isa/organizer">
+                  name="OrganizerServiceImplService" targetNamespace="http://www.polytech.unice.fr/si/4a/isa/organizer">
     <wsdl:types>
         <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
                    xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/organizer" attributeFormDefault="unqualified"
@@ -50,6 +49,13 @@
                     <xs:element minOccurs="0" name="message" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
+            <xs:element name="UnknownOrganizerException" type="tns:UnknownOrganizerException"/>
+            <xs:complexType name="UnknownOrganizerException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="email" type="xs:string"/>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
             <xs:element name="AlreadyExistingOrganizer" type="tns:AlreadyExistingOrganizer"/>
             <xs:complexType name="AlreadyExistingOrganizer">
                 <xs:sequence>
@@ -58,17 +64,6 @@
                 </xs:sequence>
             </xs:complexType>
         </xs:schema>
-        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                    xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/event" attributeFormDefault="unqualified"
-                    elementFormDefault="unqualified" targetNamespace="http://www.polytech.unice.fr/si/4a/isa/event">
-            <xsd:element name="UnknownOrganizerException" type="tns:UnknownOrganizerException"/>
-            <xsd:complexType name="UnknownOrganizerException">
-                <xsd:sequence>
-                    <xsd:element minOccurs="0" name="iD" type="xsd:string"/>
-                    <xsd:element minOccurs="0" name="message" type="xsd:string"/>
-                </xsd:sequence>
-            </xsd:complexType>
-        </xsd:schema>
     </wsdl:types>
     <wsdl:message name="loginOrganizer">
         <wsdl:part element="tns:loginOrganizer" name="parameters">
@@ -83,7 +78,7 @@
         </wsdl:part>
     </wsdl:message>
     <wsdl:message name="UnknownOrganizerException">
-        <wsdl:part element="ns1:UnknownOrganizerException" name="UnknownOrganizerException">
+        <wsdl:part element="tns:UnknownOrganizerException" name="UnknownOrganizerException">
         </wsdl:part>
     </wsdl:message>
     <wsdl:message name="AlreadyExistingOrganizer">
