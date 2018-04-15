@@ -21,6 +21,15 @@ public class Quote implements Serializable {
     @OneToOne
     private Event event;
 
+    public Quote() {
+    }
+
+    public Quote(float price, String description, Event event) {
+        this.price = price;
+        this.description = description;
+        this.event = event;
+    }
+
     public int getId() {
         return id;
     }

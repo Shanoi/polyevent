@@ -3,6 +3,8 @@ package fr.unice.polytech.isa.teamk.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
@@ -19,10 +21,10 @@ public class Event implements Serializable {
     private String name;
 
     @Temporal(TemporalType.DATE)
-    private LocalDateTime startingDate;
+    private Timestamp startingDate;
 
     @Temporal(TemporalType.DATE)
-    private LocalDateTime endingDate;
+    private Timestamp endingDate;
 
     @ManyToOne
     private Organizer organizer;
@@ -30,7 +32,7 @@ public class Event implements Serializable {
     @NotNull
     private int nbAttendee;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY, mappedBy = "event")
     private Set<Provider> providers = new HashSet<>();
 
     @OneToOne
@@ -42,7 +44,7 @@ public class Event implements Serializable {
 
     }
 
-    public Event(String name, LocalDateTime startingDate, LocalDateTime endingDate, int nbAttendee) {
+    public Event(String name, Timestamp startingDate, Timestamp endingDate, int nbAttendee) {
         this.name = name;
         this.startingDate = startingDate;
         this.endingDate = endingDate;
@@ -65,19 +67,19 @@ public class Event implements Serializable {
         this.name = name;
     }
 
-    public LocalDateTime getStartingDate() {
+    public Timestamp getStartingDate() {
         return startingDate;
     }
 
-    public void setStartingDate(LocalDateTime startingDate) {
+    public void setStartingDate(Timestamp startingDate) {
         this.startingDate = startingDate;
     }
 
-    public LocalDateTime getEndingDate() {
+    public Timestamp getEndingDate() {
         return endingDate;
     }
 
-    public void setEndingDate(LocalDateTime endingDate) {
+    public void setEndingDate(Timestamp endingDate) {
         this.endingDate = endingDate;
     }
 

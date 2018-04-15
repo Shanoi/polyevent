@@ -23,6 +23,14 @@ public class Room implements Serializable {
     @NotNull
     private String name;
 
+    public Room() {
+    }
+
+    public Room(int capacity, String name) {
+        this.capacity = capacity;
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }

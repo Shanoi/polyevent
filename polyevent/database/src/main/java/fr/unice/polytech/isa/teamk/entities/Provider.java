@@ -16,7 +16,7 @@ public class Provider implements Serializable {
     private String name;
 
     @NotNull
-    private String adress;
+    private String address;
 
     @NotNull
     private String phone;
@@ -36,6 +36,15 @@ public class Provider implements Serializable {
     public Provider() {
     }
 
+    public Provider(String name, String adress, String phone, String mail, String type, float price) {
+        this.name = name;
+        this.address = adress;
+        this.phone = phone;
+        this.mail = mail;
+        this.type = type;
+        this.price = price;
+    }
+
     public int getId() {
         return id;
     }
@@ -52,12 +61,12 @@ public class Provider implements Serializable {
         this.name = name;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String adress) {
+        this.address = adress;
     }
 
     public String getPhone() {
@@ -107,7 +116,7 @@ public class Provider implements Serializable {
         Provider provider = (Provider) o;
         return Float.compare(provider.getPrice(), getPrice()) == 0 &&
                 Objects.equals(getName(), provider.getName()) &&
-                Objects.equals(getAdress(), provider.getAdress()) &&
+                Objects.equals(getAddress(), provider.getAddress()) &&
                 Objects.equals(getPhone(), provider.getPhone()) &&
                 Objects.equals(getMail(), provider.getMail()) &&
                 Objects.equals(getType(), provider.getType());
@@ -116,6 +125,6 @@ public class Provider implements Serializable {
     @Override
     public int hashCode() {
 
-        return Objects.hash(getName(), getAdress(), getPhone(), getMail(), getType(), getPrice());
+        return Objects.hash(getName(), getAddress(), getPhone(), getMail(), getType(), getPrice());
     }
 }
