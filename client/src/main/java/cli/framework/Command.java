@@ -15,8 +15,7 @@ public abstract class Command<T> {
     }  // default implementation
 
     public void load(List<String> args) {
-    }          // default implementation
-
+    }
 
     protected Shell<T> shell;
 

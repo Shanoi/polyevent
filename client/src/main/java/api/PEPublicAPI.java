@@ -33,4 +33,5 @@ public class PEPublicAPI {
         String address = "http://" + host + ":" + port + "/event/webservices/OrganizerWS";
         ((BindingProvider) organizerService).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, address);
     }
+
 }

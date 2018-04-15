@@ -23,7 +23,6 @@ public class SubmitEvent extends Command<PEPublicAPI> {
     public void load(List<String> args) {
         short argIndex = 0;
         String eventName = args.get(argIndex++);
-        String id = args.get(argIndex++);
 
         short startHour = Short.valueOf(args.get(argIndex++));
         short startDay = Short.valueOf(args.get(argIndex++));
@@ -33,23 +32,26 @@ public class SubmitEvent extends Command<PEPublicAPI> {
         short endHour = Short.valueOf(args.get(argIndex++));
         short endDay = Short.valueOf(args.get(argIndex++));
         short endMonth = Short.valueOf(args.get(argIndex++));
-        short endYear = Short.valueOf(args.get(argIndex));
+        short endYear = Short.valueOf(args.get(argIndex++));
+
+        int nbAttendee = Integer.valueOf(args.get(argIndex));
 
         Date startDate = new Date(startYear, startMonth, startDay, startHour, 0, 0);
         Date endDate = new Date(endYear, endMonth, endDay, endHour, 0, 0);
 
-        event = new Event(eventName, id, startDate, endDate);
+        event = new Event();
+        event.setName(eventName);
     }
 
     @Override
     public void execute() throws Exception {
-       shell.system.eventService.submitNewEvent(event);
+       shell.system.eventService.submitNewEvent(event, LoginOrganizer.loggedInOrganizerId);
     }
 
     @Override
     public String describe() {
         return "An organizer can use this command to submit a new event to the Polyevent system\n" +
-                "	--> submit_event <Event name> <Start hour> <Start day> <Start month> <Start year> <End hour> <End day> <End month> <End year>";
+                "	--> submit_event <Event name> <Number attendee> <Start hour> <Start day> <Start month> <Start year> <End hour> <End day> <End month> <End year>";
     }
 
 }

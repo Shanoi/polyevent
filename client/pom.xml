@@ -6,10 +6,10 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <maven.compiler.source>1.8</maven.compiler.source>
-      <maven.compiler.target>1.8</maven.compiler.target>
-      <cxf.version>3.1.10</cxf.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <cxf.version>3.1.10</cxf.version>
     </properties>
 
     <build>
@@ -50,14 +50,17 @@
                                     <wsdl>${basedir}/src/main/resources/EventWS.wsdl</wsdl>
                                     <extraargs>
                                         <extraarg>-p</extraarg>
-                                        <extraarg>http://www.polytech.unice.fr/si/4a/isa/event=stubs.eventstubs</extraarg>
+                                        <extraarg>http://www.polytech.unice.fr/si/4a/isa/event=stubs.eventstubs
+                                        </extraarg>
                                     </extraargs>
                                 </wsdlOption>
                                 <wsdlOption>
                                     <wsdl>${basedir}/src/main/resources/OrganizerWS.wsdl</wsdl>
                                     <extraargs>
                                         <extraarg>-p</extraarg>
-                                        <extraarg>http://www.polytech.unice.fr/si/4a/isa/organizer=stubs.organizerstubs</extraarg>
+                                        <extraarg>
+                                            http://www.polytech.unice.fr/si/4a/isa/organizer=stubs.organizerstubs
+                                        </extraarg>
                                     </extraargs>
                                 </wsdlOption>
                             </wsdlOptions>

@@ -1,8 +1,8 @@
 import api.PEPublicAPI;
 import cli.commands.Bye;
 import cli.commands.LoginOrganizer;
-import cli.commands.SubmitEvent;
 import cli.commands.RegisterOrganizer;
+import cli.commands.SubmitEvent;
 import cli.framework.Shell;
 
 /**

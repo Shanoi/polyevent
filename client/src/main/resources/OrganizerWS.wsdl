@@ -16,7 +16,7 @@
             <xs:element name="sendPaymentResponse" type="tns:sendPaymentResponse"/>
             <xs:complexType name="loginOrganizer">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="organizer_id" type="xs:string"/>
+                    <xs:element minOccurs="0" name="organizer_email" type="xs:string"/>
                     <xs:element minOccurs="0" name="organizer_password" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
@@ -34,8 +34,10 @@
             </xs:complexType>
             <xs:complexType name="registerOrganizer">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="organizer_id" type="xs:string"/>
+                    <xs:element minOccurs="0" name="organizer_name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="organizer_email" type="xs:string"/>
                     <xs:element minOccurs="0" name="organizer_password" type="xs:string"/>
+                    <xs:element minOccurs="0" name="organizer_phone" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="registerOrganizerResponse">
@@ -44,14 +46,14 @@
             <xs:element name="AlreadyLoggedInOrganizer" type="tns:AlreadyLoggedInOrganizer"/>
             <xs:complexType name="AlreadyLoggedInOrganizer">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="id" type="xs:string"/>
+                    <xs:element minOccurs="0" name="email" type="xs:string"/>
                     <xs:element minOccurs="0" name="message" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:element name="AlreadyExistingOrganizer" type="tns:AlreadyExistingOrganizer"/>
             <xs:complexType name="AlreadyExistingOrganizer">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="id" type="xs:string"/>
+                    <xs:element minOccurs="0" name="email" type="xs:string"/>
                     <xs:element minOccurs="0" name="message" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>

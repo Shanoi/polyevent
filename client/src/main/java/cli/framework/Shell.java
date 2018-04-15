@@ -64,7 +64,6 @@ public class Shell<T> {
         }
     }
 
-
     private boolean processCommand(String keyword, List<String> args) throws Exception {
         if (!commands.containsKey(keyword)) {
             System.out.println("Unknown command: " + keyword);
@@ -92,7 +91,6 @@ public class Shell<T> {
             registerCommand(c);
         }
     }
-
 
     private Collection<Class<? extends Command<T>>> instructions() {
         return commands.values();
