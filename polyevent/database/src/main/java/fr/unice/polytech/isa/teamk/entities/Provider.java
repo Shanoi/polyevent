@@ -3,9 +3,14 @@ package fr.unice.polytech.isa.teamk.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 public class Provider implements Serializable {
+
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    private String id;
 
     @NotNull
     private String name;
@@ -30,10 +35,6 @@ public class Provider implements Serializable {
 
     public Provider() {
     }
-
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Id
-    private String id;
 
     public String getId() {
         return id;
@@ -97,5 +98,24 @@ public class Provider implements Serializable {
 
     public void setEvent(Event event) {
         this.event = event;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Provider provider = (Provider) o;
+        return Float.compare(provider.getPrice(), getPrice()) == 0 &&
+                Objects.equals(getName(), provider.getName()) &&
+                Objects.equals(getAdress(), provider.getAdress()) &&
+                Objects.equals(getPhone(), provider.getPhone()) &&
+                Objects.equals(getMail(), provider.getMail()) &&
+                Objects.equals(getType(), provider.getType());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getName(), getAdress(), getPhone(), getMail(), getType(), getPrice());
     }
 }

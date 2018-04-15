@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -71,4 +72,28 @@ public class Organizer implements Serializable {
         this.events = events;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Organizer organizer = (Organizer) o;
+        return Objects.equals(getName(), organizer.getName()) &&
+                Objects.equals(getPassword(), organizer.getPassword()) &&
+                Objects.equals(getEmail(), organizer.getEmail()) &&
+                Objects.equals(getPhone(), organizer.getPhone());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getName(), getPassword(), getEmail(), getPhone());
+    }
 }

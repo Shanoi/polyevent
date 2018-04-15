@@ -68,13 +68,12 @@ public class Material implements Serializable {
         Material material = (Material) o;
         return getQuantity() == material.getQuantity() &&
                 Objects.equals(getType(), material.getType()) &&
-                Objects.equals(getId(), material.getId()) &&
                 Objects.equals(getRoom(), material.getRoom());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getQuantity(), getType(), getId(), getRoom());
+        return Objects.hash(getQuantity(), getType(), getRoom());
     }
 
 }
