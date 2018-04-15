@@ -14,8 +14,8 @@ import javax.ejb.EJB;
 
 import static org.junit.Assert.assertFalse;
 
-@RunWith(Arquillian.class)
-public class OrganizerRegistrationIntegrationTest extends AbstractOrganizerTest {
+//@RunWith(Arquillian.class)
+public class OrganizerRegistrationIntegrationTest /*extends AbstractOrganizerTest */{
 
     @EJB
     private OrganizerRegister registry;

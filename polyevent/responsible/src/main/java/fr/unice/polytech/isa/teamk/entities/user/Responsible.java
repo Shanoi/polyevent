@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 public class Responsible implements Serializable {
@@ -29,7 +30,27 @@ public class Responsible implements Serializable {
 
     }
 
-    public Responsible(String id, String password) {
+    public Responsible(String name, String password, String email, String phone) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getName() {
@@ -56,4 +77,19 @@ public class Responsible implements Serializable {
         this.email = email;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Responsible that = (Responsible) o;
+        return Objects.equals(getName(), that.getName()) &&
+                Objects.equals(getEmail(), that.getEmail()) &&
+                Objects.equals(phone, that.phone);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getName(), getEmail(), phone);
+    }
 }
