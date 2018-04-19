@@ -20,7 +20,8 @@ public class Server
     private string Locker = "server.LOCK";
 
     // Web Server used to host services
-    private WebServiceHost Host;
+    private WebServiceHost CalendarHost;
+    private WebServiceHost PaymentHost;
 
     /**
      * Start the web server on the given port, and host the expected service
@@ -31,14 +32,18 @@ public class Server
         string url = "http://" + "localhost" + ":" + Port;
 
         WebHttpBinding b = new WebHttpBinding();
-        Host = new WebServiceHost(typeof(EDTService), new Uri(url));
+        CalendarHost = new WebServiceHost(typeof(CalendarService), new Uri(url + "/calendar"));
+        PaymentHost = new WebServiceHost(typeof(PaymentService), new Uri(url + "/payment"));
 
         // Adding the service to the host
-        Host.AddServiceEndpoint(typeof(IEDTService), b, "");
+        CalendarHost.AddServiceEndpoint(typeof(ICalendarService), b, "");
+        PaymentHost.AddServiceEndpoint(typeof(IPaymentService), b, "");
 
-        // Starting the Host server
-        Host.Open();
-        Console.WriteLine("\nListening to " + "localhost" + ":" + Port + "\n");
+        // Starting the CalendarHost server
+        CalendarHost.Open();
+        PaymentHost.Open();
+        Console.WriteLine("\nListening to " + "localhost" + ":" + Port + "/calendar\n" +
+            "\nListening to " + "localhost" + ":" + Port + "/payment\n");
 
         if (Standalone)
         {
@@ -55,7 +60,7 @@ public class Server
      */
     private void stop()
     {
-        Host.Close();
+        CalendarHost.Close();
         Console.WriteLine("Server shutdown complete!");
     }
 
