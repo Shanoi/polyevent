@@ -4,13 +4,69 @@
                   name="EventServiceImplService" targetNamespace="http://www.polytech.unice.fr/si/4a/isa/event">
     <wsdl:types>
         <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/event"
-                   elementFormDefault="unqualified" targetNamespace="http://www.polytech.unice.fr/si/4a/isa/event"
-                   version="1.0">
-
+                   attributeFormDefault="unqualified" elementFormDefault="unqualified"
+                   targetNamespace="http://www.polytech.unice.fr/si/4a/isa/event">
+            <xs:element name="getSubmittedEvents" type="tns:getSubmittedEvents"/>
+            <xs:element name="getSubmittedEventsResponse" type="tns:getSubmittedEventsResponse"/>
             <xs:element name="submitNewEvent" type="tns:submitNewEvent"/>
-
             <xs:element name="submitNewEventResponse" type="tns:submitNewEventResponse"/>
-
+            <xs:complexType name="getSubmittedEvents">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="getSubmittedEventsResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:event"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="event">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="endingDate" type="tns:timestamp"/>
+                    <xs:element name="id" type="xs:int"/>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    <xs:element name="nbAttendee" type="xs:int"/>
+                    <xs:element minOccurs="0" name="organizer" type="tns:organizer"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="providers" nillable="true"
+                                type="tns:provider"/>
+                    <xs:element minOccurs="0" name="quote" type="tns:quote"/>
+                    <xs:element minOccurs="0" name="startingDate" type="tns:timestamp"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="timestamp">
+                <xs:sequence>
+                    <xs:element name="nanos" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="organizer">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="email" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="events" nillable="true" type="tns:event"/>
+                    <xs:element name="id" type="xs:int"/>
+                    <xs:element name="loggedIn" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="password" type="xs:string"/>
+                    <xs:element minOccurs="0" name="phone" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="provider">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="address" type="xs:string"/>
+                    <xs:element minOccurs="0" name="event" type="tns:event"/>
+                    <xs:element name="id" type="xs:int"/>
+                    <xs:element minOccurs="0" name="mail" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="phone" type="xs:string"/>
+                    <xs:element name="price" type="xs:float"/>
+                    <xs:element minOccurs="0" name="type" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="quote">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element minOccurs="0" name="event" type="tns:event"/>
+                    <xs:element name="id" type="xs:int"/>
+                    <xs:element name="price" type="xs:float"/>
+                </xs:sequence>
+            </xs:complexType>
             <xs:complexType name="submitNewEvent">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="event_name" type="xs:string"/>
@@ -20,31 +76,78 @@
                     <xs:element minOccurs="0" name="organizer_email" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
-
             <xs:complexType name="submitNewEventResponse">
                 <xs:sequence/>
             </xs:complexType>
-
+            <xs:element name="RegisterEventException" type="tns:RegisterEventException"/>
+            <xs:complexType name="RegisterEventException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="AlreadyExistingEvent" type="tns:AlreadyExistingEvent"/>
+            <xs:complexType name="AlreadyExistingEvent">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
         </xs:schema>
     </wsdl:types>
     <wsdl:message name="submitNewEventResponse">
         <wsdl:part element="tns:submitNewEventResponse" name="parameters">
         </wsdl:part>
     </wsdl:message>
+    <wsdl:message name="AlreadyExistingEvent">
+        <wsdl:part element="tns:AlreadyExistingEvent" name="AlreadyExistingEvent">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getSubmittedEventsResponse">
+        <wsdl:part element="tns:getSubmittedEventsResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getSubmittedEvents">
+        <wsdl:part element="tns:getSubmittedEvents" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
     <wsdl:message name="submitNewEvent">
         <wsdl:part element="tns:submitNewEvent" name="parameters">
         </wsdl:part>
     </wsdl:message>
+    <wsdl:message name="RegisterEventException">
+        <wsdl:part element="tns:RegisterEventException" name="RegisterEventException">
+        </wsdl:part>
+    </wsdl:message>
     <wsdl:portType name="EventService">
+        <wsdl:operation name="getSubmittedEvents">
+            <wsdl:input message="tns:getSubmittedEvents" name="getSubmittedEvents">
+            </wsdl:input>
+            <wsdl:output message="tns:getSubmittedEventsResponse" name="getSubmittedEventsResponse">
+            </wsdl:output>
+        </wsdl:operation>
         <wsdl:operation name="submitNewEvent">
             <wsdl:input message="tns:submitNewEvent" name="submitNewEvent">
             </wsdl:input>
             <wsdl:output message="tns:submitNewEventResponse" name="submitNewEventResponse">
             </wsdl:output>
+            <wsdl:fault message="tns:AlreadyExistingEvent" name="AlreadyExistingEvent">
+            </wsdl:fault>
+            <wsdl:fault message="tns:RegisterEventException" name="RegisterEventException">
+            </wsdl:fault>
         </wsdl:operation>
     </wsdl:portType>
     <wsdl:binding name="EventServiceImplServiceSoapBinding" type="tns:EventService">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getSubmittedEvents">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getSubmittedEvents">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getSubmittedEventsResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
         <wsdl:operation name="submitNewEvent">
             <soap:operation soapAction="" style="document"/>
             <wsdl:input name="submitNewEvent">
@@ -53,6 +156,12 @@
             <wsdl:output name="submitNewEventResponse">
                 <soap:body use="literal"/>
             </wsdl:output>
+            <wsdl:fault name="AlreadyExistingEvent">
+                <soap:fault name="AlreadyExistingEvent" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="RegisterEventException">
+                <soap:fault name="RegisterEventException" use="literal"/>
+            </wsdl:fault>
         </wsdl:operation>
     </wsdl:binding>
     <wsdl:service name="EventServiceImplService">

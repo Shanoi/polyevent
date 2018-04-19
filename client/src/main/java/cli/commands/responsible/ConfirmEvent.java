@@ -26,7 +26,7 @@ public class ConfirmEvent extends Command<PEPublicAPI> {
 
     @Override
     public String describe() {
-        return "An responsible can use this command to confirm an event to the Polyevent system\n" +
+        return "A responsible can use this command to confirm an event to the Polyevent system\n" +
                 "	--> confirm_event <Event ID>";
     }
 

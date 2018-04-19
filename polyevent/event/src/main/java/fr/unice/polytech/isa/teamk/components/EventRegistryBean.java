@@ -2,14 +2,17 @@ package fr.unice.polytech.isa.teamk.components;
 
 import fr.unice.polytech.isa.teamk.EventFinder;
 import fr.unice.polytech.isa.teamk.EventRegister;
+import fr.unice.polytech.isa.teamk.OrganizerFinder;
 import fr.unice.polytech.isa.teamk.entities.Event;
 import fr.unice.polytech.isa.teamk.entities.EventStatus;
+import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingEvent;
 import fr.unice.polytech.isa.teamk.exceptions.ExternalPartnerException;
 import fr.unice.polytech.isa.teamk.exceptions.RegisterEventException;
 import fr.unice.polytech.isa.teamk.external.CalendarService;
 import org.apache.cxf.common.i18n.UncheckedException;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -19,6 +22,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,11 +40,28 @@ public class EventRegistryBean implements EventRegister, EventFinder {
     @PersistenceContext
     private EntityManager manager;
 
+    @EJB
+    private OrganizerFinder organizerFinder;
+
     private CalendarService calendarService;
 
     @Override
-    public void submitNewEvent(Event event, String organizerEmail) {
+    public void submitNewEvent(String eventName, String startDate, String endDate, int nbAttendee, String organizerEmail) throws AlreadyExistingEvent {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm d/M/yyyy");
+        LocalDateTime startDateTime = LocalDateTime.parse(startDate, formatter);
+        LocalDateTime endDateTime = LocalDateTime.parse(endDate, formatter);
 
+        Event event = new Event(eventName, Timestamp.valueOf(startDateTime), Timestamp.valueOf(endDateTime), nbAttendee);
+
+        if (searchEventByName(event.getName()).isPresent()) {
+            throw new AlreadyExistingEvent(event.getName());
+        }
+
+        // No need to check if the organizer exists because he's logged in.
+        // In consequences, he exists.
+        event.setOrganizer(organizerFinder.searchOrganizerByEmail(organizerEmail).get());
+
+        manager.persist(event);
     }
 
     @Override
@@ -64,17 +87,17 @@ public class EventRegistryBean implements EventRegister, EventFinder {
     }
 
     @Override
-    public Optional<Event> searchEventByID(String id) {
+    public Optional<Event> searchEventByName(String name) {
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<Event> criteria = builder.createQuery(Event.class);
         Root<Event> root = criteria.from(Event.class);
-        criteria.select(root).where(builder.equal(root.get("id"), id));
+        criteria.select(root).where(builder.equal(root.get("name"), name));
         TypedQuery<Event> query = manager.createQuery(criteria);
 
         try {
             return Optional.of(query.getSingleResult());
         } catch (NoResultException nre) {
-            log.log(Level.FINEST, "No result for [" + id + "]", nre);
+            log.log(Level.FINEST, "No result for [" + name + "]", nre);
             return Optional.empty();
         }
     }

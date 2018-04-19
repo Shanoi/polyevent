@@ -11,7 +11,7 @@ public class LoginOrganizer extends Command<PEPublicAPI> {
 
     private String email;
     private String password;
-    public static String loggedInOrganizerId;
+    public static String loggedInOrganizerId = "";
 
     @Override
     public String identifier() {

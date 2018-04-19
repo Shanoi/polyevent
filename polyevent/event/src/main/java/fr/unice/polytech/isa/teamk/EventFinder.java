@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface EventFinder {
 
-    Optional<Event> searchEventByID(String id);
+    Optional<Event> searchEventByName(String name);
 
     List<Event> searchEventByStatus(EventStatus status);
 

@@ -1,22 +1,26 @@
 package fr.unice.polytech.isa.teamk.services;
 
+import fr.unice.polytech.isa.teamk.EventFinder;
+import fr.unice.polytech.isa.teamk.EventRegister;
 import fr.unice.polytech.isa.teamk.OrganizerFinder;
-import fr.unice.polytech.isa.teamk.components.EventRegistryBean;
 import fr.unice.polytech.isa.teamk.entities.Event;
+import fr.unice.polytech.isa.teamk.entities.EventStatus;
+import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingEvent;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Stateless(name = "EventWS")
 @WebService(targetNamespace = "http://www.polytech.unice.fr/si/4a/isa/event")
 public class EventServiceImpl implements EventService {
 
     @EJB
-    private EventRegistryBean eventRegistryBean;
+    private EventRegister eventRegister;
+
+    @EJB
+    private EventFinder eventFinder;
 
     @EJB
     private OrganizerFinder organizerFinder;
@@ -26,12 +30,13 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void submitNewEvent(String eventName, String startDate, String endDate, int nbAttendee, String organizerEmail) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
-        LocalDateTime startDateTime = LocalDateTime.parse(startDate, formatter);
-        LocalDateTime endDateTime = LocalDateTime.parse(endDate, formatter);
-        eventRegistryBean.submitNewEvent(new Event(eventName, Timestamp.valueOf(startDateTime),
-                Timestamp.valueOf(endDateTime), nbAttendee), organizerEmail);
+    public void submitNewEvent(String eventName, String startDate, String endDate, int nbAttendee, String organizerEmail) throws AlreadyExistingEvent {
+        eventRegister.submitNewEvent(eventName, startDate, endDate, nbAttendee, organizerEmail);
+    }
+
+    @Override
+    public List<Event> getSubmittedEvents() {
+        return eventFinder.searchEventByStatus(EventStatus.SUBMITTED);
     }
 
 }

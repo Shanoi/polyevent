@@ -40,7 +40,11 @@ public class SubmitEvent extends Command<PEPublicAPI> {
 
     @Override
     public void execute() throws Exception {
-        shell.system.eventService.submitNewEvent(eventName, startDate, endDate, nbAttendee, LoginOrganizer.loggedInOrganizerId);
+        if (!LoginOrganizer.loggedInOrganizerId.isEmpty()) {
+            shell.system.eventService.submitNewEvent(eventName, startDate, endDate, nbAttendee, LoginOrganizer.loggedInOrganizerId);
+        } else {
+            System.err.println("You have to login to invoke this command.");
+        }
     }
 
     @Override

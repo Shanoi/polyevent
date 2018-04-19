@@ -44,7 +44,7 @@ public class ResponsibleServiceImpl implements ResponsibleService {
     @Override
     public void validateEvent(String responsibleID, String eventID, String roomID)
             throws RegisterEventException, UnknownEventException {
-        Optional<Event> event = finder.searchEventByID(eventID);
+        Optional<Event> event = finder.searchEventByName(eventID);
 
         if (event.isPresent()) {
             register.confirmEvent(event.get());
