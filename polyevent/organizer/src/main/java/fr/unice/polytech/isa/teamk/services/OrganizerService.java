@@ -1,7 +1,7 @@
 package fr.unice.polytech.isa.teamk.services;
 
-import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingOrganizer;
-import fr.unice.polytech.isa.teamk.exceptions.AlreadyLoggedInOrganizer;
+import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingOrganizerException;
+import fr.unice.polytech.isa.teamk.exceptions.AlreadyLoggedInOrganizerException;
 import fr.unice.polytech.isa.teamk.exceptions.UnknownOrganizerException;
 import fr.unice.polytech.isa.teamk.interceptors.PriceVerifier;
 
@@ -17,11 +17,11 @@ public interface OrganizerService {
     void registerOrganizer(@WebParam(name = "organizer_name") String name,
                            @WebParam(name = "organizer_email") String email,
                            @WebParam(name = "organizer_password") String password,
-                           @WebParam(name = "organizer_phone") String phone) throws AlreadyExistingOrganizer;
+                           @WebParam(name = "organizer_phone") String phone) throws AlreadyExistingOrganizerException;
 
     @WebMethod
     void loginOrganizer(@WebParam(name = "organizer_email") String email,
-                        @WebParam(name = "organizer_password") String password) throws UnknownOrganizerException, AlreadyLoggedInOrganizer;
+                        @WebParam(name = "organizer_password") String password) throws UnknownOrganizerException, AlreadyLoggedInOrganizerException;
 
     @WebMethod
     @Interceptors({PriceVerifier.class})

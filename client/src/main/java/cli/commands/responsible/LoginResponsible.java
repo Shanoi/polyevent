@@ -26,14 +26,14 @@ public class LoginResponsible extends Command<PEPublicAPI> {
 
     @Override
     public void execute() {
-        /*try {
+        try{
             shell.system.responsibleService.loginResponsible(email, password);
             loggedInResponsibleId = email;
         } catch (AlreadyLoggedInResponsible_Exception e) {
             System.err.println("The responsible with email '" + e.getFaultInfo().getEmail() + "' is already logged in.");
         } catch (UnknownResponsibleException_Exception e) {
             System.err.println("The responsible with email '" + e.getFaultInfo().getEmail() + "' is unknown.");
-        }*/
+        }
     }
 
     @Override

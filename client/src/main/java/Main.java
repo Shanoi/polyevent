@@ -4,6 +4,7 @@ import cli.commands.organizer.LoginOrganizer;
 import cli.commands.organizer.RegisterOrganizer;
 import cli.commands.organizer.SubmitEvent;
 import cli.commands.responsible.ConfirmEvent;
+import cli.commands.responsible.GetSubmittedEvents;
 import cli.commands.responsible.LoginResponsible;
 import cli.commands.responsible.RegisterResponsible;
 import cli.framework.Shell;
@@ -30,6 +31,7 @@ public class Main extends Shell<PEPublicAPI> {
                 // Handling Responsible event
                 RegisterResponsible.class,
                 LoginResponsible.class,
+                GetSubmittedEvents.class,
                 ConfirmEvent.class
         );
     }

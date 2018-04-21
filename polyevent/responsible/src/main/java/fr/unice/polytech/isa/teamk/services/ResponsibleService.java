@@ -1,8 +1,6 @@
 package fr.unice.polytech.isa.teamk.services;
 
-import fr.unice.polytech.isa.teamk.entities.Event;
-import fr.unice.polytech.isa.teamk.exceptions.RegisterEventException;
-import fr.unice.polytech.isa.teamk.exceptions.UnknownEventException;
+import fr.unice.polytech.isa.teamk.exceptions.*;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -14,14 +12,16 @@ public interface ResponsibleService {
 
     @WebMethod
     void registerResponsible(@WebParam(name = "responsible_name") String name,
-                             @WebParam(name = "responsible_id") String id);
+                             @WebParam(name = "responsible_email") String email,
+                             @WebParam(name = "responsible_password") String password,
+                             @WebParam(name = "responsible_phone") String phone) throws AlreadyExistingResponsibleException;
 
     @WebMethod
-    List<Event> getEventList();
+    void loginResponsible(@WebParam(name = "responsible_email") String email,
+                          @WebParam(name = "responsible_password") String password) throws AlreadyLoggedInResponsibleException, UnknownResponsibleException;
 
     @WebMethod
-    void validateEvent(@WebParam(name = "responsible_id") String responsibleID,
-                       @WebParam(name = "event_id") String eventID,
-                       @WebParam(name = "room_id") String roomID) throws RegisterEventException, UnknownEventException;
+    void confirmEvent(@WebParam(name = "event_name") String eventName,
+                      @WebParam(name = "room_list") List<String> rooms) throws RegisterEventException, UnknownEventException;
 
 }

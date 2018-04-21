@@ -3,8 +3,8 @@ package fr.unice.polytech.isa.teamk.components;
 import fr.unice.polytech.isa.teamk.OrganizerFinder;
 import fr.unice.polytech.isa.teamk.OrganizerRegister;
 import fr.unice.polytech.isa.teamk.entities.Organizer;
-import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingOrganizer;
-import fr.unice.polytech.isa.teamk.exceptions.AlreadyLoggedInOrganizer;
+import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingOrganizerException;
+import fr.unice.polytech.isa.teamk.exceptions.AlreadyLoggedInOrganizerException;
 import fr.unice.polytech.isa.teamk.exceptions.UnknownOrganizerException;
 
 import javax.ejb.Stateless;
@@ -35,9 +35,9 @@ public class OrganizerRegistryBean implements OrganizerRegister, OrganizerFinder
     }
 
     @Override
-    public void registerOrganizer(String name, String email, String password, String phone) throws AlreadyExistingOrganizer {
+    public void registerOrganizer(String name, String email, String password, String phone) throws AlreadyExistingOrganizerException {
         if (searchOrganizerByEmail(email).isPresent()) {
-            throw new AlreadyExistingOrganizer(email);
+            throw new AlreadyExistingOrganizerException(email);
         }
 
         Organizer organizer = new Organizer(name, email, password, phone);
@@ -46,7 +46,7 @@ public class OrganizerRegistryBean implements OrganizerRegister, OrganizerFinder
     }
 
     @Override
-    public void loginOrganizer(String email, String password) throws UnknownOrganizerException, AlreadyLoggedInOrganizer {
+    public void loginOrganizer(String email, String password) throws UnknownOrganizerException, AlreadyLoggedInOrganizerException {
         Optional<Organizer> organizer = searchOrganizerByEmail(email);
 
         if (organizer.isPresent() && organizer.get().getPassword().equals(password)) {
@@ -54,7 +54,7 @@ public class OrganizerRegistryBean implements OrganizerRegister, OrganizerFinder
                 organizer.get().setLoggedIn(true);
                 return;
             } else {
-                throw new AlreadyLoggedInOrganizer(email);
+                throw new AlreadyLoggedInOrganizerException(email);
             }
         }
 

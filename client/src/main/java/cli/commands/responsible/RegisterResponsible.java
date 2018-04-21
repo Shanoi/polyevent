@@ -27,11 +27,11 @@ public class RegisterResponsible extends Command<PEPublicAPI> {
 
     @Override
     public void execute() {
-        /*try {
+        try {
             shell.system.responsibleService.registerResponsible(name, email, password, phone);
         } catch (AlreadyExistingResponsible_Exception e) {
             System.err.println("The responsible with email '" + e.getFaultInfo().getEmail() + "' already exists.");
-        }*/
+        }
     }
 
     @Override
