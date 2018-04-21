@@ -5,7 +5,7 @@ import fr.unice.polytech.isa.teamk.EventRegister;
 import fr.unice.polytech.isa.teamk.OrganizerFinder;
 import fr.unice.polytech.isa.teamk.entities.Event;
 import fr.unice.polytech.isa.teamk.entities.EventStatus;
-import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingEvent;
+import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingEventException;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -30,7 +30,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void submitNewEvent(String eventName, String startDate, String endDate, int nbAttendee, String organizerEmail) throws AlreadyExistingEvent {
+    public void submitNewEvent(String eventName, String startDate, String endDate, int nbAttendee, String organizerEmail) throws AlreadyExistingEventException {
         eventRegister.submitNewEvent(eventName, startDate, endDate, nbAttendee, organizerEmail);
     }
 

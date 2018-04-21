@@ -2,7 +2,7 @@ package fr.unice.polytech.isa.teamk.managed;
 
 import fr.unice.polytech.isa.teamk.OrganizerFinder;
 import fr.unice.polytech.isa.teamk.OrganizerRegister;
-import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingOrganizer;
+import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingOrganizerException;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -78,7 +78,7 @@ public class OrganizerBean implements Serializable {
         try {
             registry.registerOrganizer(getName(), getEmail(), getPassword(), getPhone());
             return Signal.ADDED;
-        } catch (AlreadyExistingOrganizer e) {
+        } catch (AlreadyExistingOrganizerException e) {
             log.log(Level.WARNING, "Unknown customer", e);
             FacesContext.getCurrentInstance()
                     .addMessage("form-error", new FacesMessage("Organizer " + getEmail() + " already exists!"));

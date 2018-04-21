@@ -1,7 +1,7 @@
 package fr.unice.polytech.isa.teamk.services;
 
 import fr.unice.polytech.isa.teamk.entities.Event;
-import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingEvent;
+import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingEventException;
 import fr.unice.polytech.isa.teamk.exceptions.RegisterEventException;
 
 import javax.jws.WebMethod;
@@ -17,7 +17,7 @@ public interface EventService {
                         @WebParam(name = "start_date") String startDate,
                         @WebParam(name = "end_date") String endDate,
                         @WebParam(name = "nb_attendee") int nbAttendee,
-                        @WebParam(name = "organizer_email") String organizerEmail) throws RegisterEventException, AlreadyExistingEvent;
+                        @WebParam(name = "organizer_email") String organizerEmail) throws RegisterEventException, AlreadyExistingEventException;
 
     @WebMethod
     List<Event> getSubmittedEvents();
