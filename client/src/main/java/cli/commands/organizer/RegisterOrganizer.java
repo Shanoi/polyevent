@@ -2,8 +2,7 @@ package cli.commands.organizer;
 
 import api.PEPublicAPI;
 import cli.framework.Command;
-import stubs.organizerstubs.AlreadyExistingOrganizer;
-import stubs.organizerstubs.AlreadyExistingOrganizer_Exception;
+import stubs.organizerstubs.AlreadyExistingOrganizerException_Exception;
 
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class RegisterOrganizer extends Command<PEPublicAPI> {
     public void execute() {
         try {
             shell.system.organizerService.registerOrganizer(name, email, password, phone);
-        } catch (AlreadyExistingOrganizer_Exception e) {
+        } catch (AlreadyExistingOrganizerException_Exception e) {
             System.err.println("The organizer with email '" + e.getFaultInfo().getEmail() + "' already exists.");
         }
     }

@@ -2,6 +2,7 @@ package cli.commands.responsible;
 
 import api.PEPublicAPI;
 import cli.framework.Command;
+import stubs.responsiblestubs.AlreadyExistingResponsibleException_Exception;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class RegisterResponsible extends Command<PEPublicAPI> {
     public void execute() {
         try {
             shell.system.responsibleService.registerResponsible(name, email, password, phone);
-        } catch (AlreadyExistingResponsible_Exception e) {
+        } catch (AlreadyExistingResponsibleException_Exception e) {
             System.err.println("The responsible with email '" + e.getFaultInfo().getEmail() + "' already exists.");
         }
     }

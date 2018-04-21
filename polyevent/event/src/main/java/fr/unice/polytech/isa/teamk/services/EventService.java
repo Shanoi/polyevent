@@ -3,6 +3,7 @@ package fr.unice.polytech.isa.teamk.services;
 import fr.unice.polytech.isa.teamk.entities.Event;
 import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingEventException;
 import fr.unice.polytech.isa.teamk.exceptions.RegisterEventException;
+import fr.unice.polytech.isa.teamk.exceptions.UnknownEventException;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -21,5 +22,9 @@ public interface EventService {
 
     @WebMethod
     List<Event> getSubmittedEvents();
+
+    @WebMethod
+    boolean confirmEvent(@WebParam(name = "event_name") String eventName,
+                         @WebParam(name = "rooms") List<String> rooms) throws RegisterEventException, UnknownEventException;
 
 }

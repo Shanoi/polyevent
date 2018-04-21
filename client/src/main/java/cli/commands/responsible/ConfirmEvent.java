@@ -7,7 +7,8 @@ import java.util.List;
 
 public class ConfirmEvent extends Command<PEPublicAPI> {
 
-    private String eventId;
+    private String eventName;
+    private List<String> rooms;
 
     @Override
     public String identifier() { return "confirm_event"; }
@@ -16,12 +17,16 @@ public class ConfirmEvent extends Command<PEPublicAPI> {
     public void load(List<String> args) {
         short argIndex = 0;
 
-        eventId = args.get(argIndex);
+        eventName = args.get(argIndex++);
+
+        while (argIndex < args.size()) {
+            rooms.add(args.get(argIndex++));
+        }
     }
 
     @Override
     public void execute() throws Exception {
-        // confirm event
+        shell.system.eventService.confirmEvent(eventName, rooms);
     }
 
     @Override

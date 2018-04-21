@@ -6,10 +6,23 @@
         <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/event"
                    attributeFormDefault="unqualified" elementFormDefault="unqualified"
                    targetNamespace="http://www.polytech.unice.fr/si/4a/isa/event">
+            <xs:element name="confirmEvent" type="tns:confirmEvent"/>
+            <xs:element name="confirmEventResponse" type="tns:confirmEventResponse"/>
             <xs:element name="getSubmittedEvents" type="tns:getSubmittedEvents"/>
             <xs:element name="getSubmittedEventsResponse" type="tns:getSubmittedEventsResponse"/>
             <xs:element name="submitNewEvent" type="tns:submitNewEvent"/>
             <xs:element name="submitNewEventResponse" type="tns:submitNewEventResponse"/>
+            <xs:complexType name="confirmEvent">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="event_name" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="rooms" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="confirmEventResponse">
+                <xs:sequence>
+                    <xs:element name="return" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
             <xs:complexType name="getSubmittedEvents">
                 <xs:sequence/>
             </xs:complexType>
@@ -79,6 +92,13 @@
             <xs:complexType name="submitNewEventResponse">
                 <xs:sequence/>
             </xs:complexType>
+            <xs:element name="UnknownEventException" type="tns:UnknownEventException"/>
+            <xs:complexType name="UnknownEventException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
             <xs:element name="RegisterEventException" type="tns:RegisterEventException"/>
             <xs:complexType name="RegisterEventException">
                 <xs:sequence>
@@ -86,8 +106,8 @@
                     <xs:element minOccurs="0" name="message" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
-            <xs:element name="AlreadyExistingEvent" type="tns:AlreadyExistingEvent"/>
-            <xs:complexType name="AlreadyExistingEvent">
+            <xs:element name="AlreadyExistingEventException" type="tns:AlreadyExistingEventException"/>
+            <xs:complexType name="AlreadyExistingEventException">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="name" type="xs:string"/>
                     <xs:element minOccurs="0" name="message" type="xs:string"/>
@@ -99,8 +119,16 @@
         <wsdl:part element="tns:submitNewEventResponse" name="parameters">
         </wsdl:part>
     </wsdl:message>
-    <wsdl:message name="AlreadyExistingEvent">
-        <wsdl:part element="tns:AlreadyExistingEvent" name="AlreadyExistingEvent">
+    <wsdl:message name="AlreadyExistingEventException">
+        <wsdl:part element="tns:AlreadyExistingEventException" name="AlreadyExistingEventException">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="confirmEventResponse">
+        <wsdl:part element="tns:confirmEventResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="confirmEvent">
+        <wsdl:part element="tns:confirmEvent" name="parameters">
         </wsdl:part>
     </wsdl:message>
     <wsdl:message name="getSubmittedEventsResponse">
@@ -111,15 +139,29 @@
         <wsdl:part element="tns:getSubmittedEvents" name="parameters">
         </wsdl:part>
     </wsdl:message>
-    <wsdl:message name="submitNewEvent">
-        <wsdl:part element="tns:submitNewEvent" name="parameters">
+    <wsdl:message name="UnknownEventException">
+        <wsdl:part element="tns:UnknownEventException" name="UnknownEventException">
         </wsdl:part>
     </wsdl:message>
     <wsdl:message name="RegisterEventException">
         <wsdl:part element="tns:RegisterEventException" name="RegisterEventException">
         </wsdl:part>
     </wsdl:message>
+    <wsdl:message name="submitNewEvent">
+        <wsdl:part element="tns:submitNewEvent" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
     <wsdl:portType name="EventService">
+        <wsdl:operation name="confirmEvent">
+            <wsdl:input message="tns:confirmEvent" name="confirmEvent">
+            </wsdl:input>
+            <wsdl:output message="tns:confirmEventResponse" name="confirmEventResponse">
+            </wsdl:output>
+            <wsdl:fault message="tns:UnknownEventException" name="UnknownEventException">
+            </wsdl:fault>
+            <wsdl:fault message="tns:RegisterEventException" name="RegisterEventException">
+            </wsdl:fault>
+        </wsdl:operation>
         <wsdl:operation name="getSubmittedEvents">
             <wsdl:input message="tns:getSubmittedEvents" name="getSubmittedEvents">
             </wsdl:input>
@@ -131,7 +173,7 @@
             </wsdl:input>
             <wsdl:output message="tns:submitNewEventResponse" name="submitNewEventResponse">
             </wsdl:output>
-            <wsdl:fault message="tns:AlreadyExistingEvent" name="AlreadyExistingEvent">
+            <wsdl:fault message="tns:AlreadyExistingEventException" name="AlreadyExistingEventException">
             </wsdl:fault>
             <wsdl:fault message="tns:RegisterEventException" name="RegisterEventException">
             </wsdl:fault>
@@ -139,6 +181,21 @@
     </wsdl:portType>
     <wsdl:binding name="EventServiceImplServiceSoapBinding" type="tns:EventService">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="confirmEvent">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="confirmEvent">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="confirmEventResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="UnknownEventException">
+                <soap:fault name="UnknownEventException" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="RegisterEventException">
+                <soap:fault name="RegisterEventException" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
         <wsdl:operation name="getSubmittedEvents">
             <soap:operation soapAction="" style="document"/>
             <wsdl:input name="getSubmittedEvents">
@@ -156,8 +213,8 @@
             <wsdl:output name="submitNewEventResponse">
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="AlreadyExistingEvent">
-                <soap:fault name="AlreadyExistingEvent" use="literal"/>
+            <wsdl:fault name="AlreadyExistingEventException">
+                <soap:fault name="AlreadyExistingEventException" use="literal"/>
             </wsdl:fault>
             <wsdl:fault name="RegisterEventException">
                 <soap:fault name="RegisterEventException" use="literal"/>

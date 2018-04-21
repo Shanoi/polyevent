@@ -10,6 +10,7 @@
         <class>fr.unice.polytech.isa.teamk.entities.Event</class>
         <class>fr.unice.polytech.isa.teamk.entities.Organizer</class>
         <class>fr.unice.polytech.isa.teamk.entities.Material</class>
+        <class>fr.unice.polytech.isa.teamk.entities.Responsible</class>
         <class>fr.unice.polytech.isa.teamk.entities.Room</class>
         <class>fr.unice.polytech.isa.teamk.entities.Provider</class>
         <class>fr.unice.polytech.isa.teamk.entities.Quote</class>

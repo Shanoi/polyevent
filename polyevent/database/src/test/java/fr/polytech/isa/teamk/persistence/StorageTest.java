@@ -25,7 +25,6 @@ public class StorageTest extends AbstractPersistenceTest {
 
     @Test
     public void storingEvent() throws Exception {
-
         //String str = "14-03-2018 12:30";
         //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         //LocalDateTime.parse(str, formatter)
@@ -43,7 +42,6 @@ public class StorageTest extends AbstractPersistenceTest {
 
     @Test
     public void storingMaterial() throws Exception {
-
         Material c = new Material(1, "Sonic Screwdriver");
         assertEquals(0, c.getId());
 
@@ -57,7 +55,6 @@ public class StorageTest extends AbstractPersistenceTest {
 
     @Test
     public void storingOrganizer() throws Exception {
-
         Organizer c = new Organizer("23 à 0", "C'est la piquette Jack", "Tu sais pas jouer Jack", "T'es mauvais!");
         assertEquals(0, c.getId());
 
@@ -71,7 +68,6 @@ public class StorageTest extends AbstractPersistenceTest {
 
     @Test
     public void storingProvider() throws Exception {
-
         Provider c = new Provider("Otis mon Scribe", "Près de la pyramide", "Le numéros bis", "otis.scribe@tablettedargile.com", "Scribe", 544);
         assertEquals(0, c.getId());
 
@@ -85,7 +81,6 @@ public class StorageTest extends AbstractPersistenceTest {
 
     @Test
     public void storingQuote() throws Exception {
-
         Event event = new Event("Bataille du Gouffre de Helm", Timestamp.valueOf("2015-03-30 14:37:00"), Timestamp.valueOf("2015-03-30 14:37:00"), 150);
         entityManager.persist(event);
 
@@ -98,13 +93,24 @@ public class StorageTest extends AbstractPersistenceTest {
 
         Quote stored = (Quote) entityManager.find(Quote.class, id);
         Assert.assertEquals(event, stored.getEvent());
-        Assert.assertEquals(c, stored); // the alltogether
+        Assert.assertEquals(c, stored); // the all together
+    }
 
+    @Test
+    public void storingResponsible() throws Exception {
+        Responsible c = new Responsible("John Doe", "1234567890", "lolilol@gmail.com", "0474015640");
+        Assert.assertEquals(0, c.getId());
+
+        entityManager.persist(c);
+        int id = c.getId();
+        assertNotEquals(0, id);
+
+        Responsible stored = (Responsible) entityManager.find(Responsible.class, id);
+        Assert.assertEquals(c, stored);
     }
 
     @Test
     public void storingRoom() throws Exception {
-
         Room c = new Room(150, "Middle-earth");
         assertEquals(0, c.getId());
 

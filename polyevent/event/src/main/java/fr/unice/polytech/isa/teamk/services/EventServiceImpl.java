@@ -6,6 +6,8 @@ import fr.unice.polytech.isa.teamk.OrganizerFinder;
 import fr.unice.polytech.isa.teamk.entities.Event;
 import fr.unice.polytech.isa.teamk.entities.EventStatus;
 import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingEventException;
+import fr.unice.polytech.isa.teamk.exceptions.RegisterEventException;
+import fr.unice.polytech.isa.teamk.exceptions.UnknownEventException;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -37,6 +39,11 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<Event> getSubmittedEvents() {
         return eventFinder.searchEventByStatus(EventStatus.SUBMITTED);
+    }
+
+    @Override
+    public boolean confirmEvent(String eventName, List<String> rooms) throws RegisterEventException, UnknownEventException {
+        return eventRegister.confirmEvent(eventName, rooms);
     }
 
 }

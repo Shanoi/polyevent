@@ -42,8 +42,8 @@
             <xs:complexType name="registerOrganizerResponse">
                 <xs:sequence/>
             </xs:complexType>
-            <xs:element name="AlreadyLoggedInOrganizer" type="tns:AlreadyLoggedInOrganizer"/>
-            <xs:complexType name="AlreadyLoggedInOrganizer">
+            <xs:element name="AlreadyLoggedInOrganizerException" type="tns:AlreadyLoggedInOrganizerException"/>
+            <xs:complexType name="AlreadyLoggedInOrganizerException">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="email" type="xs:string"/>
                     <xs:element minOccurs="0" name="message" type="xs:string"/>
@@ -56,8 +56,8 @@
                     <xs:element minOccurs="0" name="message" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
-            <xs:element name="AlreadyExistingOrganizer" type="tns:AlreadyExistingOrganizer"/>
-            <xs:complexType name="AlreadyExistingOrganizer">
+            <xs:element name="AlreadyExistingOrganizerException" type="tns:AlreadyExistingOrganizerException"/>
+            <xs:complexType name="AlreadyExistingOrganizerException">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="email" type="xs:string"/>
                     <xs:element minOccurs="0" name="message" type="xs:string"/>
@@ -69,10 +69,6 @@
         <wsdl:part element="tns:loginOrganizer" name="parameters">
         </wsdl:part>
     </wsdl:message>
-    <wsdl:message name="AlreadyLoggedInOrganizer">
-        <wsdl:part element="tns:AlreadyLoggedInOrganizer" name="AlreadyLoggedInOrganizer">
-        </wsdl:part>
-    </wsdl:message>
     <wsdl:message name="sendPaymentResponse">
         <wsdl:part element="tns:sendPaymentResponse" name="parameters">
         </wsdl:part>
@@ -81,8 +77,8 @@
         <wsdl:part element="tns:UnknownOrganizerException" name="UnknownOrganizerException">
         </wsdl:part>
     </wsdl:message>
-    <wsdl:message name="AlreadyExistingOrganizer">
-        <wsdl:part element="tns:AlreadyExistingOrganizer" name="AlreadyExistingOrganizer">
+    <wsdl:message name="AlreadyLoggedInOrganizerException">
+        <wsdl:part element="tns:AlreadyLoggedInOrganizerException" name="AlreadyLoggedInOrganizerException">
         </wsdl:part>
     </wsdl:message>
     <wsdl:message name="loginOrganizerResponse">
@@ -101,6 +97,10 @@
         <wsdl:part element="tns:registerOrganizer" name="parameters">
         </wsdl:part>
     </wsdl:message>
+    <wsdl:message name="AlreadyExistingOrganizerException">
+        <wsdl:part element="tns:AlreadyExistingOrganizerException" name="AlreadyExistingOrganizerException">
+        </wsdl:part>
+    </wsdl:message>
     <wsdl:portType name="OrganizerService">
         <wsdl:operation name="loginOrganizer">
             <wsdl:input message="tns:loginOrganizer" name="loginOrganizer">
@@ -109,7 +109,7 @@
             </wsdl:output>
             <wsdl:fault message="tns:UnknownOrganizerException" name="UnknownOrganizerException">
             </wsdl:fault>
-            <wsdl:fault message="tns:AlreadyLoggedInOrganizer" name="AlreadyLoggedInOrganizer">
+            <wsdl:fault message="tns:AlreadyLoggedInOrganizerException" name="AlreadyLoggedInOrganizerException">
             </wsdl:fault>
         </wsdl:operation>
         <wsdl:operation name="sendPayment">
@@ -123,7 +123,7 @@
             </wsdl:input>
             <wsdl:output message="tns:registerOrganizerResponse" name="registerOrganizerResponse">
             </wsdl:output>
-            <wsdl:fault message="tns:AlreadyExistingOrganizer" name="AlreadyExistingOrganizer">
+            <wsdl:fault message="tns:AlreadyExistingOrganizerException" name="AlreadyExistingOrganizerException">
             </wsdl:fault>
         </wsdl:operation>
     </wsdl:portType>
@@ -140,8 +140,8 @@
             <wsdl:fault name="UnknownOrganizerException">
                 <soap:fault name="UnknownOrganizerException" use="literal"/>
             </wsdl:fault>
-            <wsdl:fault name="AlreadyLoggedInOrganizer">
-                <soap:fault name="AlreadyLoggedInOrganizer" use="literal"/>
+            <wsdl:fault name="AlreadyLoggedInOrganizerException">
+                <soap:fault name="AlreadyLoggedInOrganizerException" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
         <wsdl:operation name="sendPayment">
@@ -161,8 +161,8 @@
             <wsdl:output name="registerOrganizerResponse">
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="AlreadyExistingOrganizer">
-                <soap:fault name="AlreadyExistingOrganizer" use="literal"/>
+            <wsdl:fault name="AlreadyExistingOrganizerException">
+                <soap:fault name="AlreadyExistingOrganizerException" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
     </wsdl:binding>

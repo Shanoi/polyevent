@@ -3,7 +3,7 @@ package fr.unice.polytech.isa.teamk.exceptions;
 import javax.xml.ws.WebFault;
 import java.io.Serializable;
 
-@WebFault(targetNamespace = "http://www.polytech.unice.fr/si/4a/isa/organizer")
+@WebFault(targetNamespace = "http://www.polytech.unice.fr/si/4a/isa/responsible")
 public class AlreadyExistingResponsibleException extends Exception implements Serializable {
 
     private String email;

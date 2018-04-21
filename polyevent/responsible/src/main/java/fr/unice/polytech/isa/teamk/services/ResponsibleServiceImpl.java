@@ -1,15 +1,13 @@
 package fr.unice.polytech.isa.teamk.services;
 
-import fr.unice.polytech.isa.teamk.EventFinder;
-import fr.unice.polytech.isa.teamk.EventRegister;
 import fr.unice.polytech.isa.teamk.ResponsibleRegister;
-import fr.unice.polytech.isa.teamk.entities.Event;
-import fr.unice.polytech.isa.teamk.exceptions.*;
+import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingResponsibleException;
+import fr.unice.polytech.isa.teamk.exceptions.AlreadyLoggedInResponsibleException;
+import fr.unice.polytech.isa.teamk.exceptions.UnknownResponsibleException;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
-import java.util.List;
 
 @Stateless(name = "ResponsibleWS")
 @WebService(targetNamespace = "http://www.polytech.unice.fr/si/4a/isa/responsible")
@@ -17,12 +15,6 @@ public class ResponsibleServiceImpl implements ResponsibleService {
 
     @EJB
     private ResponsibleRegister responsibleRegister;
-
-    @EJB
-    private EventFinder eventFinder;
-
-    @EJB
-    private EventRegister eventRegister;
 
     public ResponsibleServiceImpl() {
 
@@ -36,11 +28,6 @@ public class ResponsibleServiceImpl implements ResponsibleService {
     @Override
     public void loginResponsible(String email, String password) throws UnknownResponsibleException, AlreadyLoggedInResponsibleException {
         responsibleRegister.loginResponsible(email, password);
-    }
-
-    @Override
-    public void confirmEvent(String eventName, List<String> rooms) throws RegisterEventException, UnknownEventException {
-        eventRegister.confirmEvent(eventName, rooms);
     }
 
 }

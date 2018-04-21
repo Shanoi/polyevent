@@ -2,7 +2,7 @@ package cli.commands.organizer;
 
 import api.PEPublicAPI;
 import cli.framework.Command;
-import stubs.organizerstubs.AlreadyLoggedInOrganizer_Exception;
+import stubs.organizerstubs.AlreadyLoggedInOrganizerException_Exception;
 import stubs.organizerstubs.UnknownOrganizerException_Exception;
 
 import java.util.List;
@@ -31,7 +31,7 @@ public class LoginOrganizer extends Command<PEPublicAPI> {
         try {
             shell.system.organizerService.loginOrganizer(email, password);
             loggedInOrganizerId = email;
-        } catch (AlreadyLoggedInOrganizer_Exception e) {
+        } catch (AlreadyLoggedInOrganizerException_Exception e) {
             System.err.println("The organizer with email '" + e.getFaultInfo().getEmail() + "' is already logged in.");
         } catch (UnknownOrganizerException_Exception e) {
             System.err.println("The organizer with email '" + e.getFaultInfo().getEmail() + "' is unknown.");

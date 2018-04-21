@@ -2,6 +2,8 @@ package cli.commands.responsible;
 
 import api.PEPublicAPI;
 import cli.framework.Command;
+import stubs.responsiblestubs.AlreadyLoggedInResponsibleException_Exception;
+import stubs.responsiblestubs.UnknownResponsibleException_Exception;
 
 import java.util.List;
 
@@ -26,10 +28,10 @@ public class LoginResponsible extends Command<PEPublicAPI> {
 
     @Override
     public void execute() {
-        try{
+        try {
             shell.system.responsibleService.loginResponsible(email, password);
             loggedInResponsibleId = email;
-        } catch (AlreadyLoggedInResponsible_Exception e) {
+        } catch (AlreadyLoggedInResponsibleException_Exception e) {
             System.err.println("The responsible with email '" + e.getFaultInfo().getEmail() + "' is already logged in.");
         } catch (UnknownResponsibleException_Exception e) {
             System.err.println("The responsible with email '" + e.getFaultInfo().getEmail() + "' is unknown.");

@@ -133,6 +133,11 @@
             <artifactId>organizer</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>fr.unice.polytech.isa.teamk</groupId>
+            <artifactId>responsible</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
