@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 
 namespace Partner.Data
 {
-    [DataContract(Namespace = "http://partner/external/calendar/data/", Name = "EventRequest")]
+    [DataContract(Namespace = "http://partner/external/service/data/", Name = "EventRequest")]
     public class EventRequest
     {
         [DataMember]
@@ -22,7 +22,7 @@ namespace Partner.Data
         }
     }
 
-    [DataContract(Namespace = "http://partner/external/calendar/data/", Name = "Event")]
+    [DataContract(Namespace = "http://partner/external/service/data/", Name = "Event")]
     public class Event
     {
         [DataMember]
@@ -53,7 +53,7 @@ namespace Partner.Data
 
     public class Day
     {
-        public String TheDay { get; set; }
+        public DateTime TheDay { get; set; }
 
         private Dictionary<string, List<Room>> planning = new Dictionary<string, List<Room>>
         {
@@ -65,19 +65,27 @@ namespace Partner.Data
             { "13:00", new List<Room>() },
             { "14:00", new List<Room>() },
             { "15:00", new List<Room>() },
-            { "16:00", new List<Room>() },
-            { "17:00", new List<Room>() }
+            { "16:00", new List<Room>() }
         };
 
-        public Day(string day)
+        public Day(DateTime day)
         {
             TheDay = day;
         }
 
-        public Dictionary<string, List<Room>> Planning { get; set; }
+        public Dictionary<string, List<Room>> Planning {
+            get
+            {
+                return planning;
+            }
+            set
+            {
+                planning = value;
+            }
+        }
     }
 
-    [DataContract(Namespace = "http://partner/external/calendar/data/", Name = "Room")]
+    [DataContract(Namespace = "http://partner/external/service/data/", Name = "Room")]
     public class Room
     {
         [DataMember]
@@ -88,24 +96,11 @@ namespace Partner.Data
 
         [DataMember]
         public TypeSalle Type { get; set; }
-
-        override public string ToString()
-        {
-            return "Room[ID:" + ID + ", Capacity" + Capacity + ", Type" + Type.ToString() + "]";
-        }
-
-        public Room(string id, int capacity, TypeSalle type)
-        {
-            ID = id;
-            Capacity = capacity;
-            Type = type;
-        }
     }
 
     public enum TypeSalle { Amphi, Cours, TD }
 
-    [DataContract(Namespace = "http://partner/external/payment/data/",
-                Name = "PaymentRequest")]
+    [DataContract(Namespace = "http://partner/external/service/data/", Name = "PaymentRequest")]
     public class PaymentRequest
     {
         [DataMember]
@@ -120,8 +115,7 @@ namespace Partner.Data
         }
     }
 
-    [DataContract(Namespace = "http://partner/external/payment/data/",
-                  Name = "Payment")]
+    [DataContract(Namespace = "http://partner/external/service/data/", Name = "Payment")]
     public class Payment
     {
         [DataMember]

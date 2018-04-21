@@ -1,9 +1,11 @@
 using Partner.Service;
+using Partner.Data;
 using System;
 using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Threading;
+using System.Collections.Generic;
 
 /**
  * References:
@@ -20,8 +22,11 @@ public class Server
     private string Locker = "server.LOCK";
 
     // Web Server used to host services
-    private WebServiceHost CalendarHost;
-    private WebServiceHost PaymentHost;
+    private WebServiceHost HostCalendar;
+    private WebServiceHost HostPayment;
+
+    public static string calendar = "calendar";
+    public static string payment = "payment";
 
     /**
      * Start the web server on the given port, and host the expected service
@@ -32,18 +37,22 @@ public class Server
         string url = "http://" + "localhost" + ":" + Port;
 
         WebHttpBinding b = new WebHttpBinding();
-        CalendarHost = new WebServiceHost(typeof(CalendarService), new Uri(url + "/calendar"));
-        PaymentHost = new WebServiceHost(typeof(PaymentService), new Uri(url + "/payment"));
+
+        HostCalendar = new WebServiceHost(typeof(CalendarService), new Uri(url + "/calendar"));
+        HostPayment = new WebServiceHost(typeof(PaymentService), new Uri(url + "/payment"));
 
         // Adding the service to the host
-        CalendarHost.AddServiceEndpoint(typeof(ICalendarService), b, "");
-        PaymentHost.AddServiceEndpoint(typeof(IPaymentService), b, "");
+        HostCalendar.AddServiceEndpoint(typeof(ICalendar), b, "");
+        HostPayment.AddServiceEndpoint(typeof(IPayment), b, "");
 
-        // Starting the CalendarHost server
-        CalendarHost.Open();
-        PaymentHost.Open();
-        Console.WriteLine("\nListening to " + "localhost" + ":" + Port + "/calendar\n" +
-            "\nListening to " + "localhost" + ":" + Port + "/payment\n");
+        // Starting the Hosts
+        HostCalendar.Open();
+        HostPayment.Open();
+
+        Console.WriteLine("\nListening to " + "localhost" + ":" + Port + "\n");
+        Console.WriteLine("Initializing calendar...\n");
+
+        Mock.MockDays();
 
         if (Standalone)
         {
@@ -60,7 +69,8 @@ public class Server
      */
     private void stop()
     {
-        CalendarHost.Close();
+        HostCalendar.Close();
+        HostPayment.Close();
         Console.WriteLine("Server shutdown complete!");
     }
 

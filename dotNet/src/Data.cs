@@ -15,25 +15,93 @@ namespace Partner.Data
 
         private static List<Room> rooms = new List<Room>
         {
-            new Room("Amphi Forum", 300, TypeSalle.Amphi), // index 0
-            new Room("E+130", 100, TypeSalle.Amphi),       // index 1
-            new Room("E+131", 100, TypeSalle.Amphi),       // index 2
-            new Room("E+132", 100, TypeSalle.Amphi),       // index 3
+            new Room {
+                ID = "Amphi Forum",
+                Capacity = 300,
+                Type = TypeSalle.Amphi
+            }, // index 0
+            new Room {
+                ID = "E+130",
+                Capacity = 100,
+                Type = TypeSalle.Amphi
+            }, // index 1
+            new Room {
+                ID = "E+131",
+                Capacity = 100,
+                Type = TypeSalle.Amphi
+            }, // index 2
+            new Room {
+                ID = "E+132",
+                Capacity = 100,
+                Type = TypeSalle.Amphi
+            }, // index 3
 
-            new Room("O+101", 50, TypeSalle.Cours),        // index 4
-            new Room("O+107", 25, TypeSalle.TD),           // index 5
-            new Room("O+108", 25, TypeSalle.TD),           // index 6
-            new Room("O+109", 25, TypeSalle.TD),           // index 7
-            new Room("O+110", 25, TypeSalle.TD),           // index 8
+            new Room {
+                ID = "O+101",
+                Capacity = 50,
+                Type = TypeSalle.Cours
+            }, // index 4
+            new Room {
+                ID = "O+107",
+                Capacity = 25,
+                Type = TypeSalle.TD
+            }, // index 5
+            new Room {
+                ID = "O+108",
+                Capacity = 25,
+                Type = TypeSalle.TD
+            }, // index 6
+            new Room {
+                ID = "O+109",
+                Capacity = 25,
+                Type = TypeSalle.TD
+            }, // index 7
+            new Room {
+                ID = "O+110",
+                Capacity = 25,
+                Type = TypeSalle.TD
+            }, // index 8
 
-            new Room("O+302", 40, TypeSalle.Cours),        // index 9
-            new Room("O+303", 40, TypeSalle.Cours),        // index 10
-            new Room("O+307", 40, TypeSalle.Cours),        // index 11
-            new Room("O+308", 45, TypeSalle.Cours),        // index 12
-            new Room("O+309", 45, TypeSalle.Cours),        // index 13
-            new Room("O+310", 45, TypeSalle.Cours),        // index 14
-            new Room("O+311", 50, TypeSalle.Cours),        // index 15
-            new Room("O+317", 50, TypeSalle.Cours)         // index 16
+            new Room {
+                ID = "O+302",
+                Capacity = 40,
+                Type = TypeSalle.Cours
+            }, // index 9
+            new Room {
+                ID = "O+303",
+                Capacity = 40,
+                Type = TypeSalle.Cours
+            },        // index 10
+            new Room {
+                ID = "O+307",
+                Capacity = 40,
+                Type = TypeSalle.Cours
+            },        // index 11
+            new Room {
+                ID = "O+308",
+                Capacity = 45,
+                Type = TypeSalle.Cours
+            },        // index 12
+            new Room {
+                ID = "O+309",
+                Capacity = 45,
+                Type = TypeSalle.Cours
+            },        // index 13
+            new Room {
+                ID = "O+310",
+                Capacity = 45,
+                Type = TypeSalle.Cours
+            },        // index 14
+            new Room {
+                ID = "O+311",
+                Capacity = 50,
+                Type = TypeSalle.Cours
+            },        // index 15
+            new Room {
+                ID = "O+317",
+                Capacity = 50,
+                Type = TypeSalle.Cours
+            }         // index 16
         };
 
         public static void MockDays()
@@ -41,17 +109,17 @@ namespace Partner.Data
             DateTime dateTime = DateTime.Now;
             DayOfWeek day = dateTime.DayOfWeek;
             int difference = (7 + (dateTime.DayOfWeek - DayOfWeek.Monday)) % 7;
-            dateTime.AddDays(-difference);
+            dateTime = dateTime.AddDays(-difference);
 
             for (int i = 0; i < 14; ++i)
             {
-                days.Add(new Day(dateTime.ToString("d")));
-                for (int j = 0; j < 10; ++j)
+                days.Add(new Day(dateTime));
+                for (int j = 0; j < 9; ++j)
                 {
                     string hour = j + 8 + ":00";
                     days[i].Planning[hour].AddRange(rooms);
                 }
-                dateTime.AddDays(1);
+                dateTime = dateTime.AddDays(1);
             }
 
             // Monday
@@ -62,15 +130,15 @@ namespace Partner.Data
                 days[i].Planning["9:00"].RemoveAt(15);
                 days[i].Planning["9:00"].RemoveAt(13);
 
-                days[i].Planning["10:00"].RemoveAt(12);
                 days[i].Planning["10:00"].RemoveAt(16);
-                days[i].Planning["11:00"].RemoveAt(12);
+                days[i].Planning["10:00"].RemoveAt(12);
                 days[i].Planning["11:00"].RemoveAt(16);
+                days[i].Planning["11:00"].RemoveAt(12);
 
-                days[i].Planning["13:00"].RemoveAt(14);
                 days[i].Planning["13:00"].RemoveAt(15);
-                days[i].Planning["14:00"].RemoveAt(14);
+                days[i].Planning["13:00"].RemoveAt(14);
                 days[i].Planning["14:00"].RemoveAt(15);
+                days[i].Planning["14:00"].RemoveAt(14);
 
                 days[i].Planning["15:00"].RemoveAt(15);
                 days[i].Planning["16:00"].RemoveAt(15);
@@ -82,10 +150,11 @@ namespace Partner.Data
                 days[i].Planning["8:00"].RemoveAt(2);
                 for (int j = 9; j < 16; j++)
                 {
-                    days[i].Planning[j + ":00"].RemoveAt(6);
-                    days[i].Planning[j + ":00"].RemoveAt(7);
-                    days[i].Planning[j + ":00"].RemoveAt(8);
                     days[i].Planning[j + ":00"].RemoveAt(14);
+                    days[i].Planning[j + ":00"].RemoveAt(8);
+                    days[i].Planning[j + ":00"].RemoveAt(7);
+                    days[i].Planning[j + ":00"].RemoveAt(6);
+                    
                     if (j == 11)
                     {
                         j++;
@@ -100,23 +169,23 @@ namespace Partner.Data
                 {
                     if (j >= 9)
                     {
-                        days[i].Planning[j + ":00"].RemoveAt(14);
                         days[i].Planning[j + ":00"].RemoveAt(15);
+                        days[i].Planning[j + ":00"].RemoveAt(14);
                     }
                     else
                     {
-                        days[i].Planning[j + ":00"].RemoveAt(14);
                         days[i].Planning[j + ":00"].RemoveAt(15);
+                        days[i].Planning[j + ":00"].RemoveAt(14);
                     }
                 }
                 
                 days[i].Planning["13:00"].RemoveAt(0);
                 days[i].Planning["14:00"].RemoveAt(0);
 
-                days[i].Planning["15:00"].RemoveAt(11);
                 days[i].Planning["15:00"].RemoveAt(16);
-                days[i].Planning["16:00"].RemoveAt(11);
+                days[i].Planning["15:00"].RemoveAt(11);
                 days[i].Planning["16:00"].RemoveAt(16);
+                days[i].Planning["16:00"].RemoveAt(11);
             }
 
             // Thursday
@@ -126,9 +195,9 @@ namespace Partner.Data
                 {
                     if (j >= 9)
                     {
-                        days[i].Planning[j + ":00"].RemoveAt(14);
-                        days[i].Planning[j + ":00"].RemoveAt(15);
                         days[i].Planning[j + ":00"].RemoveAt(16);
+                        days[i].Planning[j + ":00"].RemoveAt(15);
+                        days[i].Planning[j + ":00"].RemoveAt(14);
                         if (j == 11)
                         {
                             j++;
@@ -136,13 +205,13 @@ namespace Partner.Data
                     }
                     else if (j >= 13)
                     {
-                        days[i].Planning[j + ":00"].RemoveAt(11);
                         days[i].Planning[j + ":00"].RemoveAt(12);
+                        days[i].Planning[j + ":00"].RemoveAt(11);
                     }
                     else
                     {
-                        days[i].Planning[j + ":00"].RemoveAt(14);
                         days[i].Planning[j + ":00"].RemoveAt(15);
+                        days[i].Planning[j + ":00"].RemoveAt(14);
                     }
                 }
             }
@@ -152,11 +221,10 @@ namespace Partner.Data
             {
                 for (int j = 8; j < 17; j++)
                 {
-                    days[i].Planning[j + ":00"].RemoveAt(4);
                     if (j < 12)
                     {
-                        days[i].Planning[j + ":00"].RemoveAt(9);
                         days[i].Planning[j + ":00"].RemoveAt(10);
+                        days[i].Planning[j + ":00"].RemoveAt(9);
                         if (j == 11)
                         {
                             j++;
@@ -164,9 +232,10 @@ namespace Partner.Data
                     }
                     else
                     {
-                        days[i].Planning[j + ":00"].RemoveAt(11);
                         days[i].Planning[j + ":00"].RemoveAt(12);
+                        days[i].Planning[j + ":00"].RemoveAt(11);
                     }
+                    days[i].Planning[j + ":00"].RemoveAt(4);
                 }
             }
         }
