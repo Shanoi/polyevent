@@ -42,6 +42,7 @@
                                 type="tns:provider"/>
                     <xs:element minOccurs="0" name="quote" type="tns:quote"/>
                     <xs:element minOccurs="0" name="startingDate" type="tns:timestamp"/>
+                    <xs:element minOccurs="0" name="status" type="tns:eventStatus"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="timestamp">
@@ -92,6 +93,15 @@
             <xs:complexType name="submitNewEventResponse">
                 <xs:sequence/>
             </xs:complexType>
+            <xs:simpleType name="eventStatus">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="SUBMITTED"/>
+                    <xs:enumeration value="CONFIRMED"/>
+                    <xs:enumeration value="PAID"/>
+                    <xs:enumeration value="RUNNING"/>
+                    <xs:enumeration value="FINISHED"/>
+                </xs:restriction>
+            </xs:simpleType>
             <xs:element name="UnknownEventException" type="tns:UnknownEventException"/>
             <xs:complexType name="UnknownEventException">
                 <xs:sequence>

@@ -103,6 +103,14 @@ public class Event implements Serializable {
         this.nbAttendee = nbAttendee;
     }
 
+    public EventStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EventStatus status) {
+        this.status = status;
+    }
+
     public Set<Provider> getProviders() {
         return providers;
     }

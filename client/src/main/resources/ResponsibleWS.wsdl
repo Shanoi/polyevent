@@ -1,22 +1,18 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
                   xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/responsible"
                   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-                  xmlns:ns1="http://www.polytech.unice.fr/si/4a/isa/organizer" name="ResponsibleServiceImplService"
+                  name="ResponsibleServiceImplService"
                   targetNamespace="http://www.polytech.unice.fr/si/4a/isa/responsible">
     <wsdl:types>
         <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                   xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/responsible" elementFormDefault="unqualified"
-                   targetNamespace="http://www.polytech.unice.fr/si/4a/isa/responsible" version="1.0">
-
+                   xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/responsible" attributeFormDefault="unqualified"
+                   elementFormDefault="unqualified"
+                   targetNamespace="http://www.polytech.unice.fr/si/4a/isa/responsible">
             <xs:element name="loginResponsible" type="tns:loginResponsible"/>
-
             <xs:element name="loginResponsibleResponse" type="tns:loginResponsibleResponse"/>
-
             <xs:element name="registerResponsible" type="tns:registerResponsible"/>
-
             <xs:element name="registerResponsibleResponse" type="tns:registerResponsibleResponse"/>
-
             <xs:complexType name="registerResponsible">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="responsible_name" type="xs:string"/>
@@ -25,51 +21,43 @@
                     <xs:element minOccurs="0" name="responsible_phone" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
-
             <xs:complexType name="registerResponsibleResponse">
                 <xs:sequence/>
             </xs:complexType>
-
             <xs:complexType name="loginResponsible">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="responsible_email" type="xs:string"/>
                     <xs:element minOccurs="0" name="responsible_password" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
-
             <xs:complexType name="loginResponsibleResponse">
                 <xs:sequence/>
             </xs:complexType>
-
+            <xs:element name="AlreadyExistingResponsibleException" type="tns:AlreadyExistingResponsibleException"/>
+            <xs:complexType name="AlreadyExistingResponsibleException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="email" type="xs:string"/>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="AlreadyLoggedInResponsibleException" type="tns:AlreadyLoggedInResponsibleException"/>
+            <xs:complexType name="AlreadyLoggedInResponsibleException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="email" type="xs:string"/>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="UnknownResponsibleException" type="tns:UnknownResponsibleException"/>
+            <xs:complexType name="UnknownResponsibleException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="email" type="xs:string"/>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
         </xs:schema>
-        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                    xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/organizer" attributeFormDefault="unqualified"
-                    elementFormDefault="unqualified" targetNamespace="http://www.polytech.unice.fr/si/4a/isa/organizer">
-            <xsd:element name="AlreadyExistingResponsibleException" type="tns:AlreadyExistingResponsibleException"/>
-            <xsd:complexType name="AlreadyExistingResponsibleException">
-                <xsd:sequence>
-                    <xsd:element minOccurs="0" name="email" type="xsd:string"/>
-                    <xsd:element minOccurs="0" name="message" type="xsd:string"/>
-                </xsd:sequence>
-            </xsd:complexType>
-            <xsd:element name="AlreadyLoggedInResponsibleException" type="tns:AlreadyLoggedInResponsibleException"/>
-            <xsd:complexType name="AlreadyLoggedInResponsibleException">
-                <xsd:sequence>
-                    <xsd:element minOccurs="0" name="email" type="xsd:string"/>
-                    <xsd:element minOccurs="0" name="message" type="xsd:string"/>
-                </xsd:sequence>
-            </xsd:complexType>
-            <xsd:element name="UnknownResponsibleException" type="tns:UnknownResponsibleException"/>
-            <xsd:complexType name="UnknownResponsibleException">
-                <xsd:sequence>
-                    <xsd:element minOccurs="0" name="email" type="xsd:string"/>
-                    <xsd:element minOccurs="0" name="message" type="xsd:string"/>
-                </xsd:sequence>
-            </xsd:complexType>
-        </xsd:schema>
     </wsdl:types>
     <wsdl:message name="AlreadyExistingResponsibleException">
-        <wsdl:part element="ns1:AlreadyExistingResponsibleException" name="AlreadyExistingResponsibleException">
+        <wsdl:part element="tns:AlreadyExistingResponsibleException" name="AlreadyExistingResponsibleException">
         </wsdl:part>
     </wsdl:message>
     <wsdl:message name="loginResponsible">
@@ -85,11 +73,11 @@
         </wsdl:part>
     </wsdl:message>
     <wsdl:message name="AlreadyLoggedInResponsibleException">
-        <wsdl:part element="ns1:AlreadyLoggedInResponsibleException" name="AlreadyLoggedInResponsibleException">
+        <wsdl:part element="tns:AlreadyLoggedInResponsibleException" name="AlreadyLoggedInResponsibleException">
         </wsdl:part>
     </wsdl:message>
     <wsdl:message name="UnknownResponsibleException">
-        <wsdl:part element="ns1:UnknownResponsibleException" name="UnknownResponsibleException">
+        <wsdl:part element="tns:UnknownResponsibleException" name="UnknownResponsibleException">
         </wsdl:part>
     </wsdl:message>
     <wsdl:message name="registerResponsibleResponse">

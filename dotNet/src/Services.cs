@@ -23,60 +23,68 @@ namespace Partner.Service
             DateTime startDateTime = DateTime.Parse(start_date.Replace('_', ' ').Replace('-', '/'));
             DateTime endDateTime = DateTime.Parse(end_date.Replace('_', ' ').Replace('-', '/'));
 
-            Dictionary<string, List<Room>> result = new Dictionary<string, List<Room>>();
-
-            Day startDay = new Day(new DateTime());
-            Day endDay = new Day(new DateTime());
-
-            foreach (Day day in Mock.days)
+            if (startDateTime.Ticks >= endDateTime.Ticks)
             {
-                if (startDateTime.ToShortDateString() == day.TheDay.ToShortDateString())
-                {
-                    startDay = day;
-                    startDay.TheDay = startDateTime;
-                }
-                if (endDateTime.ToShortDateString() == day.TheDay.ToShortDateString())
-                {
-                    endDay = day;
-                    endDay.TheDay = endDateTime;
-                    break;
-                }
-            }
-
-            // Handle case where the event is held only one day.
-            if (startDay.TheDay.ToShortDateString() == endDay.TheDay.ToShortDateString())
-            {
-                for (int i = startDateTime.Hour; i < endDateTime.Hour; ++i)
-                {
-                    result.Add(startDay.TheDay.ToShortDateString() + " " + i + ":00", startDay.Planning[i + ":00"]);
-                }
+                WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
+                return null;
             }
             else
             {
-                for (int i = startDay.TheDay.Hour; i < 17; ++i)
+                Dictionary<string, List<Room>> result = new Dictionary<string, List<Room>>();
+
+                Day startDay = new Day(new DateTime());
+                Day endDay = new Day(new DateTime());
+
+                foreach (Day day in Mock.days)
                 {
-                    result.Add(startDay.TheDay.ToShortDateString() + " " + i + ":00", startDay.Planning[i + ":00"]);
+                    if (startDateTime.ToShortDateString() == day.TheDay.ToShortDateString())
+                    {
+                        startDay = day;
+                        startDay.TheDay = startDateTime;
+                    }
+                    if (endDateTime.ToShortDateString() == day.TheDay.ToShortDateString())
+                    {
+                        endDay = day;
+                        endDay.TheDay = endDateTime;
+                        break;
+                    }
                 }
 
-                startDay.TheDay = startDay.TheDay.AddDays(1);
-
-                while (startDay.TheDay.ToShortDateString() != endDay.TheDay.ToShortDateString())
+                // Handle case where the event is held only one day.
+                if (startDay.TheDay.ToShortDateString() == endDay.TheDay.ToShortDateString())
                 {
-                    for (int i = 8; i < 17; i++)
+                    for (int i = startDateTime.Hour; i < endDateTime.Hour; ++i)
+                    {
+                        result.Add(startDay.TheDay.ToShortDateString() + " " + i + ":00", startDay.Planning[i + ":00"]);
+                    }
+                }
+                else
+                {
+                    for (int i = startDay.TheDay.Hour; i < 17; ++i)
                     {
                         result.Add(startDay.TheDay.ToShortDateString() + " " + i + ":00", startDay.Planning[i + ":00"]);
                     }
 
                     startDay.TheDay = startDay.TheDay.AddDays(1);
+
+                    while (startDay.TheDay.ToShortDateString() != endDay.TheDay.ToShortDateString())
+                    {
+                        for (int i = 8; i < 17; i++)
+                        {
+                            result.Add(startDay.TheDay.ToShortDateString() + " " + i + ":00", startDay.Planning[i + ":00"]);
+                        }
+
+                        startDay.TheDay = startDay.TheDay.AddDays(1);
+                    }
+
+                    for (int i = 8; i < endDay.TheDay.Hour; i++)
+                    {
+                        result.Add(startDay.TheDay.ToShortDateString() + " " + i + ":00", startDay.Planning[i + ":00"]);
+                    }
                 }
 
-                for (int i = 8; i < endDay.TheDay.Hour; i++)
-                {
-                    result.Add(startDay.TheDay.ToShortDateString() + " " + i + ":00", startDay.Planning[i + ":00"]);
-                }
+                return result;
             }
-
-            return result;
         }
 
         public int ReceiveEventRequest(EventRequest eventRequest)

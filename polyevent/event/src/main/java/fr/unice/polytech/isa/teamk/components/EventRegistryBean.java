@@ -117,6 +117,19 @@ public class EventRegistryBean implements EventRegister, EventFinder {
         criteria.select(root).where(builder.equal(root.get("status"), status));
         TypedQuery<Event> query = manager.createQuery(criteria);
 
+        /*
+        // Other solution
+        List<Event> events = manager.createQuery("SELECT e FROM Event e", Event.class).getResultList();
+
+        for (Event e : events) {
+            if (e.getStatus() != status) {
+                events.remove(e);
+            }
+        }
+
+        return events;
+        */
+
         try {
             return query.getResultList();
         } catch (NoResultException nre) {
