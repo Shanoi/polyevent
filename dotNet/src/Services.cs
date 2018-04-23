@@ -39,12 +39,12 @@ namespace Partner.Service
                 {
                     if (startDateTime.ToShortDateString() == day.TheDay.ToShortDateString())
                     {
-                        startDay = day;
+                        startDay.Planning = day.Planning;
                         startDay.TheDay = startDateTime;
                     }
                     if (endDateTime.ToShortDateString() == day.TheDay.ToShortDateString())
                     {
-                        endDay = day;
+                        endDay.Planning = day.Planning;
                         endDay.TheDay = endDateTime;
                         break;
                     }
