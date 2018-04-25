@@ -75,7 +75,7 @@ public class Quote implements Serializable {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(getPrice(), getDescription(), getId(), getEvent().hashCode());
     }
+
 }

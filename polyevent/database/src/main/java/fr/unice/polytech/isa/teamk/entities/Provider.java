@@ -124,7 +124,7 @@ public class Provider implements Serializable {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(getName(), getAddress(), getPhone(), getMail(), getType(), getPrice());
     }
+
 }

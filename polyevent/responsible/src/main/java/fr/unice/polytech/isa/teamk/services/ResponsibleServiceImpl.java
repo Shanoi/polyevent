@@ -13,7 +13,6 @@ import javax.ejb.Stateless;
 import javax.jws.WebService;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 @Stateless(name = "ResponsibleWS")
 @WebService(targetNamespace = "http://www.polytech.unice.fr/si/4a/isa/responsible")

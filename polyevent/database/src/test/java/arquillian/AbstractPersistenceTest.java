@@ -24,5 +24,4 @@ public abstract class AbstractPersistenceTest {
                 .addAsManifestResource(new ClassLoaderAsset("META-INF/persistence.xml"), "persistence.xml");
     }
 
-
 }

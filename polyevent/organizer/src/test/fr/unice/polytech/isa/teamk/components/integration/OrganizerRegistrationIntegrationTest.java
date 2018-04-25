@@ -1,21 +1,18 @@
 package fr.unice.polytech.isa.teamk.components.integration;
 
-import arquillian.AbstractOrganizerTest;
 import fr.unice.polytech.isa.teamk.OrganizerFinder;
 import fr.unice.polytech.isa.teamk.OrganizerRegister;
 import fr.unice.polytech.isa.teamk.entities.Organizer;
-import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import javax.ejb.EJB;
 
 import static org.junit.Assert.assertFalse;
 
 //@RunWith(Arquillian.class)
-public class OrganizerRegistrationIntegrationTest /*extends AbstractOrganizerTest */{
+public class OrganizerRegistrationIntegrationTest /*extends AbstractOrganizerTest */ {
 
     @EJB
     private OrganizerRegister registry;

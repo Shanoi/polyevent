@@ -87,7 +87,7 @@ public class Room implements Serializable {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(getCapacity(), getName());
     }
+
 }
