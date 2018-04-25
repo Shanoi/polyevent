@@ -1,8 +1,9 @@
 package fr.unice.polytech.isa.teamk.interceptors;
 
+import fr.unice.polytech.isa.teamk.exceptions.PriceException;
+
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
-import java.io.UncheckedIOException;
 
 public class PriceVerifier {
 
@@ -11,7 +12,7 @@ public class PriceVerifier {
         int price = (int) context.getParameters()[1];
 
         if (price <= 0) {
-            throw new UncheckedIOException("Wrong price input", null);
+            throw new PriceException("Wrong price input", null);
         }
 
         return context.proceed();

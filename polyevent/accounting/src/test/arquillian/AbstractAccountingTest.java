@@ -1,7 +1,7 @@
 package arquillian;
 
 import fr.unice.polytech.isa.teamk.Payment;
-import fr.unice.polytech.isa.teamk.components.PaymentBean;
+import fr.unice.polytech.isa.teamk.components.ComptabilityBean;
 import fr.unice.polytech.isa.teamk.entities.Event;
 import fr.unice.polytech.isa.teamk.entities.Organizer;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -22,7 +22,7 @@ public abstract class AbstractAccountingTest {
                 // Components Interfaces
                 .addPackage(Payment.class.getPackage())
                 // Components implementations
-                .addPackage(PaymentBean.class.getPackage());
+                .addPackage(ComptabilityBean.class.getPackage());
     }
 
 }

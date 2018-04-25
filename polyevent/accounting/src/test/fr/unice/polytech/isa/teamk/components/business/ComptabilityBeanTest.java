@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 
-public class PaymentBeanTest {
+public class ComptabilityBeanTest {
 
     @Test
     public void pay() throws Exception {
