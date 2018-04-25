@@ -2,7 +2,6 @@ package fr.unice.polytech.isa.teamk.components;
 
 import fr.unice.polytech.isa.teamk.ResponsibleFinder;
 import fr.unice.polytech.isa.teamk.ResponsibleRegister;
-import fr.unice.polytech.isa.teamk.entities.Organizer;
 import fr.unice.polytech.isa.teamk.entities.Responsible;
 import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingResponsibleException;
 import fr.unice.polytech.isa.teamk.exceptions.AlreadyLoggedInResponsibleException;
