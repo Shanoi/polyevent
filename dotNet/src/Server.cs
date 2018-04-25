@@ -49,7 +49,8 @@ public class Server
         HostCalendar.Open();
         HostPayment.Open();
 
-        Console.WriteLine("\nListening to " + "localhost" + ":" + Port + "\n");
+        Console.WriteLine("\nListening to " + url + "/calendar");
+        Console.WriteLine("\nListening to " + url + "/payment\n");
         Console.WriteLine("Initializing calendar...\n");
 
         Mock.MockDays();

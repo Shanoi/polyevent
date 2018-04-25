@@ -18,89 +18,89 @@ namespace Partner.Data
             new Room {
                 ID = "Amphi Forum",
                 Capacity = 300,
-                Type = TypeSalle.Amphi
+                Type = RoomType.Amphi
             }, // index 0
             new Room {
                 ID = "E+130",
                 Capacity = 100,
-                Type = TypeSalle.Amphi
+                Type = RoomType.Amphi
             }, // index 1
             new Room {
                 ID = "E+131",
                 Capacity = 100,
-                Type = TypeSalle.Amphi
+                Type = RoomType.Amphi
             }, // index 2
             new Room {
                 ID = "E+132",
                 Capacity = 100,
-                Type = TypeSalle.Amphi
+                Type = RoomType.Amphi
             }, // index 3
 
             new Room {
                 ID = "O+101",
                 Capacity = 50,
-                Type = TypeSalle.Cours
+                Type = RoomType.Cours
             }, // index 4
             new Room {
                 ID = "O+107",
                 Capacity = 25,
-                Type = TypeSalle.TD
+                Type = RoomType.TD
             }, // index 5
             new Room {
                 ID = "O+108",
                 Capacity = 25,
-                Type = TypeSalle.TD
+                Type = RoomType.TD
             }, // index 6
             new Room {
                 ID = "O+109",
                 Capacity = 25,
-                Type = TypeSalle.TD
+                Type = RoomType.TD
             }, // index 7
             new Room {
                 ID = "O+110",
                 Capacity = 25,
-                Type = TypeSalle.TD
+                Type = RoomType.TD
             }, // index 8
 
             new Room {
                 ID = "O+302",
                 Capacity = 40,
-                Type = TypeSalle.Cours
+                Type = RoomType.Cours
             }, // index 9
             new Room {
                 ID = "O+303",
                 Capacity = 40,
-                Type = TypeSalle.Cours
+                Type = RoomType.Cours
             },        // index 10
             new Room {
                 ID = "O+307",
                 Capacity = 40,
-                Type = TypeSalle.Cours
+                Type = RoomType.Cours
             },        // index 11
             new Room {
                 ID = "O+308",
                 Capacity = 45,
-                Type = TypeSalle.Cours
+                Type = RoomType.Cours
             },        // index 12
             new Room {
                 ID = "O+309",
                 Capacity = 45,
-                Type = TypeSalle.Cours
+                Type = RoomType.Cours
             },        // index 13
             new Room {
                 ID = "O+310",
                 Capacity = 45,
-                Type = TypeSalle.Cours
+                Type = RoomType.Cours
             },        // index 14
             new Room {
                 ID = "O+311",
                 Capacity = 50,
-                Type = TypeSalle.Cours
+                Type = RoomType.Cours
             },        // index 15
             new Room {
                 ID = "O+317",
                 Capacity = 50,
-                Type = TypeSalle.Cours
+                Type = RoomType.Cours
             }         // index 16
         };
 

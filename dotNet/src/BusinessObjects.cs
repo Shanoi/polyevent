@@ -95,10 +95,10 @@ namespace Partner.Data
         public int Capacity { get; set; }
 
         [DataMember]
-        public TypeSalle Type { get; set; }
+        public RoomType Type { get; set; }
     }
 
-    public enum TypeSalle { Amphi, Cours, TD }
+    public enum RoomType { Amphi, Cours, TD }
 
     [DataContract(Namespace = "http://partner/external/service/data/", Name = "PaymentRequest")]
     public class PaymentRequest
