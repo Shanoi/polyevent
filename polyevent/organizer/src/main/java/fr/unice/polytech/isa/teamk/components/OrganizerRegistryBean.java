@@ -24,7 +24,7 @@ public class OrganizerRegistryBean implements OrganizerRegister, OrganizerFinder
 
     private static final Logger log = Logger.getLogger(Logger.class.getName());
 
-    @PersistenceContext(unitName = "polyevent_persistence_unit")
+    @PersistenceContext
     private EntityManager manager;
 
     /**
@@ -59,6 +59,14 @@ public class OrganizerRegistryBean implements OrganizerRegister, OrganizerFinder
         }
 
         throw new UnknownOrganizerException(email);
+    }
+
+    @Override
+    public void disconnectOrganizer(String email) {
+        Optional<Organizer> organizer = searchOrganizerByEmail(email); // Safe check, but useless since you cannot log
+        // off if you never logged in.
+
+        organizer.ifPresent(organizer1 -> organizer1.setLoggedIn(false));
     }
 
     @Override

@@ -24,6 +24,9 @@ public interface OrganizerService {
                         @WebParam(name = "organizer_password") String password) throws UnknownOrganizerException, AlreadyLoggedInOrganizerException;
 
     @WebMethod
+    void disconnectOrganizer(@WebParam(name = "organizer_email") String email);
+
+    @WebMethod
     @Interceptors({PriceVerifier.class})
     void sendPayment(@WebParam(name = "organizer_id") String id,
                      @WebParam(name = "price") int price);

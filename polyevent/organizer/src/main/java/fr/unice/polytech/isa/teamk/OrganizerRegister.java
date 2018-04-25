@@ -13,4 +13,6 @@ public interface OrganizerRegister {
 
     void loginOrganizer(String email, String password) throws UnknownOrganizerException, AlreadyLoggedInOrganizerException;
 
+    void disconnectOrganizer(String email);
+
 }

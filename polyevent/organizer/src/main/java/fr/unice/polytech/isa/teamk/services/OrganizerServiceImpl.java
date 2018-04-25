@@ -34,6 +34,11 @@ public class OrganizerServiceImpl implements OrganizerService {
     }
 
     @Override
+    public void disconnectOrganizer(String email) {
+        organizerRegister.disconnectOrganizer(email);
+    }
+
+    @Override
     public void sendPayment(String id, int price) {
 
     }
