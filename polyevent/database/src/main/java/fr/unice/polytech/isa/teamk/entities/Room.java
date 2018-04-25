@@ -14,21 +14,26 @@ public class Room implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @OneToMany
-    private Set<Material> materials = new HashSet<>();
-
     @NotNull
     private int capacity;
 
     @NotNull
     private String name;
 
+    @NotNull
+    @Enumerated(value = EnumType.STRING)
+    private RoomType type;
+
+    @OneToMany
+    private Set<Material> materials = new HashSet<>();
+
     public Room() {
     }
 
-    public Room(int capacity, String name) {
-        this.capacity = capacity;
+    public Room(String name, int capacity, RoomType type) {
         this.name = name;
+        this.capacity = capacity;
+        this.type = type;
     }
 
     public int getId() {
@@ -39,12 +44,12 @@ public class Room implements Serializable {
         this.id = id;
     }
 
-    public Set<Material> getMaterials() {
-        return materials;
+    public String getName() {
+        return name;
     }
 
-    public void setMaterials(Set<Material> materials) {
-        this.materials = materials;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getCapacity() {
@@ -55,12 +60,20 @@ public class Room implements Serializable {
         this.capacity = capacity;
     }
 
-    public String getName() {
-        return name;
+    public RoomType getType() {
+        return type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(RoomType type) {
+        this.type = type;
+    }
+
+    public Set<Material> getMaterials() {
+        return materials;
+    }
+
+    public void setMaterials(Set<Material> materials) {
+        this.materials = materials;
     }
 
     @Override
