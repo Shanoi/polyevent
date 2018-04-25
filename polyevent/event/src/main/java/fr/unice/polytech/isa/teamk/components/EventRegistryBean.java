@@ -10,11 +10,13 @@ import fr.unice.polytech.isa.teamk.exceptions.ExternalPartnerException;
 import fr.unice.polytech.isa.teamk.exceptions.RegisterEventException;
 import fr.unice.polytech.isa.teamk.exceptions.UnknownEventException;
 import fr.unice.polytech.isa.teamk.external.CalendarService;
+import fr.unice.polytech.isa.teamk.interceptors.TimeVerifier;
 import org.apache.cxf.common.i18n.UncheckedException;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -38,7 +40,7 @@ public class EventRegistryBean implements EventRegister, EventFinder {
 
     private static final Logger log = Logger.getLogger(Logger.class.getName());
 
-    @PersistenceContext(unitName = "polyevent_persistence_unit")
+    @PersistenceContext
     private EntityManager manager;
 
     @EJB
@@ -47,6 +49,7 @@ public class EventRegistryBean implements EventRegister, EventFinder {
     private CalendarService calendarService;
 
     @Override
+    @Interceptors(TimeVerifier.class)
     public void submitNewEvent(String eventName, String startDate, String endDate, int nbAttendee, String organizerEmail) throws AlreadyExistingEventException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm d/M/yyyy");
         LocalDateTime startDateTime = LocalDateTime.parse(startDate, formatter);

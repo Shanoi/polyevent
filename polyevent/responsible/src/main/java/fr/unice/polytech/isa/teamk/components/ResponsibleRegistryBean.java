@@ -2,6 +2,7 @@ package fr.unice.polytech.isa.teamk.components;
 
 import fr.unice.polytech.isa.teamk.ResponsibleFinder;
 import fr.unice.polytech.isa.teamk.ResponsibleRegister;
+import fr.unice.polytech.isa.teamk.entities.Organizer;
 import fr.unice.polytech.isa.teamk.entities.Responsible;
 import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingResponsibleException;
 import fr.unice.polytech.isa.teamk.exceptions.AlreadyLoggedInResponsibleException;
@@ -24,7 +25,7 @@ public class ResponsibleRegistryBean implements ResponsibleRegister, Responsible
 
     private static final Logger log = Logger.getLogger(Logger.class.getName());
 
-    @PersistenceContext(unitName = "polyevent_responsible_persistence_unit")
+    @PersistenceContext
     private EntityManager manager;
 
     /**
@@ -59,6 +60,14 @@ public class ResponsibleRegistryBean implements ResponsibleRegister, Responsible
         }
 
         throw new UnknownResponsibleException(email);
+    }
+
+    @Override
+    public void disconnectResponsible(String email) {
+        Optional<Responsible> responsible = searchResponsibleByEmail(email); // Safe check, but useless since you cannot
+        // log off if you never logged in.
+
+        responsible.ifPresent(organizer1 -> organizer1.setLoggedIn(false));
     }
 
     @Override

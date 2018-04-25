@@ -13,4 +13,6 @@ public interface ResponsibleRegister {
 
     void loginResponsible(String email, String password) throws UnknownResponsibleException, AlreadyLoggedInResponsibleException;
 
+    void disconnectResponsible(String email);
+
 }
