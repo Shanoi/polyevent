@@ -11,7 +11,7 @@ public class LoginResponsible extends Command<PEPublicAPI> {
 
     private String email;
     private String password;
-    public static String loggedInResponsibleId;
+    public static String loggedInResponsibleId = "";
 
     @Override
     public String identifier() {
@@ -32,7 +32,11 @@ public class LoginResponsible extends Command<PEPublicAPI> {
             shell.system.responsibleService.loginResponsible(email, password);
             loggedInResponsibleId = email;
         } catch (AlreadyLoggedInResponsibleException_Exception e) {
-            System.err.println("The responsible with email '" + e.getFaultInfo().getEmail() + "' is already logged in.");
+            if (loggedInResponsibleId.isEmpty()) {
+                loggedInResponsibleId = email;
+            } else {
+                System.err.println("The responsible with email '" + e.getFaultInfo().getEmail() + "' is already logged in.");
+            }
         } catch (UnknownResponsibleException_Exception e) {
             System.err.println("The responsible with email '" + e.getFaultInfo().getEmail() + "' is unknown.");
         }

@@ -18,11 +18,15 @@ public class GetSubmittedEvents extends Command<PEPublicAPI> {
 
     @Override
     public void execute() throws Exception {
-        List<Event> submittedEvents = shell.system.eventService.getSubmittedEvents();
-        System.out.println("List of events with status 'SUBMITTED':");
-        int i = 1;
-        for (Event e : submittedEvents) {
-            System.out.println(i + ". " + e.getName());
+        if (!LoginResponsible.loggedInResponsibleId.isEmpty()) {
+            List<Event> submittedEvents = shell.system.eventService.getSubmittedEvents();
+            System.out.println("List of events with status 'SUBMITTED':");
+            int i = 1;
+            for (Event e : submittedEvents) {
+                System.out.println(i++ + ". " + e.getName());
+            }
+        } else {
+            System.err.println("You have to login to invoke this command.");
         }
     }
 

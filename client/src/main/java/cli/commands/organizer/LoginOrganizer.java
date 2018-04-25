@@ -32,7 +32,11 @@ public class LoginOrganizer extends Command<PEPublicAPI> {
             shell.system.organizerService.loginOrganizer(email, password);
             loggedInOrganizerId = email;
         } catch (AlreadyLoggedInOrganizerException_Exception e) {
-            System.err.println("The organizer with email '" + e.getFaultInfo().getEmail() + "' is already logged in.");
+            if (loggedInOrganizerId.isEmpty()) {
+                loggedInOrganizerId = email;
+            } else {
+                System.err.println("The organizer with email '" + e.getFaultInfo().getEmail() + "' is already logged in.");
+            }
         } catch (UnknownOrganizerException_Exception e) {
             System.err.println("The organizer with email '" + e.getFaultInfo().getEmail() + "' is unknown.");
         }

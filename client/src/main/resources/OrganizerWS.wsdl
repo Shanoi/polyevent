@@ -7,6 +7,8 @@
         <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
                    xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/organizer" attributeFormDefault="unqualified"
                    elementFormDefault="unqualified" targetNamespace="http://www.polytech.unice.fr/si/4a/isa/organizer">
+            <xs:element name="disconnectOrganizer" type="tns:disconnectOrganizer"/>
+            <xs:element name="disconnectOrganizerResponse" type="tns:disconnectOrganizerResponse"/>
             <xs:element name="loginOrganizer" type="tns:loginOrganizer"/>
             <xs:element name="loginOrganizerResponse" type="tns:loginOrganizerResponse"/>
             <xs:element name="registerOrganizer" type="tns:registerOrganizer"/>
@@ -20,6 +22,14 @@
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="loginOrganizerResponse">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="disconnectOrganizer">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="organizer_email" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="disconnectOrganizerResponse">
                 <xs:sequence/>
             </xs:complexType>
             <xs:complexType name="sendPayment">
@@ -69,12 +79,20 @@
         <wsdl:part element="tns:loginOrganizer" name="parameters">
         </wsdl:part>
     </wsdl:message>
+    <wsdl:message name="disconnectOrganizerResponse">
+        <wsdl:part element="tns:disconnectOrganizerResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
     <wsdl:message name="sendPaymentResponse">
         <wsdl:part element="tns:sendPaymentResponse" name="parameters">
         </wsdl:part>
     </wsdl:message>
     <wsdl:message name="UnknownOrganizerException">
         <wsdl:part element="tns:UnknownOrganizerException" name="UnknownOrganizerException">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="disconnectOrganizer">
+        <wsdl:part element="tns:disconnectOrganizer" name="parameters">
         </wsdl:part>
     </wsdl:message>
     <wsdl:message name="AlreadyLoggedInOrganizerException">
@@ -112,6 +130,12 @@
             <wsdl:fault message="tns:AlreadyLoggedInOrganizerException" name="AlreadyLoggedInOrganizerException">
             </wsdl:fault>
         </wsdl:operation>
+        <wsdl:operation name="disconnectOrganizer">
+            <wsdl:input message="tns:disconnectOrganizer" name="disconnectOrganizer">
+            </wsdl:input>
+            <wsdl:output message="tns:disconnectOrganizerResponse" name="disconnectOrganizerResponse">
+            </wsdl:output>
+        </wsdl:operation>
         <wsdl:operation name="sendPayment">
             <wsdl:input message="tns:sendPayment" name="sendPayment">
             </wsdl:input>
@@ -143,6 +167,15 @@
             <wsdl:fault name="AlreadyLoggedInOrganizerException">
                 <soap:fault name="AlreadyLoggedInOrganizerException" use="literal"/>
             </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="disconnectOrganizer">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="disconnectOrganizer">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="disconnectOrganizerResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="sendPayment">
             <soap:operation soapAction="" style="document"/>

@@ -9,6 +9,10 @@
                    xmlns:tns="http://www.polytech.unice.fr/si/4a/isa/responsible" attributeFormDefault="unqualified"
                    elementFormDefault="unqualified"
                    targetNamespace="http://www.polytech.unice.fr/si/4a/isa/responsible">
+            <xs:element name="disconnectResponsible" type="tns:disconnectResponsible"/>
+            <xs:element name="disconnectResponsibleResponse" type="tns:disconnectResponsibleResponse"/>
+            <xs:element name="getVacantRooms" type="tns:getVacantRooms"/>
+            <xs:element name="getVacantRoomsResponse" type="tns:getVacantRoomsResponse"/>
             <xs:element name="loginResponsible" type="tns:loginResponsible"/>
             <xs:element name="loginResponsibleResponse" type="tns:loginResponsibleResponse"/>
             <xs:element name="registerResponsible" type="tns:registerResponsible"/>
@@ -33,6 +37,81 @@
             <xs:complexType name="loginResponsibleResponse">
                 <xs:sequence/>
             </xs:complexType>
+            <xs:complexType name="disconnectResponsible">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="responsible_email" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="disconnectResponsibleResponse">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="getVacantRooms">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="start_date" type="xs:string"/>
+                    <xs:element minOccurs="0" name="end_date" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getVacantRoomsResponse">
+                <xs:sequence>
+                    <xs:element name="_return">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element minOccurs="0" name="key" type="xs:string"/>
+                                            <xs:element minOccurs="0" name="value" type="tns:arrayList"/>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="arrayList">
+                <xs:complexContent>
+                    <xs:extension base="tns:abstractList">
+                        <xs:sequence/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="abstractList">
+                <xs:complexContent>
+                    <xs:extension base="tns:abstractCollection">
+                        <xs:sequence/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="abstractCollection">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="room">
+                <xs:sequence>
+                    <xs:element name="capacity" type="xs:int"/>
+                    <xs:element name="id" type="xs:int"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="materials" nillable="true"
+                                type="tns:material"/>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="type" type="tns:roomType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="material">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:int"/>
+                    <xs:element name="quantity" type="xs:int"/>
+                    <xs:element minOccurs="0" name="room" type="tns:room"/>
+                    <xs:element minOccurs="0" name="type" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:simpleType name="roomType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="AMPHI"/>
+                    <xs:enumeration value="COURS"/>
+                    <xs:enumeration value="TD"/>
+                    <xs:enumeration value="UNKNOWN"/>
+                </xs:restriction>
+            </xs:simpleType>
             <xs:element name="AlreadyExistingResponsibleException" type="tns:AlreadyExistingResponsibleException"/>
             <xs:complexType name="AlreadyExistingResponsibleException">
                 <xs:sequence>
@@ -54,6 +133,12 @@
                     <xs:element minOccurs="0" name="message" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
+            <xs:element name="ExternalPartnerException" type="tns:ExternalPartnerException"/>
+            <xs:complexType name="ExternalPartnerException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
         </xs:schema>
     </wsdl:types>
     <wsdl:message name="AlreadyExistingResponsibleException">
@@ -64,8 +149,20 @@
         <wsdl:part element="tns:loginResponsible" name="parameters">
         </wsdl:part>
     </wsdl:message>
+    <wsdl:message name="disconnectResponsible">
+        <wsdl:part element="tns:disconnectResponsible" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getVacantRoomsResponse">
+        <wsdl:part element="tns:getVacantRoomsResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
     <wsdl:message name="loginResponsibleResponse">
         <wsdl:part element="tns:loginResponsibleResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="disconnectResponsibleResponse">
+        <wsdl:part element="tns:disconnectResponsibleResponse" name="parameters">
         </wsdl:part>
     </wsdl:message>
     <wsdl:message name="registerResponsible">
@@ -82,6 +179,14 @@
     </wsdl:message>
     <wsdl:message name="registerResponsibleResponse">
         <wsdl:part element="tns:registerResponsibleResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getVacantRooms">
+        <wsdl:part element="tns:getVacantRooms" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="ExternalPartnerException">
+        <wsdl:part element="tns:ExternalPartnerException" name="ExternalPartnerException">
         </wsdl:part>
     </wsdl:message>
     <wsdl:portType name="ResponsibleService">
@@ -101,6 +206,20 @@
             <wsdl:fault message="tns:AlreadyLoggedInResponsibleException" name="AlreadyLoggedInResponsibleException">
             </wsdl:fault>
             <wsdl:fault message="tns:UnknownResponsibleException" name="UnknownResponsibleException">
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="disconnectResponsible">
+            <wsdl:input message="tns:disconnectResponsible" name="disconnectResponsible">
+            </wsdl:input>
+            <wsdl:output message="tns:disconnectResponsibleResponse" name="disconnectResponsibleResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getVacantRooms">
+            <wsdl:input message="tns:getVacantRooms" name="getVacantRooms">
+            </wsdl:input>
+            <wsdl:output message="tns:getVacantRoomsResponse" name="getVacantRoomsResponse">
+            </wsdl:output>
+            <wsdl:fault message="tns:ExternalPartnerException" name="ExternalPartnerException">
             </wsdl:fault>
         </wsdl:operation>
     </wsdl:portType>
@@ -131,6 +250,27 @@
             </wsdl:fault>
             <wsdl:fault name="UnknownResponsibleException">
                 <soap:fault name="UnknownResponsibleException" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="disconnectResponsible">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="disconnectResponsible">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="disconnectResponsibleResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getVacantRooms">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getVacantRooms">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getVacantRoomsResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ExternalPartnerException">
+                <soap:fault name="ExternalPartnerException" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
     </wsdl:binding>
