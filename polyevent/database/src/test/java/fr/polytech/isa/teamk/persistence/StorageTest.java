@@ -20,7 +20,7 @@ import static org.junit.Assert.assertNotEquals;
 @Transactional(TransactionMode.COMMIT)
 public class StorageTest extends AbstractPersistenceTest {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "polyevent_persistence_unit")
     private EntityManager entityManager;
 
     @Test
@@ -94,19 +94,6 @@ public class StorageTest extends AbstractPersistenceTest {
         Quote stored = (Quote) entityManager.find(Quote.class, id);
         Assert.assertEquals(event, stored.getEvent());
         Assert.assertEquals(c, stored); // the all together
-    }
-
-    @Test
-    public void storingResponsible() throws Exception {
-        Responsible c = new Responsible("John Doe", "1234567890", "lolilol@gmail.com", "0474015640");
-        Assert.assertEquals(0, c.getId());
-
-        entityManager.persist(c);
-        int id = c.getId();
-        assertNotEquals(0, id);
-
-        Responsible stored = (Responsible) entityManager.find(Responsible.class, id);
-        Assert.assertEquals(c, stored);
     }
 
     @Test

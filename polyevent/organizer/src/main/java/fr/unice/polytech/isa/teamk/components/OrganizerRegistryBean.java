@@ -24,7 +24,7 @@ public class OrganizerRegistryBean implements OrganizerRegister, OrganizerFinder
 
     private static final Logger log = Logger.getLogger(Logger.class.getName());
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "polyevent_persistence_unit")
     private EntityManager manager;
 
     /**

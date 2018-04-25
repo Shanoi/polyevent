@@ -24,7 +24,7 @@ public class ResponsibleRegistryBean implements ResponsibleRegister, Responsible
 
     private static final Logger log = Logger.getLogger(Logger.class.getName());
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "polyevent_responsible_persistence_unit")
     private EntityManager manager;
 
     /**
