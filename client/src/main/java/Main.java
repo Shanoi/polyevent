@@ -1,12 +1,10 @@
 import api.PEPublicAPI;
 import cli.commands.Bye;
+import cli.commands.organizer.GetEventsStatus;
 import cli.commands.organizer.LoginOrganizer;
 import cli.commands.organizer.RegisterOrganizer;
 import cli.commands.organizer.SubmitEvent;
-import cli.commands.responsible.ConfirmEvent;
-import cli.commands.responsible.GetSubmittedEvents;
-import cli.commands.responsible.LoginResponsible;
-import cli.commands.responsible.RegisterResponsible;
+import cli.commands.responsible.*;
 import cli.framework.Shell;
 
 /**
@@ -28,10 +26,12 @@ public class Main extends Shell<PEPublicAPI> {
                 RegisterOrganizer.class,
                 LoginOrganizer.class,
                 SubmitEvent.class,
+                GetEventsStatus.class,
                 // Handling Responsible event
                 RegisterResponsible.class,
                 LoginResponsible.class,
                 GetSubmittedEvents.class,
+                GetVacantRooms.class,
                 ConfirmEvent.class
         );
     }

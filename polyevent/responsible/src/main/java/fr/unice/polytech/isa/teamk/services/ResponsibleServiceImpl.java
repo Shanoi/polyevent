@@ -8,11 +8,15 @@ import fr.unice.polytech.isa.teamk.exceptions.ExternalPartnerException;
 import fr.unice.polytech.isa.teamk.exceptions.UnknownResponsibleException;
 import fr.unice.polytech.isa.teamk.external.CalendarService;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Stateless(name = "ResponsibleWS")
 @WebService(targetNamespace = "http://www.polytech.unice.fr/si/4a/isa/responsible")
@@ -22,6 +26,8 @@ public class ResponsibleServiceImpl implements ResponsibleService {
     private ResponsibleRegister responsibleRegister;
 
     private CalendarService calendarService;
+
+    private static final Logger log = Logger.getLogger(Logger.class.getName());
 
     public ResponsibleServiceImpl() {
 
@@ -43,8 +49,21 @@ public class ResponsibleServiceImpl implements ResponsibleService {
     }
 
     @Override
-    public LinkedHashMap<String, ArrayList<Room>> getVacantRooms(String startDate, String endDate) throws ExternalPartnerException {
-        return (LinkedHashMap<String, ArrayList<Room>>) calendarService.getVacantRooms(startDate, endDate);
+    public HashMap<String, Room[]> getVacantRooms(String startDate, String endDate) throws ExternalPartnerException {
+        return calendarService.getVacantRooms(startDate, endDate);
+    }
+
+    @PostConstruct
+    private void initializeRestPartnership() throws ExternalPartnerException {
+        try {
+            Properties prop = new Properties();
+            prop.load(this.getClass().getResourceAsStream("/calendar.properties"));
+            calendarService = new CalendarService(prop.getProperty("calendarHostName"),
+                    prop.getProperty("calendarPortNumber"));
+        } catch (IOException e) {
+            log.log(Level.INFO, "Cannot read calendar.properties file", e);
+            throw new ExternalPartnerException("Cannot read calendar.properties file", e);
+        }
     }
 
 }

@@ -8,7 +8,7 @@ submit_event PolyDating 8 28 4 2018 17 29 4 2018 250
 submit_event NuitDeLInfo 8 27 4 2018 17 28 4 2018 250
 
 # Checking Organizer's event status
-events_status
+# events_status
 
 # Registering and logging in a given responsible
 register_responsible BOULET olivier.boulet@wanadoo.fr pwd 0655443322
@@ -16,3 +16,20 @@ login_responsible olivier.boulet@wanadoo.fr pwd
 
 # Getting the submitted event list
 get_submitted_events
+
+# Getting vacant rooms from Calendar External Service
+get_vacant_rooms 8 28 4 2018 15 29 4 2018
+
+
+
+#####################  After CLI Restart run those commands only  ######################
+
+# Login Organizer and Responsible
+login_organizer jeremy.lara@wanadoo.fr pwd
+login_responsible olivier.boulet@wanadoo.fr pwd
+
+# Getting the submitted event list
+get_submitted_events
+
+# Getting vacant rooms from Calendar External Service
+get_vacant_rooms 8 28 4 2018 15 29 4 2018

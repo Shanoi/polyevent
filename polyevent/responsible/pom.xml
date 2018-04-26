@@ -14,6 +14,7 @@
         <dir.agent>agent</dir.agent>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <versions.maven.compiler>3.6.1</versions.maven.compiler>
+        <versions.openejb>7.0.2</versions.openejb>
         <versions.java>1.8</versions.java>
         <versions.tomee>7.0.2</versions.tomee>
 
@@ -33,6 +34,20 @@
             <groupId>org.apache.tomee</groupId>
             <artifactId>javaee-api</artifactId>
             <version>${versions.javaee}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Dependency to integrate REST clients (order matters for CXF) (provided) -->
+        <dependency>
+            <groupId>org.apache.tomee</groupId>
+            <artifactId>openejb-cxf</artifactId>
+            <version>${versions.openejb}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomee</groupId>
+            <artifactId>openejb-cxf-rs</artifactId>
+            <version>${versions.openejb}</version>
             <scope>provided</scope>
         </dependency>
 

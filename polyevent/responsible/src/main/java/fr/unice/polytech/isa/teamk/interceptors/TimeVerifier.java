@@ -11,14 +11,15 @@ public class TimeVerifier {
 
     @AroundInvoke
     public Object intercept(InvocationContext context) throws Exception {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm d/M/yyyy");
         LocalDateTime startDate;
         LocalDateTime endDate;
         if (context.getMethod().getName().equals("submitNewEvent")) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm d/M/yyyy");
             startDate = LocalDateTime.parse((String) context.getParameters()[1], formatter);
             endDate = LocalDateTime.parse((String) context.getParameters()[2], formatter);
             checkDates(startDate, endDate);
         } else if (context.getMethod().getName().equals("getVacantRooms")) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm_d-M-yyyy");
             startDate = LocalDateTime.parse((String) context.getParameters()[0], formatter);
             endDate = LocalDateTime.parse((String) context.getParameters()[1], formatter);
             checkDates(startDate, endDate);
