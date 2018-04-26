@@ -16,4 +16,18 @@
         </navigation-case>
     </navigation-rule>
 
+    <navigation-rule>
+        <from-view-id>/event.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>ADDED</from-outcome>
+            <to-view-id>/tracker.xhtml</to-view-id>
+            <redirect>
+                <redirect-param>
+                    <name>eventId</name>
+                    <value>#{eventBean.eventId}</value>
+                </redirect-param>
+            </redirect>
+        </navigation-case>
+    </navigation-rule>
+
 </faces-config>

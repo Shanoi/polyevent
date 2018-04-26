@@ -10,7 +10,7 @@ import java.util.List;
 @Local
 public interface EventRegister {
 
-    void submitNewEvent(String eventName, String startDate, String endDate, int nbAttendee, String organizerEmail) throws AlreadyExistingEventException;
+    String submitNewEvent(String eventName, String startDate, String endDate, int nbAttendee, String organizerEmail) throws AlreadyExistingEventException;
 
     boolean confirmEvent(String eventName, List<String> rooms) throws RegisterEventException, UnknownEventException;
 

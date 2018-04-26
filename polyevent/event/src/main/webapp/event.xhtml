@@ -2,32 +2,46 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html">
-<head>
+<h:head>
     <title>Polyevent</title>
-</head>
-<body>
-<h1>PolyEvent web interface</h1>
+</h:head>
+<h:body>
+    <h1>PolyEvent web interface</h1>
 
-<h:messages email="form-error" style="color: red"/>
+    <h:messages id="form-error" style="color: red"/>
 
-<h2>Create a new event</h2>
-<f:view>
-    <h:form email="select-form">
-        <h:panelGrid columns="2">
-            <h:outputText value='Name:'/>
-            <h:inputText value='#{eventBean.name}' required="true"/>
-            <h:outputText value='Starting date:'/>
-            <h:inputText value='#{eventBean.startDate}' required="true"/>
-            <h:outputText value='Ending date:'/>
-            <h:inputText value='#{eventBean.endDate}' required="true"/>
-            <h:outputText value='Number of attendee:'/>
-            <h:inputText value='#{eventBean.nbAttendee}' required="true"/>
-            <h:selectManyMenu value='#{eventBean.partners}'><f:selectItems
-                    value="#{eventBean.selectedPartners}"/></h:selectManyMenu>
-            <h:commandButton action="#{eventBean.registerEvent}" value="Create"/>
-        </h:panelGrid>
-    </h:form>
-</f:view>
-</body>
+    <h2>Create a new event</h2>
+    <f:view>
+        <h:form email="select-form">
+            <h:panelGrid columns="2">
+                <h:outputText value='Name:'/>
+                <h:inputText value='#{eventBean.name}' required="true"/>
+                <h:outputText value='Starting date:'/>
+                <h:inputText value='#{eventBean.startDate}' required="true"/>
+                <h:outputText value='Ending date:'/>
+                <h:inputText value='#{eventBean.endDate}' required="true"/>
+                <h:outputText value='Number of attendee:'/>
+                <h:inputText value='#{eventBean.nbAttendee}' required="true"/>
+                <h:selectManyMenu value='#{eventBean.partners}'><f:selectItems
+                        value="#{eventBean.selectedPartners}"/></h:selectManyMenu>
+                <h:commandButton action="#{eventBean.registerEvent}" value="Create"/>
+            </h:panelGrid>
+        </h:form>
+    </f:view>
+
+    <h2>List of your events</h2>
+    <f:view>
+
+        <ul>
+            <!-- Warning: ui:repeat requires a List instead of a Set -->
+            <ui:repeat var="i" value="#{eventBean.events}">
+                <li><h:outputText value="#{i.name}" /> (<h:outputText value="#{i.startingDate}" /> - <h:outputText value="#{i.endingDate}" />) STATUS : <h:outputText value="#{i.status}" /></li>
+            </ui:repeat>
+        </ul>
+
+    </f:view>
+
+</h:body>
 </html>

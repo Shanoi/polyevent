@@ -3,8 +3,10 @@ package fr.unice.polytech.isa.teamk.components;
 import fr.unice.polytech.isa.teamk.EventFinder;
 import fr.unice.polytech.isa.teamk.EventRegister;
 import fr.unice.polytech.isa.teamk.OrganizerFinder;
+import fr.unice.polytech.isa.teamk.Tracker;
 import fr.unice.polytech.isa.teamk.entities.Event;
 import fr.unice.polytech.isa.teamk.entities.EventStatus;
+import fr.unice.polytech.isa.teamk.entities.Organizer;
 import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingEventException;
 import fr.unice.polytech.isa.teamk.exceptions.ExternalPartnerException;
 import fr.unice.polytech.isa.teamk.exceptions.RegisterEventException;
@@ -28,15 +30,12 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Properties;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Stateless
-public class EventRegistryBean implements EventRegister, EventFinder {
+public class EventRegistryBean implements EventRegister, EventFinder, Tracker {
 
     private static final Logger log = Logger.getLogger(Logger.class.getName());
 
@@ -50,7 +49,7 @@ public class EventRegistryBean implements EventRegister, EventFinder {
 
     @Override
     @Interceptors(TimeVerifier.class)
-    public void submitNewEvent(String eventName, String startDate, String endDate, int nbAttendee, String organizerEmail) throws AlreadyExistingEventException {
+    public String submitNewEvent(String eventName, String startDate, String endDate, int nbAttendee, String organizerEmail) throws AlreadyExistingEventException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm d/M/yyyy");
         LocalDateTime startDateTime = LocalDateTime.parse(startDate, formatter);
         LocalDateTime endDateTime = LocalDateTime.parse(endDate, formatter);
@@ -66,6 +65,9 @@ public class EventRegistryBean implements EventRegister, EventFinder {
         event.setOrganizer(organizerFinder.searchOrganizerByEmail(organizerEmail).get());
 
         manager.persist(event);
+
+        return Integer.toString(event.getId());
+
     }
 
     @Override
@@ -141,6 +143,12 @@ public class EventRegistryBean implements EventRegister, EventFinder {
         }
     }
 
+    @Override
+    public Set<Event> searchEventByOrganizer(Organizer organizer) {
+        Organizer o = manager.merge(organizer);
+        return o.getEvents();
+    }
+
     @PostConstruct
     private void initializeRestPartnership() {
         try {
@@ -154,4 +162,11 @@ public class EventRegistryBean implements EventRegister, EventFinder {
         }
     }
 
+    @Override
+    public EventStatus status(String eventId) throws UnknownEventException {
+        Event event = manager.find(Event.class, Integer.parseInt(eventId));
+        if (event == null)
+            throw new UnknownEventException(eventId);
+        return  event.getStatus();
+    }
 }
