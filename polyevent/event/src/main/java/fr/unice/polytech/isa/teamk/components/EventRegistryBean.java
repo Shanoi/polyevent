@@ -7,6 +7,7 @@ import fr.unice.polytech.isa.teamk.Tracker;
 import fr.unice.polytech.isa.teamk.entities.Event;
 import fr.unice.polytech.isa.teamk.entities.EventStatus;
 import fr.unice.polytech.isa.teamk.entities.Organizer;
+import fr.unice.polytech.isa.teamk.entities.Room;
 import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingEventException;
 import fr.unice.polytech.isa.teamk.exceptions.ExternalPartnerException;
 import fr.unice.polytech.isa.teamk.exceptions.RegisterEventException;
@@ -33,6 +34,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static fr.unice.polytech.isa.teamk.entities.EventStatus.next;
 
 @Stateless
 public class EventRegistryBean implements EventRegister, EventFinder, Tracker {
@@ -71,14 +74,14 @@ public class EventRegistryBean implements EventRegister, EventFinder, Tracker {
     }
 
     @Override
-    public boolean confirmEvent(String eventName, List<String> rooms) throws RegisterEventException, UnknownEventException {
+    public boolean confirmEvent(String eventName, List<String> rooms) throws RegisterEventException, UnknownEventException, ExternalPartnerException {
         Optional<Event> event = searchEventByName(eventName);
 
         if (event.isPresent()) {
             boolean status;
 
             try {
-                status = calendarService.submitEvent(event.get());
+                status = calendarService.confirmEvent(event.get(), rooms);
             } catch (ExternalPartnerException e) {
                 log.log(Level.INFO, "Error while exchanging with external partner", e);
                 throw new RegisterEventException(event.get().getName(), e);
@@ -88,11 +91,23 @@ public class EventRegistryBean implements EventRegister, EventFinder, Tracker {
                 throw new RegisterEventException(event.get().getName());
             }
 
-            manager.persist(event);
+            List<Room> roomList = new ArrayList<>();
 
-            //TODO PUT THE J2E SIDE CODE HERE
+            for (String roomID : rooms) {
+                roomList.add(calendarService.roomInfo(roomID));
+            }
 
-            return status;
+            event.get().setRooms(roomList);
+            Optional<EventStatus> next = EventStatus.next(event.get().getStatus());
+            if(next.isPresent()) {
+                log.log(Level.INFO, "Moving event [" + event.get().getId() + ", " + event.get().getName() + "] to next step");
+                event.get().setStatus(next.get());
+            } else {
+                log.log(Level.INFO, "No more scheduled operation for Event [" +
+                        event.get().getId() + ", " + event.get().getName() + "]");
+            }
+
+            return true;
         } else {
             throw new UnknownEventException(eventName);
         }
@@ -144,9 +159,25 @@ public class EventRegistryBean implements EventRegister, EventFinder, Tracker {
     }
 
     @Override
-    public Set<Event> searchEventByOrganizer(Organizer organizer) {
-        Organizer o = manager.merge(organizer);
-        return o.getEvents();
+    public Set<Event> searchEventByOrganizer(String email) {
+        Optional<Organizer> organizer = organizerFinder.searchOrganizerByEmail(email);
+
+        // Safe check, but organizer should always exists since it has be logged in to use commands
+        // that call this method
+        if (organizer.isPresent()) {
+            Organizer o = manager.merge(organizer.get());
+            return o.getEvents();
+        }
+
+        return new HashSet<>();
+    }
+
+    @Override
+    public EventStatus status(String eventId) throws UnknownEventException {
+        Event event = manager.find(Event.class, Integer.parseInt(eventId));
+        if (event == null)
+            throw new UnknownEventException(eventId);
+        return event.getStatus();
     }
 
     @PostConstruct
@@ -162,11 +193,4 @@ public class EventRegistryBean implements EventRegister, EventFinder, Tracker {
         }
     }
 
-    @Override
-    public EventStatus status(String eventId) throws UnknownEventException {
-        Event event = manager.find(Event.class, Integer.parseInt(eventId));
-        if (event == null)
-            throw new UnknownEventException(eventId);
-        return  event.getStatus();
-    }
 }

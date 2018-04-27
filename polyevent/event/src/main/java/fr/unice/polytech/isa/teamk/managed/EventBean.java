@@ -5,7 +5,6 @@ import fr.unice.polytech.isa.teamk.components.EventRegistryBean;
 import fr.unice.polytech.isa.teamk.entities.Event;
 import fr.unice.polytech.isa.teamk.entities.Organizer;
 import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingEventException;
-import fr.unice.polytech.isa.teamk.exceptions.RegisterEventException;
 import fr.unice.polytech.isa.teamk.external.CalendarService;
 
 import javax.annotation.PostConstruct;
@@ -137,7 +136,7 @@ public class EventBean implements Serializable {
      ***************************/
 
     public List<Event> getEvents() {
-        return new ArrayList<Event>(eventRegistry.searchEventByOrganizer(getOrganizer()));
+        return new ArrayList<>(eventRegistry.searchEventByOrganizer(getOrganizer().getEmail()));
     }
 
     @PostConstruct

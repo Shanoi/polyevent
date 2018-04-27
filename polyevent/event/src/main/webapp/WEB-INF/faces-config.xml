@@ -22,10 +22,10 @@
             <from-outcome>ADDED</from-outcome>
             <to-view-id>/tracker.xhtml</to-view-id>
             <redirect>
-                <redirect-param>
+                <view-param>
                     <name>eventId</name>
                     <value>#{eventBean.eventId}</value>
-                </redirect-param>
+                </view-param>
             </redirect>
         </navigation-case>
     </navigation-rule>

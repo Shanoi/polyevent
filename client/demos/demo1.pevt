@@ -4,8 +4,8 @@ register_organizer LARA jeremy.lara@wanadoo.fr pwd 0699887766
 login_organizer jeremy.lara@wanadoo.fr pwd
 
 # Submitting some events
-submit_event PolyDating 8 28 4 2018 17 29 4 2018 250
-submit_event NuitDeLInfo 8 27 4 2018 17 28 4 2018 250
+submit_event PolyDating 8 28 4 2018 15 29 4 2018 250
+submit_event NuitDeLInfo 8 29 4 2018 15 30 4 2018 250
 
 # Checking Organizer's event status
 # events_status
@@ -14,13 +14,20 @@ submit_event NuitDeLInfo 8 27 4 2018 17 28 4 2018 250
 register_responsible BOULET olivier.boulet@wanadoo.fr pwd 0655443322
 login_responsible olivier.boulet@wanadoo.fr pwd
 
+# Getting events status given an organizer
+get_events_status
+
 # Getting the submitted event list
 get_submitted_events
 
 # Getting vacant rooms from Calendar External Service
 get_vacant_rooms 8 28 4 2018 15 29 4 2018
 
+# Confirming event to Calendar Service
+confirm_event PolyDating O+310 O+311
 
+# Getting events status given an organizer to see effective confirmation
+get_events_status
 
 #####################  After CLI Restart run those commands only  ######################
 

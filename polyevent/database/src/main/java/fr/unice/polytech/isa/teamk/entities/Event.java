@@ -40,7 +40,6 @@ public class Event implements Serializable {
     @OneToOne
     private Quote quote;
 
-
     private List<Room> rooms;
 
     public Event() {
@@ -125,6 +124,14 @@ public class Event implements Serializable {
 
     public void setQuote(Quote quote) {
         this.quote = quote;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
     }
 
     @Override

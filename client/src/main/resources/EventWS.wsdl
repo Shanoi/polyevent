@@ -8,6 +8,8 @@
                    targetNamespace="http://www.polytech.unice.fr/si/4a/isa/event">
             <xs:element name="confirmEvent" type="tns:confirmEvent"/>
             <xs:element name="confirmEventResponse" type="tns:confirmEventResponse"/>
+            <xs:element name="getEventsByOrganizer" type="tns:getEventsByOrganizer"/>
+            <xs:element name="getEventsByOrganizerResponse" type="tns:getEventsByOrganizerResponse"/>
             <xs:element name="getSubmittedEvents" type="tns:getSubmittedEvents"/>
             <xs:element name="getSubmittedEventsResponse" type="tns:getSubmittedEventsResponse"/>
             <xs:element name="submitNewEvent" type="tns:submitNewEvent"/>
@@ -21,6 +23,29 @@
             <xs:complexType name="confirmEventResponse">
                 <xs:sequence>
                     <xs:element name="return" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getEventsByOrganizer">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="organizer_email" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getEventsByOrganizerResponse">
+                <xs:sequence>
+                    <xs:element name="_return">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element minOccurs="0" name="key" type="xs:string"/>
+                                            <xs:element minOccurs="0" name="value" type="tns:eventStatus"/>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="getSubmittedEvents">
@@ -41,6 +66,7 @@
                     <xs:element maxOccurs="unbounded" minOccurs="0" name="providers" nillable="true"
                                 type="tns:provider"/>
                     <xs:element minOccurs="0" name="quote" type="tns:quote"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="rooms" nillable="true" type="tns:room"/>
                     <xs:element minOccurs="0" name="startingDate" type="tns:timestamp"/>
                     <xs:element minOccurs="0" name="status" type="tns:eventStatus"/>
                 </xs:sequence>
@@ -81,6 +107,24 @@
                     <xs:element name="price" type="xs:float"/>
                 </xs:sequence>
             </xs:complexType>
+            <xs:complexType name="room">
+                <xs:sequence>
+                    <xs:element name="capacity" type="xs:int"/>
+                    <xs:element name="id" type="xs:int"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="materials" nillable="true"
+                                type="tns:material"/>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="type" type="tns:roomType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="material">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:int"/>
+                    <xs:element name="quantity" type="xs:int"/>
+                    <xs:element minOccurs="0" name="room" type="tns:room"/>
+                    <xs:element minOccurs="0" name="type" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
             <xs:complexType name="submitNewEvent">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="event_name" type="xs:string"/>
@@ -102,6 +146,20 @@
                     <xs:enumeration value="FINISHED"/>
                 </xs:restriction>
             </xs:simpleType>
+            <xs:simpleType name="roomType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="AMPHI"/>
+                    <xs:enumeration value="COURS"/>
+                    <xs:enumeration value="TD"/>
+                    <xs:enumeration value="UNKNOWN"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:element name="ExternalPartnerException" type="tns:ExternalPartnerException"/>
+            <xs:complexType name="ExternalPartnerException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
             <xs:element name="UnknownEventException" type="tns:UnknownEventException"/>
             <xs:complexType name="UnknownEventException">
                 <xs:sequence>
@@ -125,6 +183,10 @@
             </xs:complexType>
         </xs:schema>
     </wsdl:types>
+    <wsdl:message name="ExternalPartnerException">
+        <wsdl:part element="tns:ExternalPartnerException" name="ExternalPartnerException">
+        </wsdl:part>
+    </wsdl:message>
     <wsdl:message name="submitNewEventResponse">
         <wsdl:part element="tns:submitNewEventResponse" name="parameters">
         </wsdl:part>
@@ -139,6 +201,10 @@
     </wsdl:message>
     <wsdl:message name="confirmEvent">
         <wsdl:part element="tns:confirmEvent" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getEventsByOrganizer">
+        <wsdl:part element="tns:getEventsByOrganizer" name="parameters">
         </wsdl:part>
     </wsdl:message>
     <wsdl:message name="getSubmittedEventsResponse">
@@ -157,6 +223,10 @@
         <wsdl:part element="tns:RegisterEventException" name="RegisterEventException">
         </wsdl:part>
     </wsdl:message>
+    <wsdl:message name="getEventsByOrganizerResponse">
+        <wsdl:part element="tns:getEventsByOrganizerResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
     <wsdl:message name="submitNewEvent">
         <wsdl:part element="tns:submitNewEvent" name="parameters">
         </wsdl:part>
@@ -167,10 +237,18 @@
             </wsdl:input>
             <wsdl:output message="tns:confirmEventResponse" name="confirmEventResponse">
             </wsdl:output>
+            <wsdl:fault message="tns:ExternalPartnerException" name="ExternalPartnerException">
+            </wsdl:fault>
             <wsdl:fault message="tns:UnknownEventException" name="UnknownEventException">
             </wsdl:fault>
             <wsdl:fault message="tns:RegisterEventException" name="RegisterEventException">
             </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getEventsByOrganizer">
+            <wsdl:input message="tns:getEventsByOrganizer" name="getEventsByOrganizer">
+            </wsdl:input>
+            <wsdl:output message="tns:getEventsByOrganizerResponse" name="getEventsByOrganizerResponse">
+            </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="getSubmittedEvents">
             <wsdl:input message="tns:getSubmittedEvents" name="getSubmittedEvents">
@@ -199,12 +277,24 @@
             <wsdl:output name="confirmEventResponse">
                 <soap:body use="literal"/>
             </wsdl:output>
+            <wsdl:fault name="ExternalPartnerException">
+                <soap:fault name="ExternalPartnerException" use="literal"/>
+            </wsdl:fault>
             <wsdl:fault name="UnknownEventException">
                 <soap:fault name="UnknownEventException" use="literal"/>
             </wsdl:fault>
             <wsdl:fault name="RegisterEventException">
                 <soap:fault name="RegisterEventException" use="literal"/>
             </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getEventsByOrganizer">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getEventsByOrganizer">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getEventsByOrganizerResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="getSubmittedEvents">
             <soap:operation soapAction="" style="document"/>

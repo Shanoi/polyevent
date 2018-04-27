@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import javax.ws.rs.core.MediaType;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,6 +34,7 @@ public class CalendarService {
      */
     public HashMap<String, Room[]> getVacantRooms(String startDate, String endDate) throws ExternalPartnerException {
         JSONArray vacantRooms;
+
         try {
             String response = WebClient.create(url).path("/rooms/" + startDate + "/" + endDate).get(String.class);
             log.log(Level.SEVERE, "getVacantRooms external Service response\n{0}\n", response);
@@ -64,14 +66,16 @@ public class CalendarService {
         return slots;
     }
 
-    public boolean submitEvent(Event event) throws ExternalPartnerException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
+    public boolean confirmEvent(Event event, List<String> room) throws ExternalPartnerException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm d/M/yyyy");
         String startDate = event.getStartingDate().toLocalDateTime().format(formatter);
         String endDate = event.getEndingDate().toLocalDateTime().format(formatter);
 
-        JSONObject request = new JSONObject().put("StartDate", startDate).put("EndDate", endDate);
+        JSONObject request = new JSONObject().put("StartDate", startDate).put("EndDate", endDate).put("Rooms", room);
 
         Integer id;
+
+        log.log(Level.SEVERE, "Event Request: {0}", request);
 
         try {
             String str = WebClient.create(url).path("/eventbox")
@@ -93,6 +97,22 @@ public class CalendarService {
         }
         // Assessing the payment status
         return (status.getInt("Status") == 0);
+    }
+
+    public Room roomInfo(String roomID) throws ExternalPartnerException {
+        JSONObject roomInfo;
+
+        try {
+            String response = WebClient.create(url).path("/room/" + roomID).get(String.class);
+            roomInfo = new JSONObject(response);
+        } catch (Exception e) {
+            throw new ExternalPartnerException(url + "/room/" + roomID, e);
+        }
+
+        int capacity = roomInfo.getInt("Capacity");
+        RoomType type = RoomType.convert(roomInfo.getInt("Type"));
+
+        return new Room(roomID, capacity, type);
     }
 
 }

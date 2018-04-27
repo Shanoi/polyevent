@@ -3,6 +3,7 @@ package cli.commands.responsible;
 import api.PEPublicAPI;
 import cli.framework.Command;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConfirmEvent extends Command<PEPublicAPI> {
@@ -19,6 +20,8 @@ public class ConfirmEvent extends Command<PEPublicAPI> {
 
         eventName = args.get(argIndex++);
 
+        rooms = new ArrayList<>();
+
         while (argIndex < args.size()) {
             rooms.add(args.get(argIndex++));
         }
@@ -32,7 +35,7 @@ public class ConfirmEvent extends Command<PEPublicAPI> {
     @Override
     public String describe() {
         return "A responsible can use this command to confirm an event to the Polyevent system\n" +
-                "	--> confirm_event <Event ID>";
+                "	--> confirm_event <Event Name> <Room ID0> <...> <Room IDn>";
     }
 
 }
