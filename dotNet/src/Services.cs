@@ -119,9 +119,32 @@ namespace Partner.Service
                 StartDate = request.StartDate,
                 EndDate = request.EndDate,
                 Rooms = request.Rooms,
-                Status = EventStatus.Ok
             };
+            if (Mock.UpdateRooms(e.StartDate, e.EndDate, e.Rooms))
+            {
+                e.Status = EventStatus.Ok;
+            }
+            else
+            {
+                e.Status = EventStatus.Ko;
+            }
             return e;
+        }
+
+        public Room GetRoomInfo(string id)
+        {
+            Console.WriteLine("Service Calendar invoked with GetRoomInfo method with the following parameters:\n" +
+                "id: " + id + "\n");
+            foreach (Room room in Mock.rooms)
+            {
+                if (room.ID.Equals(id))
+                {
+                    return room;
+                }
+            }
+
+            WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.NotFound;
+            return null;
         }
     }
 

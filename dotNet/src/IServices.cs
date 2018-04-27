@@ -22,6 +22,10 @@ namespace Partner.Service
         [WebInvoke(Method = "GET", UriTemplate = "events/{identifier}",
                     ResponseFormat = WebMessageFormat.Json)]
         Event FindEventById(string identifier);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "room/{id}", ResponseFormat = WebMessageFormat.Json)]
+        Room GetRoomInfo(string id);
     }
 
     [ServiceContract(Namespace = "http://partner/external/service/payment/")]

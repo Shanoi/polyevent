@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
 
 namespace Partner.Data
 {
@@ -13,7 +15,7 @@ namespace Partner.Data
 
         public static List<Day> days = new List<Day>();
 
-        private static List<Room> rooms = new List<Room>
+        public static List<Room> rooms = new List<Room>
         {
             new Room {
                 ID = "Amphi Forum",
@@ -71,37 +73,37 @@ namespace Partner.Data
                 ID = "O+303",
                 Capacity = 40,
                 Type = RoomType.Cours
-            },        // index 10
+            }, // index 10
             new Room {
                 ID = "O+307",
                 Capacity = 40,
                 Type = RoomType.Cours
-            },        // index 11
+            }, // index 11
             new Room {
                 ID = "O+308",
                 Capacity = 45,
                 Type = RoomType.Cours
-            },        // index 12
+            }, // index 12
             new Room {
                 ID = "O+309",
                 Capacity = 45,
                 Type = RoomType.Cours
-            },        // index 13
+            }, // index 13
             new Room {
                 ID = "O+310",
                 Capacity = 45,
                 Type = RoomType.Cours
-            },        // index 14
+            }, // index 14
             new Room {
                 ID = "O+311",
                 Capacity = 50,
                 Type = RoomType.Cours
-            },        // index 15
+            }, // index 15
             new Room {
                 ID = "O+317",
                 Capacity = 50,
                 Type = RoomType.Cours
-            }         // index 16
+            } // index 16
         };
 
         public static void MockDays()
@@ -154,7 +156,7 @@ namespace Partner.Data
                     days[i].Planning[j + ":00"].RemoveAt(8);
                     days[i].Planning[j + ":00"].RemoveAt(7);
                     days[i].Planning[j + ":00"].RemoveAt(6);
-                    
+
                     if (j == 11)
                     {
                         j++;
@@ -178,7 +180,7 @@ namespace Partner.Data
                         days[i].Planning[j + ":00"].RemoveAt(14);
                     }
                 }
-                
+
                 days[i].Planning["13:00"].RemoveAt(0);
                 days[i].Planning["14:00"].RemoveAt(0);
 
@@ -238,6 +240,103 @@ namespace Partner.Data
                     days[i].Planning[j + ":00"].RemoveAt(4);
                 }
             }
+        }
+
+        public static bool UpdateRooms(string startDate, string endDate, List<string> roomIDs)
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR");
+            DateTime startDateTime = DateTime.Parse(startDate);
+            DateTime endDateTime = DateTime.Parse(endDate);
+
+            List<Day> eventDays = new List<Day>();
+
+            foreach (Day day in days)
+            {
+                if (startDateTime.ToShortDateString() == day.TheDay.ToShortDateString())
+                {
+                    eventDays.Add(day);
+                }
+                if (endDateTime.ToShortDateString() == day.TheDay.ToShortDateString())
+                {
+                    eventDays.Add(day);
+                    break;
+                }
+                if (eventDays.Count != 0 && startDateTime.ToShortDateString() != day.TheDay.ToShortDateString())
+                {
+                    eventDays.Add(day);
+                }
+            }
+
+            if (eventDays.Count == 1)
+            {
+                for (int i = startDateTime.Hour; i < endDateTime.Hour; ++i)
+                {
+                    if (!CheckRooms(roomIDs, eventDays[0], i))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < eventDays.Count; ++i)
+                {
+                    if (i == 0)
+                    {
+                        for (int j = startDateTime.Hour; j < 17; ++j)
+                        {
+                            if (!CheckRooms(roomIDs, eventDays[0], j))
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                    else if (i == eventDays.Count - 1)
+                    {
+                        for (int j = 8; j < endDateTime.Hour; ++j)
+                        {
+                            if (!CheckRooms(roomIDs, eventDays[i], j))
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (int j = 8; j < 17; ++j)
+                        {
+                            if (!CheckRooms(roomIDs, eventDays[i], j))
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        private static bool CheckRooms(List<string> roomIDs, Day day, int hour)
+        {
+            foreach (Room room in rooms)
+            {
+                if (roomIDs.Contains(room.ID))
+                {
+                    if (day.Planning[hour + ":00"].Contains(room))
+                    {
+                        day.Planning[hour + ":00"].Remove(room);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Room:" + room.ID + " isn't vacant on " + day.TheDay.ToShortDateString() +
+                            ".\nThe event couldn't be registered in the calendar.");
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }
