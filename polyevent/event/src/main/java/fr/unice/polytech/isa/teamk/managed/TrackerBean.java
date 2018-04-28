@@ -16,17 +16,22 @@ public class TrackerBean {
     @EJB
     private Tracker tracker;
 
+    @ManagedProperty("#{param.eventName}")  // Will be automatically injected from the GET parameter
+    private String eventName;
+    public String getEventName() { return eventName; }
+    public void setEventName(String eventName) { this.eventName = eventName; }
+
     @ManagedProperty("#{param.eventId}")  // Will be automatically injected from the GET parameter
     private String eventId;
-    public String getOrderId() { return eventId; }
-    public void setOrderId(String orderId) { this.eventId = orderId; }
+    public String getEventId() { return eventId; }
+    public void setEventId(String eventId) { this.eventId = eventId; }
 
     public String getStatus() {
         if(eventId == null) { return "No eventId given!"; }
         try {
             return tracker.status(eventId).name();
-        } catch (UnknownEventException uoid) {
-            log.log(Level.INFO, "Unknown eventId", uoid);
+        } catch (UnknownEventException ueid) {
+            log.log(Level.INFO, "Unknown eventId", ueid);
             return "Unknown Order [" + eventId + "]";
         }
     }

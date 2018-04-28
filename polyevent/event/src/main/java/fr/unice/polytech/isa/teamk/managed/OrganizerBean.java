@@ -76,6 +76,7 @@ public class OrganizerBean implements Serializable {
     // Invoked when the "Register" button is pushed
     public String register() {
         try {
+            log.log(Level.INFO, "Customer Registered");
             registry.registerOrganizer(getName(), getEmail(), getPassword(), getPhone());
             return Signal.ADDED;
         } catch (AlreadyExistingOrganizerException e) {
@@ -83,7 +84,12 @@ public class OrganizerBean implements Serializable {
             FacesContext.getCurrentInstance()
                     .addMessage("form-error", new FacesMessage("Organizer " + getEmail() + " already exists!"));
             return Signal.EXISTING;
+        }catch (Exception e){
+
+            log.log(Level.WARNING, "Exceptionnnnnnnnnnnnn customer", e);
+            return Signal.UNKNOWN;
         }
+
     }
 
 }
