@@ -12,7 +12,9 @@ public class ConfirmEvent extends Command<PEPublicAPI> {
     private List<String> rooms;
 
     @Override
-    public String identifier() { return "confirm_event"; }
+    public String identifier() {
+        return "confirm_event";
+    }
 
     @Override
     public void load(List<String> args) {

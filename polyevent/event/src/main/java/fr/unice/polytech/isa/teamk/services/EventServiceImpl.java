@@ -15,7 +15,6 @@ import javax.ejb.Stateless;
 import javax.jws.WebService;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 @Stateless(name = "EventWS")

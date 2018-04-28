@@ -9,7 +9,9 @@ import java.util.List;
 public class GetSubmittedEvents extends Command<PEPublicAPI> {
 
     @Override
-    public String identifier() { return "get_submitted_events"; }
+    public String identifier() {
+        return "get_submitted_events";
+    }
 
     @Override
     public void load(List<String> args) {

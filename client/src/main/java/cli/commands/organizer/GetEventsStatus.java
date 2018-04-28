@@ -2,7 +2,6 @@ package cli.commands.organizer;
 
 import api.PEPublicAPI;
 import cli.framework.Command;
-import stubs.eventstubs.Event;
 import stubs.eventstubs.GetEventsByOrganizerResponse;
 
 import java.util.List;

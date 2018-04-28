@@ -35,8 +35,6 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static fr.unice.polytech.isa.teamk.entities.EventStatus.next;
-
 @Stateless
 public class EventRegistryBean implements EventRegister, EventFinder, Tracker {
 
@@ -70,7 +68,6 @@ public class EventRegistryBean implements EventRegister, EventFinder, Tracker {
         manager.persist(event);
 
         return Integer.toString(event.getId());
-
     }
 
     @Override
@@ -79,6 +76,10 @@ public class EventRegistryBean implements EventRegister, EventFinder, Tracker {
 
         if (event.isPresent()) {
             boolean status;
+
+            log.log(Level.SEVERE, "Time from TimeStamp after persist:\nStartDate: {0}\nEndDate: {1}\nStartDate (nanos): {2}\nEndDate(nanos): {3}",
+                    new Object[]{event.get().getStartingDate().toLocalDateTime().toString(), event.get().getEndingDate().toLocalDateTime().toString(),
+                            event.get().getStartingDate().getNanos(), event.get().getEndingDate().getNanos()});
 
             try {
                 status = calendarService.confirmEvent(event.get(), rooms);
@@ -99,7 +100,7 @@ public class EventRegistryBean implements EventRegister, EventFinder, Tracker {
 
             event.get().setRooms(roomList);
             Optional<EventStatus> next = EventStatus.next(event.get().getStatus());
-            if(next.isPresent()) {
+            if (next.isPresent()) {
                 log.log(Level.INFO, "Moving event [" + event.get().getId() + ", " + event.get().getName() + "] to next step");
                 event.get().setStatus(next.get());
             } else {

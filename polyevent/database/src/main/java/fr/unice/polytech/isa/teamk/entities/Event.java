@@ -19,10 +19,10 @@ public class Event implements Serializable {
     @NotNull
     private String name;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp startingDate;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp endingDate;
 
     @NotNull
