@@ -11,8 +11,7 @@ import javax.interceptor.Interceptors;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 @WebService(targetNamespace = "http://www.polytech.unice.fr/si/4a/isa/responsible")
 public interface ResponsibleService {
@@ -32,7 +31,7 @@ public interface ResponsibleService {
 
     @WebMethod
     @Interceptors(TimeVerifier.class)
-    LinkedHashMap<String, ArrayList<Room>> getVacantRooms(@WebParam(name = "start_date") String startDate,
-                                                          @WebParam(name = "end_date") String endDate) throws ExternalPartnerException;
+    Map<String, Room[]> getVacantRooms(@WebParam(name = "start_date") String startDate,
+                                       @WebParam(name = "end_date") String endDate) throws ExternalPartnerException;
 
 }

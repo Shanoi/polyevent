@@ -73,7 +73,8 @@ namespace Partner.Data
             TheDay = day;
         }
 
-        public Dictionary<string, List<Room>> Planning {
+        public Dictionary<string, List<Room>> Planning
+        {
             get
             {
                 return planning;

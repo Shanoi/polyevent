@@ -19,6 +19,8 @@ namespace Partner.Service
 
         public Dictionary<string, List<Room>> GetVacantRooms(string start_date, string end_date)
         {
+            Console.WriteLine("Service Calendar invoked with GetVacantRooms method with the following parameters:\n" +
+                "\tstart_date: " + start_date + "\n\tend_date: " + end_date + "\n");
             Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR");
             DateTime startDateTime = DateTime.Parse(start_date.Replace('_', ' ').Replace('-', '/'));
             DateTime endDateTime = DateTime.Parse(end_date.Replace('_', ' ').Replace('-', '/'));
@@ -89,7 +91,8 @@ namespace Partner.Service
 
         public int ReceiveEventRequest(EventRequest eventRequest)
         {
-            Console.WriteLine("ReceiveRequest: " + eventRequest);
+            Console.WriteLine("Service Calendar invoked with ReceiveEventRequest method with the following parameters:\n" +
+                "eventRequest: " + eventRequest + "\n");
             var e = BuildEvent(eventRequest);
             events.Add(counter, e);
             return counter;
@@ -97,6 +100,8 @@ namespace Partner.Service
 
         public Event FindEventById(string identifier)
         {
+            Console.WriteLine("Service Calendar invoked with FindEventById method with the following parameters:\n" +
+                "identifier: " + identifier + "\n");
             if (!events.ContainsKey(Int32.Parse(identifier)))
             {
                 WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.NotFound;
@@ -114,9 +119,32 @@ namespace Partner.Service
                 StartDate = request.StartDate,
                 EndDate = request.EndDate,
                 Rooms = request.Rooms,
-                Status = EventStatus.Ok
             };
+            if (Mock.UpdateRooms(e.StartDate, e.EndDate, e.Rooms))
+            {
+                e.Status = EventStatus.Ok;
+            }
+            else
+            {
+                e.Status = EventStatus.Ko;
+            }
             return e;
+        }
+
+        public Room GetRoomInfo(string id)
+        {
+            Console.WriteLine("Service Calendar invoked with GetRoomInfo method with the following parameters:\n" +
+                "id: " + id + "\n");
+            foreach (Room room in Mock.rooms)
+            {
+                if (room.ID.Equals(id))
+                {
+                    return room;
+                }
+            }
+
+            WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.NotFound;
+            return null;
         }
     }
 
@@ -131,7 +159,8 @@ namespace Partner.Service
 
         public int ReceivePaymentRequest(PaymentRequest request)
         {
-            Console.WriteLine("ReceiveRequest: " + request);
+            Console.WriteLine("Service Payment invoked with ReceivePaymentRequest method with the following parameters:\n" +
+                "request: " + request + "\n");
             var payment = BuildPayment(request);
             accounts.Add(paymentCounter, payment);
             return paymentCounter;
@@ -139,6 +168,8 @@ namespace Partner.Service
 
         public Payment FindPaymentById(string identifier)
         {
+            Console.WriteLine("Service Payment invoked with FindPaymentById method with the following parameters:\n" +
+                "identifier: " + identifier + "\n");
             if (!accounts.ContainsKey(Int32.Parse(identifier)))
             {
                 WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.NotFound;
@@ -149,6 +180,7 @@ namespace Partner.Service
 
         public List<int> GetAllPaymentIds()
         {
+            Console.WriteLine("Service Payment invoked with GetAllPaymentIds method\n");
             return accounts.Keys.ToList();
         }
 

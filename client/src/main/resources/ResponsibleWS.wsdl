@@ -60,7 +60,7 @@
                                     <xs:complexType>
                                         <xs:sequence>
                                             <xs:element minOccurs="0" name="key" type="xs:string"/>
-                                            <xs:element minOccurs="0" name="value" type="tns:arrayList"/>
+                                            <xs:element minOccurs="0" name="value" type="tns:roomArray"/>
                                         </xs:sequence>
                                     </xs:complexType>
                                 </xs:element>
@@ -68,23 +68,6 @@
                         </xs:complexType>
                     </xs:element>
                 </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="arrayList">
-                <xs:complexContent>
-                    <xs:extension base="tns:abstractList">
-                        <xs:sequence/>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType abstract="true" name="abstractList">
-                <xs:complexContent>
-                    <xs:extension base="tns:abstractCollection">
-                        <xs:sequence/>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType abstract="true" name="abstractCollection">
-                <xs:sequence/>
             </xs:complexType>
             <xs:complexType name="room">
                 <xs:sequence>
@@ -112,6 +95,11 @@
                     <xs:enumeration value="UNKNOWN"/>
                 </xs:restriction>
             </xs:simpleType>
+            <xs:complexType final="#all" name="roomArray">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="tns:room"/>
+                </xs:sequence>
+            </xs:complexType>
             <xs:element name="AlreadyExistingResponsibleException" type="tns:AlreadyExistingResponsibleException"/>
             <xs:complexType name="AlreadyExistingResponsibleException">
                 <xs:sequence>

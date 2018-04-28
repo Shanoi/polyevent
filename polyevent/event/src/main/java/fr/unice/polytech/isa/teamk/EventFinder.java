@@ -16,6 +16,6 @@ public interface EventFinder {
 
     List<Event> searchEventByStatus(EventStatus status);
 
-    Set<Event> searchEventByOrganizer(Organizer organizer);
+    Set<Event> searchEventByOrganizer(String email);
 
 }

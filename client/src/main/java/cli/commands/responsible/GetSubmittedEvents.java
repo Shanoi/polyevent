@@ -23,7 +23,7 @@ public class GetSubmittedEvents extends Command<PEPublicAPI> {
             System.out.println("List of events with status 'SUBMITTED':");
             int i = 1;
             for (Event e : submittedEvents) {
-                System.out.println(i++ + ". " + e.getName());
+                System.out.println(i++ + ". " + e.getName() + " (ID: " + e.getId() + ")");
             }
         } else {
             System.err.println("You have to login to invoke this command.");

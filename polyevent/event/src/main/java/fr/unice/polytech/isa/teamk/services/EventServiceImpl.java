@@ -6,13 +6,17 @@ import fr.unice.polytech.isa.teamk.OrganizerFinder;
 import fr.unice.polytech.isa.teamk.entities.Event;
 import fr.unice.polytech.isa.teamk.entities.EventStatus;
 import fr.unice.polytech.isa.teamk.exceptions.AlreadyExistingEventException;
+import fr.unice.polytech.isa.teamk.exceptions.ExternalPartnerException;
 import fr.unice.polytech.isa.teamk.exceptions.RegisterEventException;
 import fr.unice.polytech.isa.teamk.exceptions.UnknownEventException;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Stateless(name = "EventWS")
 @WebService(targetNamespace = "http://www.polytech.unice.fr/si/4a/isa/event")
@@ -42,7 +46,19 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public boolean confirmEvent(String eventName, List<String> rooms) throws RegisterEventException, UnknownEventException {
+    public HashMap<String, EventStatus> getEventsByOrganizer(String organizerEmail) {
+        Set<Event> eventSet = eventFinder.searchEventByOrganizer(organizerEmail);
+        HashMap<String, EventStatus> events = new HashMap<>();
+
+        for (Event event : eventSet) {
+            events.put(event.getName(), event.getStatus());
+        }
+
+        return events;
+    }
+
+    @Override
+    public boolean confirmEvent(String eventName, List<String> rooms) throws RegisterEventException, UnknownEventException, ExternalPartnerException {
         return eventRegister.confirmEvent(eventName, rooms);
     }
 
